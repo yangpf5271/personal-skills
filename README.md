@@ -16,7 +16,7 @@ npx skills@latest update
 
 ## What's here
 
-A curated set of 30 skills — browser automation, design, document creation (docx/pdf/pptx/xlsx), frontend guidelines, MCP building, research/writing, and more. Browse [`skills/`](./skills/) for the full list; each folder is one self-contained skill.
+A curated set of 31 skills — browser automation, design, document creation (docx/pdf/pptx/xlsx), frontend guidelines, MCP building, research/writing, file-based planning, and more. Browse [`skills/`](./skills/) for the full list; each folder is one self-contained skill.
 
 ## Repository layout
 
