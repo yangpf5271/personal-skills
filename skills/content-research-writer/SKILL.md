@@ -1,6 +1,6 @@
 ---
 name: content-research-writer
-description: Assists in writing high-quality content. 通过进行研究、添加引用、改进开篇吸引点、迭代大纲以及对每个部分提供实时反馈来帮助创作高质量内容。将您的写作过程从独自努力转变为协作伙伴关系。
+description: 研究驱动的内容写作搭档：A writing partner that researches, adds citations, improves hooks, iterates outlines, and gives section-by-section feedback while preserving your voice — turning solo writing into a collaborative loop. Use for blog posts, tutorials, case studies, or any long-form content with sources.
 ---
 
 # Content Research Writer
