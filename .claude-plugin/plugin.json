@@ -1,0 +1,14 @@
+{
+  "name": "yangpf-skills",
+  "version": "0.1.0",
+  "description": "Yangpf's personal agent skills collection. Plug-and-play skills for coding agents — install what you need, edit freely.",
+  "license": "MIT",
+  "keywords": [
+    "skills",
+    "agent",
+    "productivity"
+  ],
+  "skills": [
+    "./skills/hello"
+  ]
+}
