@@ -1,6 +1,6 @@
 ---
 name: content-research-writer
-description: 研究驱动的内容写作搭档：A writing partner that researches, adds citations, improves hooks, iterates outlines, and gives section-by-section feedback while preserving your voice — turning solo writing into a collaborative loop. Use for blog posts, tutorials, case studies, or any long-form content with sources.
+description: 研究驱动的内容写作搭档：Assists in writing high-quality content by conducting research, adding citations, improving hooks, iterating on outlines, and providing real-time feedback on each section. Transforms your writing process from solo effort to collaborative partnership.
 ---
 
 # Content Research Writer
@@ -43,7 +43,7 @@ Create your draft file:
 touch article-draft.md
 ```
 
-Open Codex from this directory and start writing.
+Open Claude Code from this directory and start writing.
 
 ### Basic Workflow
 
@@ -481,7 +481,7 @@ Ready for the next section!
 
 ## Pro Tips
 
-1. **Work in VS Code**: Better than web Codex for long-form writing
+1. **Work in VS Code**: Better than web Claude for long-form writing
 2. **One section at a time**: Get feedback incrementally
 3. **Save research separately**: Keep a research.md file
 4. **Version your drafts**: article-v1.md, article-v2.md, etc.
