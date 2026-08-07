@@ -1,6 +1,6 @@
 ---
 name: Agent Browser
-description: A fast Rust-based headless browser automation CLI with Node.js fallback that enables AI agents to navigate, click, type, and snapshot pages via structured commands.
+description: 无头浏览器自动化：A fast Rust-based headless browser automation CLI with Node.js fallback that enables AI agents to navigate, click, type, and snapshot pages via structured commands.
 read_when:
   - Automating web interactions
   - Extracting structured data from pages

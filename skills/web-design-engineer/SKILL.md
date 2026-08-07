@@ -1,7 +1,7 @@
 ---
 name: web-design-engineer
 description: |
-  Build high-quality visual Web artifacts using HTML/CSS/JavaScript/React — web pages, landing pages, dashboards, interactive prototypes, HTML slide decks, animated demos, UI mockups, data visualizations, and more.
+  高质量 Web 视觉制品：Build high-quality visual Web artifacts using HTML/CSS/JavaScript/React — web pages, landing pages, dashboards, interactive prototypes, HTML slide decks, animated demos, UI mockups, data visualizations, and more.
   Use this skill whenever the user's request involves a visual, interactive, or front-end deliverable, including:
   - Creating web pages, landing pages, dashboards, marketing pages
   - Building interactive prototypes or UI mockups (with device frames)

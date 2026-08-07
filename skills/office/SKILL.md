@@ -1,6 +1,6 @@
 ---
 name: Office
-description: "Master Excel, Word, PowerPoint, and Google Workspace with formulas, formatting, and automation."
+description: "Office 办公套件操作：Master Excel, Word, PowerPoint, and Google Workspace with formulas, formatting, and automation."
 ---
 
 ## What "Office" Means Here

@@ -1,6 +1,6 @@
 ---
 name: architecture-designer
-description: Use when designing new system architecture, reviewing existing designs, or making architectural decisions. Invoke for system design, architecture review, design patterns, ADRs, scalability planning.
+description: 系统架构设计：Use when designing new system architecture, reviewing existing designs, or making architectural decisions. Invoke for system design, architecture review, design patterns, ADRs, scalability planning.
 license: MIT
 metadata:
   author: https://github.com/Jeffallan
