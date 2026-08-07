@@ -16,7 +16,7 @@ npx skills@latest update
 
 ## What's here
 
-- [`hello`](./skills/hello/SKILL.md) — a minimal example skill. Copy its folder to start your own.
+A curated set of 30 skills — browser automation, design, document creation (docx/pdf/pptx/xlsx), frontend guidelines, MCP building, research/writing, and more. Browse [`skills/`](./skills/) for the full list; each folder is one self-contained skill.
 
 ## Repository layout
 
@@ -34,7 +34,7 @@ The install unit is **each `skills/<name>/` directory**. Only `SKILL.md` and its
 
 ## Add your own skill
 
-1. Copy `skills/hello/` to `skills/<your-skill-name>/`.
+1. Create `skills/<your-skill-name>/` with a `SKILL.md` (use any existing skill folder as a reference for the frontmatter shape).
 2. Edit `SKILL.md`: set `name` (the command), write a `description`, decide on `disable-model-invocation`, and write the body.
 3. Add `"./skills/<your-skill-name>"` to the `skills` array in `.claude-plugin/plugin.json`.
 4. Commit and push. `npx skills@latest add yangpf5271/personal-skills` picks it up.
