@@ -1,5 +1,5 @@
 ---
-name: artifacts-builder - 构件构建工具
+name: artifacts-builder
 description: Suite of tools for creating elaborate, multi-component Codex.ai HTML artifacts using modern frontend web technologies. 用于创建复杂多组件Codex.ai HTML构件的工具套件，使用现代前端Web技术（React、Tailwind CSS、shadcn/ui）。适用于需要状态管理、路由或shadcn/ui组件的复杂构件，不适用于简单的单文件HTML/JSX构件。
 license: Complete terms in LICENSE.txt
 ---

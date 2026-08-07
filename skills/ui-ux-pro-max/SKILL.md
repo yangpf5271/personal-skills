@@ -1,5 +1,5 @@
 ---
-name: ui-ux-pro-max - UI/UX设计智能
+name: ui-ux-pro-max
 description: "UI/UX design intelligence. UI/UX设计智能系统。包含50种风格、21种调色板、50种字体配对、20种图表、9个技术栈（React、Next.js、Vue、Svelte、SwiftUI、React Native、Flutter、Tailwind、shadcn/ui）。操作：规划、构建、创建、设计、实现、审查、修复、改进、优化、增强、重构、检查UI/UX代码。项目：网站、落地页、仪表板、管理面板、电子商务、SaaS、作品集、博客、移动应用、.html、.tsx、.vue、.svelte。元素：按钮、模态框、导航栏、侧边栏、卡片、表格、表单、图表。风格：玻璃态、粘土态、极简主义、野兽派、新拟态、便当网格、暗色模式、响应式、拟物化、扁平化设计。主题：调色板、可访问性、动画、布局、排版、字体配对、间距、悬停、阴影、渐变。集成：shadcn/ui MCP用于组件搜索和示例。"
 ---
 

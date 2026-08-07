@@ -1,5 +1,5 @@
 ---
-name: vercel-design-guidelines - Vercel设计指南
+name: vercel-design-guidelines
 description: Check web interfaces against Vercel's design guidelines. 根据Vercel的设计指南检查Web界面。当被要求"审查我的UI"、"检查可访问性"、"审计设计"、"审查UX"、"根据最佳实践检查我的网站"或"应用Vercel设计指南"时使用。
 ---
 

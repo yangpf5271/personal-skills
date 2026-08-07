@@ -1,5 +1,5 @@
 ---
-name: find-skills - 技能发现工具
+name: find-skills
 description: Helps users discover and install agent skills. 帮助用户发现和安装agent技能，当他们问"我如何做X"、"为X找个技能"、"有没有可以...的技能"，或表达对扩展功能的兴趣时使用。当用户寻找可能作为可安装技能存在的功能时，应使用此技能。
 ---
 

@@ -1,5 +1,5 @@
 ---
-name: auto-trigger - 自动触发钩子
+name: auto-trigger
 description: Workflow automation hooks for agent-playbook skills. agent-playbook技能的工作流自动化钩子。此技能定义技能之间的自动触发器 - 请勿直接使用，这是其他技能引用的配置技能。
 allowed-tools: Read, Write, Edit
 ---

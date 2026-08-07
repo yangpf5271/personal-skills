@@ -1,5 +1,5 @@
 ---
-name: react-best-practices - React最佳实践
+name: react-best-practices
 description: React and Next.js performance optimization guidelines from Vercel Engineering. 来自Vercel工程的React和Next.js性能优化指南。在编写、审查或重构React/Next.js代码时应使用此技能，以确保采用最佳性能模式。在涉及React组件、Next.js页面、数据获取、包优化或性能改进的任务时触发。
 ---
 

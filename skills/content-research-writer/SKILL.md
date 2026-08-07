@@ -1,5 +1,5 @@
 ---
-name: content-research-writer - 内容研究写作助手
+name: content-research-writer
 description: Assists in writing high-quality content. 通过进行研究、添加引用、改进开篇吸引点、迭代大纲以及对每个部分提供实时反馈来帮助创作高质量内容。将您的写作过程从独自努力转变为协作伙伴关系。
 ---
 
