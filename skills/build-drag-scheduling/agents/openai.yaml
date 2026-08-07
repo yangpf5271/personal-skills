@@ -1,4 +1,0 @@
-interface:
-  display_name: "Build Drag Scheduling"
-  short_description: "Build APS-style drag scheduling components"
-  default_prompt: "Use $build-drag-scheduling to implement a framework-agnostic drag scheduling workspace and gantt board."
