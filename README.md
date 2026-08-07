@@ -16,7 +16,7 @@ npx skills@latest update
 
 ## What's here
 
-A curated set of 24 skills — browser automation, design, document creation (docx/pdf/pptx/xlsx), React frontend guidelines, MCP building, research/writing, file-based planning, technical diagrams, website cloning, and more. Browse [`skills/`](./skills/) for the full list; each folder is one self-contained skill.
+A curated set of 23 skills — browser automation, design, document creation (docx/pdf/pptx/xlsx), React frontend guidelines, MCP building, research/writing, file-based planning, technical diagrams, and more. Browse [`skills/`](./skills/) for the full list; each folder is one self-contained skill.
 
 ### Skill sources
 
@@ -46,7 +46,6 @@ Each skill is tracked to its upstream where known. Skills with no listed source 
 | skill-creator | [anthropics/skills](https://github.com/anthropics/skills) | |
 | ui-ux-pro-max | [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | |
 | web-design-engineer | [ConardLi/garden-skills](https://github.com/ConardLi/garden-skills) | Customized locally; not synced from upstream |
-| website-cloner | [JCodesMore/ai-website-cloner-template](https://github.com/JCodesMore/ai-website-cloner-template) | Upstream skill name `clone-website`; renamed locally. Parallel multi-agent clone via browser MCP + getComputedStyle |
 | xlsx | [anthropics/skills](https://github.com/anthropics/skills) | |
 
 ## Repository layout
