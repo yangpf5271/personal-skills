@@ -1,11 +1,11 @@
-# yangpf-skills
+# personal-skills
 
 A personal collection of agent skills, distributed via [skills.sh](https://skills.sh) and installable on any coding agent (Claude Code, Codex, ZCode, …).
 
 ## Install
 
 ```bash
-npx skills@latest add yangpf5271/yangpf-skills
+npx skills@latest add yangpf5271/personal-skills
 ```
 
 Pick the skills you want and which coding agents to install them on. The installer writes each skill as ordinary, editable files you own — nothing updates behind your back. Pull the latest when you want it:
@@ -21,7 +21,7 @@ npx skills@latest update
 ## Repository layout
 
 ```
-yangpf-skills/
+personal-skills/
 ├── .claude-plugin/
 │   └── plugin.json          ← manifest: lists every installable skill path
 ├── skills/
@@ -37,7 +37,7 @@ The install unit is **each `skills/<name>/` directory**. Only `SKILL.md` and its
 1. Copy `skills/hello/` to `skills/<your-skill-name>/`.
 2. Edit `SKILL.md`: set `name` (the command), write a `description`, decide on `disable-model-invocation`, and write the body.
 3. Add `"./skills/<your-skill-name>"` to the `skills` array in `.claude-plugin/plugin.json`.
-4. Commit and push. `npx skills@latest add yangpf5271/yangpf-skills` picks it up.
+4. Commit and push. `npx skills@latest add yangpf5271/personal-skills` picks it up.
 
 ## Skill authoring quick reference
 
