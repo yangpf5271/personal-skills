@@ -16,7 +16,7 @@ npx skills@latest update
 
 ## What's here
 
-A curated set of 21 skills — browser automation, design, document creation (docx/pdf/pptx/xlsx), React frontend guidelines, MCP building, research/writing, file-based planning, and more. Browse [`skills/`](./skills/) for the full list; each folder is one self-contained skill.
+A curated set of 24 skills — browser automation, design, document creation (docx/pdf/pptx/xlsx), React frontend guidelines, MCP building, research/writing, file-based planning, technical diagrams, website cloning, and more. Browse [`skills/`](./skills/) for the full list; each folder is one self-contained skill.
 
 ### Skill sources
 
@@ -33,7 +33,9 @@ Each skill is tracked to its upstream where known. Skills with no listed source 
 | content-research-writer | [ComposioHQ/awesome-claude-skills](https://github.com/ComposioHQ/awesome-claude-skills) | |
 | docx | [anthropics/skills](https://github.com/anthropics/skills) | |
 | figma | — | Source untraceable (Apache 2.0) |
+| fireworks-tech-graph | [yizhiyanhua-ai/fireworks-tech-graph](https://github.com/yizhiyanhua-ai/fireworks-tech-graph) | Natural-language → production SVG/PNG technical diagrams (12 styles) |
 | find-skills | [KimYx0207/findskill](https://github.com/KimYx0207/findskill) | Windows-compat fork of [vercel-labs/skills](https://github.com/vercel-labs/skills); kept to avoid the Git Bash empty-output bug |
+| humanizer-zh | [op7418/Humanizer-zh](https://github.com/op7418/Humanizer-zh) | Chinese text humanizer / AI-trace removal |
 | mcp-builder | [anthropics/skills](https://github.com/anthropics/skills) | |
 | motion | — | Upstream [jezweb/claude-skills](https://github.com/jezweb/claude-skills) removed it; local copy kept as orphan |
 | office | — | Source untraceable (distributed via OpenClaw) |
@@ -44,6 +46,7 @@ Each skill is tracked to its upstream where known. Skills with no listed source 
 | skill-creator | [anthropics/skills](https://github.com/anthropics/skills) | |
 | ui-ux-pro-max | [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | |
 | web-design-engineer | [ConardLi/garden-skills](https://github.com/ConardLi/garden-skills) | Customized locally; not synced from upstream |
+| website-cloner | [JCodesMore/ai-website-cloner-template](https://github.com/JCodesMore/ai-website-cloner-template) | Upstream skill name `clone-website`; renamed locally. Parallel multi-agent clone via browser MCP + getComputedStyle |
 | xlsx | [anthropics/skills](https://github.com/anthropics/skills) | |
 
 ## Repository layout

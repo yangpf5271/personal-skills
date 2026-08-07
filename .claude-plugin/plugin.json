@@ -18,7 +18,9 @@
     "./skills/content-research-writer",
     "./skills/docx",
     "./skills/figma",
+    "./skills/fireworks-tech-graph",
     "./skills/find-skills",
+    "./skills/humanizer-zh",
     "./skills/mcp-builder",
     "./skills/motion",
     "./skills/office",
@@ -29,6 +31,7 @@
     "./skills/skill-creator",
     "./skills/ui-ux-pro-max",
     "./skills/web-design-engineer",
+    "./skills/website-cloner",
     "./skills/xlsx"
   ]
 }
