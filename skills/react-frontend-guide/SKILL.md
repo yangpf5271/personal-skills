@@ -1,6 +1,6 @@
 ---
 name: react-frontend-guide
-description: Frontend development guidelines for React/TypeScript applications. React/TypeScript应用的前端开发指南。包含现代模式，包括Suspense、懒加载、useSuspenseQuery、使用features目录的文件组织、MUI v7样式、TanStack Router、性能优化和TypeScript最佳实践。在创建组件、页面、功能、获取数据、样式设置、路由或处理前端代码时使用。
+description: React 前端开发指南：Frontend development guidelines for React/TypeScript applications. Covers modern patterns including Suspense, lazy loading, useSuspenseQuery, features-dir file organization, MUI v7 styling, TanStack Router, performance optimization, and TypeScript best practices. Use when creating components, pages, features, fetching data, styling, routing, or working on frontend code.
 ---
 
 # Frontend Development Guidelines

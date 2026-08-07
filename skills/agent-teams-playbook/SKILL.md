@@ -2,7 +2,7 @@
 name: agent-teams-playbook
 version: "6.0-codex"
 description: |
-  Codex subagents orchestration playbook. Codex 多代理/子代理协作编排手册。
+  多代理/子代理协作编排：Codex subagents orchestration playbook.
   Use this skill when the user explicitly asks for multi-agent work, parallel agents, subagents, delegation, agent teams, swarm/蜂群, 拉团队, 分工处理, or explicit multi-agent task orchestration.
   Helps Codex decide when to keep work local, when to split work across subagents, how to assign bounded tasks, how to collect results, and how to close agents cleanly.
   Do not use subagents just because a task asks for depth, thoroughness, research, investigation, or detailed analysis; explicit user intent for delegation or parallel agent work is required.

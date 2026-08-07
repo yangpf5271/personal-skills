@@ -1,7 +1,7 @@
 ‍```Markdown
 ---
 name: code-security
-description: "Runs Semgrep security scans on the current project to detect vulnerabilities, secrets leakage, and OWASP Top 10 issues. 在当前项目上运行Semgrep安全扫描以检测漏洞、密钥泄露和OWASP Top 10问题。当用户要求安全扫描、漏洞检测，或说安全扫描、扫漏洞、安全检查、漏洞检测时使用。"
+description: "代码安全扫描：Runs Semgrep security scans on the current project to detect vulnerabilities, secrets leakage, and OWASP Top 10 issues. Use when the user asks for a security scan, vulnerability detection, or says 安全扫描、扫漏洞、安全检查、漏洞检测."
 version: "1.0"
 context: fork
 ---
