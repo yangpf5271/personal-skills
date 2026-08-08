@@ -20,11 +20,11 @@ A curated set of 25 skills grouped by function into 5 categories. Each group has
 
 | Group | What it covers | Skills | README |
 | --- | --- | --- | --- |
-| 🎨 `design` | UI/UX, Web visuals, animation, diagrams, quality audit | 8 | [skills/design/README.md](./skills/design/README.md) |
-| 📄 `docs` | Document generation (Word/PDF/PPT/Excel) + writing & text polish | 7 | [skills/docs/README.md](./skills/docs/README.md) |
-| 🔧 `engineering` | Architecture, security, MCP, task planning, Python tooling | 5 | [skills/engineering/README.md](./skills/engineering/README.md) |
-| 🤖 `agents` | Skill discovery/creation, browser automation | 3 | [skills/agents/README.md](./skills/agents/README.md) |
-| ✏️ `original` | Self-authored skills (multi-agent orchestration, log query) | 2 | [skills/original/README.md](./skills/original/README.md) |
+| 🎨 `frontend` | 前端编码规范、设计系统、视觉制品、动效、质量检测 | 8 | [skills/frontend/README.md](./skills/frontend/README.md) |
+| 🐍 `python` | Python 现代工具链与编码规范 | 1 | [skills/python/README.md](./skills/python/README.md) |
+| 🔧 `general` | 架构设计、安全、MCP、任务规划、skill 工具、浏览器自动化 | 7 | [skills/general/README.md](./skills/general/README.md) |
+| 📄 `docs` | 文档生成（Word/PDF/PPT/Excel）+ 写作与文字润色 | 7 | [skills/docs/README.md](./skills/docs/README.md) |
+| ✏️ `mine` | 我的原创（多 agent 编排、日志查询） | 2 | [skills/mine/README.md](./skills/mine/README.md) |
 
 ### Skill sources
 
@@ -32,31 +32,31 @@ Each skill is tracked to its upstream where known. Skills with no listed source 
 
 | Group | Skill | Upstream source | Notes |
 | --- | --- | --- | --- |
-| design | ui-ux-pro-max | [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | |
-| design | web-design-engineer | [ConardLi/garden-skills](https://github.com/ConardLi/garden-skills) | Customized locally; not synced from upstream |
-| design | canvas-design | [anthropics/skills](https://github.com/anthropics/skills) | |
-| design | figma | — | Source untraceable (Apache 2.0) |
-| design | motion | — | Upstream [jezweb/claude-skills](https://github.com/jezweb/claude-skills) removed it; local copy kept as orphan |
-| design | fireworks-tech-graph | [yizhiyanhua-ai/fireworks-tech-graph](https://github.com/yizhiyanhua-ai/fireworks-tech-graph) | |
-| design | web-quality | [addyosmani/web-quality-skills](https://github.com/addyosmani/web-quality-skills) | Upstream skill `web-quality-audit`; renamed locally |
-| design | react-frontend-guide | [mrgoonie/claudekit-skills](https://github.com/mrgoonie/claudekit-skills) | Upstream dir is `frontend-development`; renamed locally |
+| frontend | canvas-design | [anthropics/skills](https://github.com/anthropics/skills) | |
+| frontend | figma | — | Source untraceable (Apache 2.0) |
+| frontend | fireworks-tech-graph | [yizhiyanhua-ai/fireworks-tech-graph](https://github.com/yizhiyanhua-ai/fireworks-tech-graph) | |
+| frontend | motion | — | Upstream [jezweb/claude-skills](https://github.com/jezweb/claude-skills) removed it; local copy kept as orphan |
+| frontend | react-frontend-guide | [mrgoonie/claudekit-skills](https://github.com/mrgoonie/claudekit-skills) | Upstream dir is `frontend-development`; renamed locally |
+| frontend | ui-ux-pro-max | [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | |
+| frontend | web-design-engineer | [ConardLi/garden-skills](https://github.com/ConardLi/garden-skills) | Customized locally; not synced from upstream |
+| frontend | web-quality | [addyosmani/web-quality-skills](https://github.com/addyosmani/web-quality-skills) | Upstream skill `web-quality-audit`; renamed locally |
+| python | modern-python | [trailofbits/skills](https://github.com/trailofbits/skills) | uv + ruff + ty + pytest toolchain |
+| general | agent-browser | [vercel-labs/agent-browser](https://github.com/vercel-labs/agent-browser) | `hidden: true` removed locally so it stays visible |
+| general | architecture-designer | [Jeffallan/claude-skills](https://github.com/Jeffallan/claude-skills) | |
+| general | code-security | [semgrep/skills](https://github.com/semgrep/skills) | Includes full `rules/` directory |
+| general | find-skills | [KimYx0207/findskill](https://github.com/KimYx0207/findskill) | Windows-compat fork of [vercel-labs/skills](https://github.com/vercel-labs/skills); kept to avoid the Git Bash empty-output bug |
+| general | mcp-builder | [anthropics/skills](https://github.com/anthropics/skills) | |
+| general | planning-with-files | [OthmanAdi/planning-with-files](https://github.com/OthmanAdi/planning-with-files) | |
+| general | skill-creator | [anthropics/skills](https://github.com/anthropics/skills) | |
+| docs | content-research-writer | [ComposioHQ/awesome-claude-skills](https://github.com/ComposioHQ/awesome-claude-skills) | |
 | docs | docx | [anthropics/skills](https://github.com/anthropics/skills) | |
+| docs | humanizer-zh | [op7418/Humanizer-zh](https://github.com/op7418/Humanizer-zh) | |
+| docs | office | — | Source untraceable (distributed via OpenClaw) |
 | docs | pdf | [anthropics/skills](https://github.com/anthropics/skills) | |
 | docs | pptx | [anthropics/skills](https://github.com/anthropics/skills) | |
 | docs | xlsx | [anthropics/skills](https://github.com/anthropics/skills) | |
-| docs | office | — | Source untraceable (distributed via OpenClaw) |
-| docs | content-research-writer | [ComposioHQ/awesome-claude-skills](https://github.com/ComposioHQ/awesome-claude-skills) | |
-| docs | humanizer-zh | [op7418/Humanizer-zh](https://github.com/op7418/Humanizer-zh) | |
-| engineering | architecture-designer | [Jeffallan/claude-skills](https://github.com/Jeffallan/claude-skills) | |
-| engineering | code-security | [semgrep/skills](https://github.com/semgrep/skills) | Includes full `rules/` directory |
-| engineering | mcp-builder | [anthropics/skills](https://github.com/anthropics/skills) | |
-| engineering | planning-with-files | [OthmanAdi/planning-with-files](https://github.com/OthmanAdi/planning-with-files) | |
-| engineering | modern-python | [trailofbits/skills](https://github.com/trailofbits/skills) | uv + ruff + ty + pytest toolchain |
-| agents | find-skills | [KimYx0207/findskill](https://github.com/KimYx0207/findskill) | Windows-compat fork of [vercel-labs/skills](https://github.com/vercel-labs/skills); kept to avoid the Git Bash empty-output bug |
-| agents | skill-creator | [anthropics/skills](https://github.com/anthropics/skills) | |
-| agents | agent-browser | [vercel-labs/agent-browser](https://github.com/vercel-labs/agent-browser) | `hidden: true` removed locally so it stays visible |
-| original | agent-teams-playbook | — | Original (self-authored) |
-| original | ccr-log-query | — | Original (self-authored) |
+| mine | agent-teams-playbook | — | Original (self-authored) |
+| mine | ccr-log-query | — | Original (self-authored) |
 
 ## Repository layout
 
@@ -65,18 +65,18 @@ personal-skills/
 ├── .claude-plugin/
 │   └── plugin.json          ← manifest: lists every installable skill path (nested)
 ├── skills/
-│   ├── design/              ← group folder
+│   ├── frontend/            ← group folder
 │   │   ├── README.md        ← group description (GitHub auto-renders; not installed)
-│   │   ├── ui-ux-pro-max/SKILL.md
+│   │   ├── react-frontend-guide/SKILL.md
 │   │   └── ...
+│   ├── python/
+│   ├── general/
 │   ├── docs/
-│   ├── engineering/
-│   ├── agents/
-│   └── original/
+│   └── mine/
 └── README.md                ← human-facing (not packaged into installs)
 ```
 
-The install unit is **each `<skill>/` directory** (the one containing a `SKILL.md`). Group folders and their `README.md` are organizational only — they are never installed. The installer flattens skills on install (e.g. `skills/design/ui-ux-pro-max` installs as `~/.claude/skills/ui-ux-pro-max/`), so group choice is for repo navigation, not for the installed layout.
+The install unit is **each `<skill>/` directory** (the one containing a `SKILL.md`). Group folders and their `README.md` are organizational only — they are never installed. The installer flattens skills on install (e.g. `skills/frontend/ui-ux-pro-max` installs as `~/.claude/skills/ui-ux-pro-max/`), so group choice is for repo navigation, not for the installed layout.
 
 ## Add your own skill
 
