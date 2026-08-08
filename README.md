@@ -16,7 +16,7 @@ npx skills@latest update
 
 ## What's here
 
-A curated set of 25 skills grouped by function into 5 categories. Each group has its own `README.md` with skill list, recommended combos, and a one-line group-install command. Browse [`skills/`](./skills/) or jump to a group:
+A curated set of 33 skills grouped by function into 6 categories. Each group has its own `README.md` with skill list, recommended combos, and a one-line group-install command. Browse [`skills/`](./skills/) or jump to a group:
 
 | Group | What it covers | Skills | README |
 | --- | --- | --- | --- |
@@ -24,7 +24,8 @@ A curated set of 25 skills grouped by function into 5 categories. Each group has
 | 🐍 `python` | Python 现代工具链与编码规范 | 1 | [skills/python/README.md](./skills/python/README.md) |
 | 🔧 `general` | 架构设计、安全、MCP、任务规划、skill 工具、浏览器自动化 | 7 | [skills/general/README.md](./skills/general/README.md) |
 | 📄 `docs` | 文档生成（Word/PDF/PPT/Excel）+ 写作与文字润色 | 7 | [skills/docs/README.md](./skills/docs/README.md) |
-| ✏️ `mine` | 我的原创（多 agent 编排、日志查询） | 2 | [skills/mine/README.md](./skills/mine/README.md) |
+| ✏️ `mine` | 我的原创（多 agent 编排、日志查询、工蜂 CLI） | 3 | [skills/mine/README.md](./skills/mine/README.md) |
+| 🎬 `creative-video` | 创意视频制作（HTML + GSAP + HyperFrames） | 7 | [skills/creative-video/README.md](./skills/creative-video/README.md) |
 
 ### Skill sources
 
@@ -57,6 +58,14 @@ Each skill is tracked to its upstream where known. Skills with no listed source 
 | docs | xlsx | [anthropics/skills](https://github.com/anthropics/skills) | |
 | mine | agent-teams-playbook | — | Original (self-authored) |
 | mine | ccr-log-query | — | Original (self-authored) |
+| mine | tencent-code-cli | — | Original (self-authored) |
+| creative-video | hyperframes | [HeyGen/hyperframes](https://github.com/heygen-com/hyperframes) | |
+| creative-video | hyperframes-cli | [HeyGen/hyperframes](https://github.com/heygen-com/hyperframes) | |
+| creative-video | hyperframes-media | [HeyGen/hyperframes](https://github.com/heygen-com/hyperframes) | |
+| creative-video | motion-design | [HeyGen/hyperframes](https://github.com/heygen-com/hyperframes) | |
+| creative-video | video-spec-builder | [HeyGen/hyperframes](https://github.com/heygen-com/hyperframes) | |
+| creative-video | video-agency-roles | — | Original (self-authored) |
+| creative-video | gsap | [HeyGen/hyperframes](https://github.com/heygen-com/hyperframes) | |
 
 ## Repository layout
 
@@ -72,7 +81,8 @@ personal-skills/
 │   ├── python/
 │   ├── general/
 │   ├── docs/
-│   └── mine/
+│   ├── mine/
+│   └── creative-video/
 └── README.md                ← human-facing (not packaged into installs)
 ```
 
