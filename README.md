@@ -16,58 +16,74 @@ npx skills@latest update
 
 ## What's here
 
-A curated set of 23 skills — browser automation, design, document creation (docx/pdf/pptx/xlsx), React frontend guidelines, MCP building, research/writing, file-based planning, technical diagrams, and more. Browse [`skills/`](./skills/) for the full list; each folder is one self-contained skill.
+A curated set of 23 skills grouped by function into 5 categories. Each group has its own `README.md` with skill list, recommended combos, and a one-line group-install command. Browse [`skills/`](./skills/) or jump to a group:
+
+| Group | What it covers | Skills | README |
+| --- | --- | --- | --- |
+| 🎨 `design` | UI/UX, Web visuals, animation, diagrams | 7 | [skills/design/README.md](./skills/design/README.md) |
+| 📄 `docs` | Document generation (Word/PDF/PPT/Excel) + writing & text polish | 7 | [skills/docs/README.md](./skills/docs/README.md) |
+| 🔧 `engineering` | Architecture, security, MCP, task planning | 4 | [skills/engineering/README.md](./skills/engineering/README.md) |
+| 🤖 `agents` | Skill discovery/creation, browser automation | 3 | [skills/agents/README.md](./skills/agents/README.md) |
+| ✏️ `original` | Self-authored skills (multi-agent orchestration, log query) | 2 | [skills/original/README.md](./skills/original/README.md) |
 
 ### Skill sources
 
 Each skill is tracked to its upstream where known. Skills with no listed source are original or untraceable.
 
-| Skill | Upstream source | Notes |
-| --- | --- | --- |
-| agent-browser | [vercel-labs/agent-browser](https://github.com/vercel-labs/agent-browser) | `hidden: true` removed locally so it stays visible |
-| agent-teams-playbook | — | Original (self-authored) |
-| architecture-designer | [Jeffallan/claude-skills](https://github.com/Jeffallan/claude-skills) | |
-| canvas-design | [anthropics/skills](https://github.com/anthropics/skills) | |
-| ccr-log-query | — | Original (self-authored) |
-| code-security | [semgrep/skills](https://github.com/semgrep/skills) | Includes full `rules/` directory |
-| content-research-writer | [ComposioHQ/awesome-claude-skills](https://github.com/ComposioHQ/awesome-claude-skills) | |
-| docx | [anthropics/skills](https://github.com/anthropics/skills) | |
-| figma | — | Source untraceable (Apache 2.0) |
-| fireworks-tech-graph | [yizhiyanhua-ai/fireworks-tech-graph](https://github.com/yizhiyanhua-ai/fireworks-tech-graph) | Natural-language → production SVG/PNG technical diagrams (12 styles) |
-| find-skills | [KimYx0207/findskill](https://github.com/KimYx0207/findskill) | Windows-compat fork of [vercel-labs/skills](https://github.com/vercel-labs/skills); kept to avoid the Git Bash empty-output bug |
-| humanizer-zh | [op7418/Humanizer-zh](https://github.com/op7418/Humanizer-zh) | Chinese text humanizer / AI-trace removal |
-| mcp-builder | [anthropics/skills](https://github.com/anthropics/skills) | |
-| motion | — | Upstream [jezweb/claude-skills](https://github.com/jezweb/claude-skills) removed it; local copy kept as orphan |
-| office | — | Source untraceable (distributed via OpenClaw) |
-| pdf | [anthropics/skills](https://github.com/anthropics/skills) | |
-| planning-with-files | [OthmanAdi/planning-with-files](https://github.com/OthmanAdi/planning-with-files) | |
-| pptx | [anthropics/skills](https://github.com/anthropics/skills) | |
-| react-frontend-guide | [mrgoonie/claudekit-skills](https://github.com/mrgoonie/claudekit-skills) | Upstream dir is `frontend-development`; renamed locally for clarity |
-| skill-creator | [anthropics/skills](https://github.com/anthropics/skills) | |
-| ui-ux-pro-max | [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | |
-| web-design-engineer | [ConardLi/garden-skills](https://github.com/ConardLi/garden-skills) | Customized locally; not synced from upstream |
-| xlsx | [anthropics/skills](https://github.com/anthropics/skills) | |
+| Group | Skill | Upstream source | Notes |
+| --- | --- | --- | --- |
+| design | ui-ux-pro-max | [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | |
+| design | web-design-engineer | [ConardLi/garden-skills](https://github.com/ConardLi/garden-skills) | Customized locally; not synced from upstream |
+| design | canvas-design | [anthropics/skills](https://github.com/anthropics/skills) | |
+| design | figma | — | Source untraceable (Apache 2.0) |
+| design | motion | — | Upstream [jezweb/claude-skills](https://github.com/jezweb/claude-skills) removed it; local copy kept as orphan |
+| design | fireworks-tech-graph | [yizhiyanhua-ai/fireworks-tech-graph](https://github.com/yizhiyanhua-ai/fireworks-tech-graph) | |
+| design | react-frontend-guide | [mrgoonie/claudekit-skills](https://github.com/mrgoonie/claudekit-skills) | Upstream dir is `frontend-development`; renamed locally |
+| docs | docx | [anthropics/skills](https://github.com/anthropics/skills) | |
+| docs | pdf | [anthropics/skills](https://github.com/anthropics/skills) | |
+| docs | pptx | [anthropics/skills](https://github.com/anthropics/skills) | |
+| docs | xlsx | [anthropics/skills](https://github.com/anthropics/skills) | |
+| docs | office | — | Source untraceable (distributed via OpenClaw) |
+| docs | content-research-writer | [ComposioHQ/awesome-claude-skills](https://github.com/ComposioHQ/awesome-claude-skills) | |
+| docs | humanizer-zh | [op7418/Humanizer-zh](https://github.com/op7418/Humanizer-zh) | |
+| engineering | architecture-designer | [Jeffallan/claude-skills](https://github.com/Jeffallan/claude-skills) | |
+| engineering | code-security | [semgrep/skills](https://github.com/semgrep/skills) | Includes full `rules/` directory |
+| engineering | mcp-builder | [anthropics/skills](https://github.com/anthropics/skills) | |
+| engineering | planning-with-files | [OthmanAdi/planning-with-files](https://github.com/OthmanAdi/planning-with-files) | |
+| agents | find-skills | [KimYx0207/findskill](https://github.com/KimYx0207/findskill) | Windows-compat fork of [vercel-labs/skills](https://github.com/vercel-labs/skills); kept to avoid the Git Bash empty-output bug |
+| agents | skill-creator | [anthropics/skills](https://github.com/anthropics/skills) | |
+| agents | agent-browser | [vercel-labs/agent-browser](https://github.com/vercel-labs/agent-browser) | `hidden: true` removed locally so it stays visible |
+| original | agent-teams-playbook | — | Original (self-authored) |
+| original | ccr-log-query | — | Original (self-authored) |
 
 ## Repository layout
 
 ```
 personal-skills/
 ├── .claude-plugin/
-│   └── plugin.json          ← manifest: lists every installable skill path
+│   └── plugin.json          ← manifest: lists every installable skill path (nested)
 ├── skills/
-│   └── <skill-name>/
-│       └── SKILL.md         ← frontmatter (name/description) + body
+│   ├── design/              ← group folder
+│   │   ├── README.md        ← group description (GitHub auto-renders; not installed)
+│   │   ├── ui-ux-pro-max/SKILL.md
+│   │   └── ...
+│   ├── docs/
+│   ├── engineering/
+│   ├── agents/
+│   └── original/
 └── README.md                ← human-facing (not packaged into installs)
 ```
 
-The install unit is **each `skills/<name>/` directory**. Only `SKILL.md` and its sibling files in that folder are installed. Repo-level docs, this README, and config files are **not** packaged — so keep every skill self-contained.
+The install unit is **each `<skill>/` directory** (the one containing a `SKILL.md`). Group folders and their `README.md` are organizational only — they are never installed. The installer flattens skills on install (e.g. `skills/design/ui-ux-pro-max` installs as `~/.claude/skills/ui-ux-pro-max/`), so group choice is for repo navigation, not for the installed layout.
 
 ## Add your own skill
 
-1. Create `skills/<your-skill-name>/` with a `SKILL.md` (use any existing skill folder as a reference for the frontmatter shape).
-2. Edit `SKILL.md`: set `name` (the command), write a `description`, decide on `disable-model-invocation`, and write the body.
-3. Add `"./skills/<your-skill-name>"` to the `skills` array in `.claude-plugin/plugin.json`.
-4. Commit and push. `npx skills@latest add yangpf5271/personal-skills` picks it up.
+1. Pick the right group folder under `skills/<group>/` (create the folder if it's a new group).
+2. Create `skills/<group>/<your-skill-name>/` with a `SKILL.md` (use any existing skill folder as a reference for the frontmatter shape).
+3. Edit `SKILL.md`: set `name` (the command), write a `description`, decide on `disable-model-invocation`, and write the body.
+4. Add `"./skills/<group>/<your-skill-name>"` to the `skills` array in `.claude-plugin/plugin.json`.
+5. If it's a new group, add a `skills/<group>/README.md` describing the group.
+6. Commit and push. `npx skills@latest add yangpf5271/personal-skills` picks it up.
 
 ## Skill authoring quick reference
 
