@@ -16,13 +16,13 @@ npx skills@latest update
 
 ## What's here
 
-A curated set of 23 skills grouped by function into 5 categories. Each group has its own `README.md` with skill list, recommended combos, and a one-line group-install command. Browse [`skills/`](./skills/) or jump to a group:
+A curated set of 25 skills grouped by function into 5 categories. Each group has its own `README.md` with skill list, recommended combos, and a one-line group-install command. Browse [`skills/`](./skills/) or jump to a group:
 
 | Group | What it covers | Skills | README |
 | --- | --- | --- | --- |
-| 🎨 `design` | UI/UX, Web visuals, animation, diagrams | 7 | [skills/design/README.md](./skills/design/README.md) |
+| 🎨 `design` | UI/UX, Web visuals, animation, diagrams, quality audit | 8 | [skills/design/README.md](./skills/design/README.md) |
 | 📄 `docs` | Document generation (Word/PDF/PPT/Excel) + writing & text polish | 7 | [skills/docs/README.md](./skills/docs/README.md) |
-| 🔧 `engineering` | Architecture, security, MCP, task planning | 4 | [skills/engineering/README.md](./skills/engineering/README.md) |
+| 🔧 `engineering` | Architecture, security, MCP, task planning, Python tooling | 5 | [skills/engineering/README.md](./skills/engineering/README.md) |
 | 🤖 `agents` | Skill discovery/creation, browser automation | 3 | [skills/agents/README.md](./skills/agents/README.md) |
 | ✏️ `original` | Self-authored skills (multi-agent orchestration, log query) | 2 | [skills/original/README.md](./skills/original/README.md) |
 
@@ -38,6 +38,7 @@ Each skill is tracked to its upstream where known. Skills with no listed source 
 | design | figma | — | Source untraceable (Apache 2.0) |
 | design | motion | — | Upstream [jezweb/claude-skills](https://github.com/jezweb/claude-skills) removed it; local copy kept as orphan |
 | design | fireworks-tech-graph | [yizhiyanhua-ai/fireworks-tech-graph](https://github.com/yizhiyanhua-ai/fireworks-tech-graph) | |
+| design | web-quality | [addyosmani/web-quality-skills](https://github.com/addyosmani/web-quality-skills) | Upstream skill `web-quality-audit`; renamed locally |
 | design | react-frontend-guide | [mrgoonie/claudekit-skills](https://github.com/mrgoonie/claudekit-skills) | Upstream dir is `frontend-development`; renamed locally |
 | docs | docx | [anthropics/skills](https://github.com/anthropics/skills) | |
 | docs | pdf | [anthropics/skills](https://github.com/anthropics/skills) | |
@@ -50,6 +51,7 @@ Each skill is tracked to its upstream where known. Skills with no listed source 
 | engineering | code-security | [semgrep/skills](https://github.com/semgrep/skills) | Includes full `rules/` directory |
 | engineering | mcp-builder | [anthropics/skills](https://github.com/anthropics/skills) | |
 | engineering | planning-with-files | [OthmanAdi/planning-with-files](https://github.com/OthmanAdi/planning-with-files) | |
+| engineering | modern-python | [trailofbits/skills](https://github.com/trailofbits/skills) | uv + ruff + ty + pytest toolchain |
 | agents | find-skills | [KimYx0207/findskill](https://github.com/KimYx0207/findskill) | Windows-compat fork of [vercel-labs/skills](https://github.com/vercel-labs/skills); kept to avoid the Git Bash empty-output bug |
 | agents | skill-creator | [anthropics/skills](https://github.com/anthropics/skills) | |
 | agents | agent-browser | [vercel-labs/agent-browser](https://github.com/vercel-labs/agent-browser) | `hidden: true` removed locally so it stays visible |

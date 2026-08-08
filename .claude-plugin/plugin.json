@@ -11,6 +11,7 @@
   "skills": [
     "./skills/design/ui-ux-pro-max",
     "./skills/design/web-design-engineer",
+    "./skills/design/web-quality",
     "./skills/design/canvas-design",
     "./skills/design/figma",
     "./skills/design/motion",
@@ -26,6 +27,7 @@
     "./skills/engineering/architecture-designer",
     "./skills/engineering/code-security",
     "./skills/engineering/mcp-builder",
+    "./skills/engineering/modern-python",
     "./skills/engineering/planning-with-files",
     "./skills/agents/find-skills",
     "./skills/agents/skill-creator",
