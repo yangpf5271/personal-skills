@@ -1,6 +1,6 @@
 {
   "name": "personal-skills",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Personal agent skills collection, grouped by function — frontend, python, general, docs, mine. Plug-and-play skills for coding agents; install what you need, edit freely.",
   "license": "MIT",
   "keywords": [
@@ -32,6 +32,7 @@
     "./skills/docs/pdf",
     "./skills/docs/pptx",
     "./skills/docs/xlsx",
+    "./skills/docs/hv-analysis",
     "./skills/mine/agent-teams-playbook",
     "./skills/mine/ccr-log-query",
     "./skills/mine/tencent-code-cli"

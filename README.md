@@ -16,14 +16,14 @@ npx skills@latest update
 
 ## What's here
 
-A curated set of 26 skills grouped by function into 5 categories. Plus 7 optional `creative-video` skills available as "Other" during install. Each group has its own `README.md` with skill list, recommended combos, and a one-line group-install command. Browse [`skills/`](./skills/) or jump to a group:
+A curated set of 27 skills grouped by function into 5 categories. Plus 7 optional `creative-video` skills available as "Other" during install. Each group has its own `README.md` with skill list, recommended combos, and a one-line group-install command. Browse [`skills/`](./skills/) or jump to a group:
 
 | Group | What it covers | Skills | README |
 | --- | --- | --- | --- |
 | 🎨 `frontend` | 前端编码规范、设计系统、视觉制品、动效、质量检测 | 8 | [skills/frontend/README.md](./skills/frontend/README.md) |
 | 🐍 `python` | Python 现代工具链与编码规范 | 1 | [skills/python/README.md](./skills/python/README.md) |
 | 🔧 `general` | 架构设计、安全、MCP、任务规划、skill 工具、浏览器自动化 | 7 | [skills/general/README.md](./skills/general/README.md) |
-| 📄 `docs` | 文档生成（Word/PDF/PPT/Excel）+ 写作与文字润色 | 7 | [skills/docs/README.md](./skills/docs/README.md) |
+| 📄 `docs` | 文档生成（Word/PDF/PPT/Excel）+ 写作、研究、文字润色 | 8 | [skills/docs/README.md](./skills/docs/README.md) |
 | ✏️ `mine` | 我的原创（多 agent 编排、日志查询、工蜂 CLI） | 3 | [skills/mine/README.md](./skills/mine/README.md) |
 
 > 🎬 **创意视频制作**（7 skills）：未加入主分组，安装时在 "Other" 中可选。详见 [`skills/creative-video/README.md`](./skills/creative-video/README.md)。
@@ -57,6 +57,7 @@ Each skill is tracked to its upstream where known. Skills with no listed source 
 | docs | pdf | [anthropics/skills](https://github.com/anthropics/skills) | |
 | docs | pptx | [anthropics/skills](https://github.com/anthropics/skills) | |
 | docs | xlsx | [anthropics/skills](https://github.com/anthropics/skills) | |
+| docs | hv-analysis | [khazix/hv-analysis](https://github.com/khazix/hv-analysis) | 横纵分析法：纵轴生命历程 + 横轴竞品对比 → PDF 研究报告 |
 | mine | agent-teams-playbook | — | Original (self-authored) |
 | mine | ccr-log-query | — | Original (self-authored) |
 | mine | tencent-code-cli | — | Original (self-authored) |
