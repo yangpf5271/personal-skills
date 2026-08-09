@@ -1,7 +1,7 @@
 {
   "name": "personal-skills",
-  "version": "0.4.0",
-  "description": "Personal agent skills collection, grouped by function — frontend, python, general, docs, mine, creative-video. Plug-and-play skills for coding agents; install what you need, edit freely.",
+  "version": "0.3.1",
+  "description": "Personal agent skills collection, grouped by function — frontend, python, general, docs, mine. Plug-and-play skills for coding agents; install what you need, edit freely.",
   "license": "MIT",
   "keywords": [
     "skills",
@@ -34,13 +34,6 @@
     "./skills/docs/xlsx",
     "./skills/mine/agent-teams-playbook",
     "./skills/mine/ccr-log-query",
-    "./skills/mine/tencent-code-cli",
-    "./skills/creative-video/hyperframes",
-    "./skills/creative-video/hyperframes-cli",
-    "./skills/creative-video/hyperframes-media",
-    "./skills/creative-video/motion-design",
-    "./skills/creative-video/video-spec-builder",
-    "./skills/creative-video/video-agency-roles",
-    "./skills/creative-video/gsap"
+    "./skills/mine/tencent-code-cli"
   ]
 }

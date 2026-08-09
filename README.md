@@ -16,7 +16,7 @@ npx skills@latest update
 
 ## What's here
 
-A curated set of 33 skills grouped by function into 6 categories. Each group has its own `README.md` with skill list, recommended combos, and a one-line group-install command. Browse [`skills/`](./skills/) or jump to a group:
+A curated set of 26 skills grouped by function into 5 categories. Plus 7 optional `creative-video` skills available as "Other" during install. Each group has its own `README.md` with skill list, recommended combos, and a one-line group-install command. Browse [`skills/`](./skills/) or jump to a group:
 
 | Group | What it covers | Skills | README |
 | --- | --- | --- | --- |
@@ -25,7 +25,8 @@ A curated set of 33 skills grouped by function into 6 categories. Each group has
 | 🔧 `general` | 架构设计、安全、MCP、任务规划、skill 工具、浏览器自动化 | 7 | [skills/general/README.md](./skills/general/README.md) |
 | 📄 `docs` | 文档生成（Word/PDF/PPT/Excel）+ 写作与文字润色 | 7 | [skills/docs/README.md](./skills/docs/README.md) |
 | ✏️ `mine` | 我的原创（多 agent 编排、日志查询、工蜂 CLI） | 3 | [skills/mine/README.md](./skills/mine/README.md) |
-| 🎬 `creative-video` | 创意视频制作（HTML + GSAP + HyperFrames） | 7 | [skills/creative-video/README.md](./skills/creative-video/README.md) |
+
+> 🎬 **创意视频制作**（7 skills）：未加入主分组，安装时在 "Other" 中可选。详见 [`skills/creative-video/README.md`](./skills/creative-video/README.md)。
 
 ### Skill sources
 
@@ -59,13 +60,8 @@ Each skill is tracked to its upstream where known. Skills with no listed source 
 | mine | agent-teams-playbook | — | Original (self-authored) |
 | mine | ccr-log-query | — | Original (self-authored) |
 | mine | tencent-code-cli | — | Original (self-authored) |
-| creative-video | hyperframes | [HeyGen/hyperframes](https://github.com/heygen-com/hyperframes) | |
-| creative-video | hyperframes-cli | [HeyGen/hyperframes](https://github.com/heygen-com/hyperframes) | |
-| creative-video | hyperframes-media | [HeyGen/hyperframes](https://github.com/heygen-com/hyperframes) | |
-| creative-video | motion-design | [HeyGen/hyperframes](https://github.com/heygen-com/hyperframes) | |
-| creative-video | video-spec-builder | [HeyGen/hyperframes](https://github.com/heygen-com/hyperframes) | |
-| creative-video | video-agency-roles | — | Original (self-authored) |
-| creative-video | gsap | [HeyGen/hyperframes](https://github.com/heygen-com/hyperframes) | |
+
+> 🎬 creative-video 组（7 skills，不注册在主分组）：hyperframes、hyperframes-cli、hyperframes-media、motion-design、video-spec-builder、video-agency-roles、gsap。来源 [HeyGen/hyperframes](https://github.com/heygen-com/hyperframes)（除 video-agency-roles 为原创）。安装时在 "Other" 中可选。
 
 ## Repository layout
 
@@ -82,7 +78,7 @@ personal-skills/
 │   ├── general/
 │   ├── docs/
 │   ├── mine/
-│   └── creative-video/
+│   └── creative-video/       ← "Other" group (not in plugin.json, optional install)
 └── README.md                ← human-facing (not packaged into installs)
 ```
 
@@ -93,7 +89,7 @@ The install unit is **each `<skill>/` directory** (the one containing a `SKILL.m
 1. Pick the right group folder under `skills/<group>/` (create the folder if it's a new group).
 2. Create `skills/<group>/<your-skill-name>/` with a `SKILL.md` (use any existing skill folder as a reference for the frontmatter shape).
 3. Edit `SKILL.md`: set `name` (the command), write a `description`, decide on `disable-model-invocation`, and write the body.
-4. Add `"./skills/<group>/<your-skill-name>"` to the `skills` array in `.claude-plugin/plugin.json`.
+4. Add `"./skills/<group>/<your-skill-name>"` to the `skills` array in `.claude-plugin/plugin.json` to register it in a group. Skills not in `plugin.json` are still installable — they appear under "Other" during install.
 5. If it's a new group, add a `skills/<group>/README.md` describing the group.
 6. Commit and push. `npx skills@latest add yangpf5271/personal-skills` picks it up.
 
