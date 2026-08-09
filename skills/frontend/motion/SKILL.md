@@ -1,13 +1,9 @@
 ---
 name: motion
 description: |
-  React 动画库 Motion 指南：Production-ready setup for Motion (formerly Framer Motion) - the most popular React animation library with 30,200+ GitHub stars. Motion provides declarative animations, gesture controls, scroll-based effects, spring physics, layout animations, and SVG manipulation.
+  React 动画库 Motion 指南：Production-ready setup for Motion (formerly Framer Motion)，30,200+ GitHub stars。支持手势控制（drag/hover/tap）、滚动动画（parallax/scroll-linked）、布局动画（FLIP）、SVG 路径变形、弹簧物理、离场动画（AnimatePresence）。适用于拖拽排序、视差英雄区、模态框、手风琴、轮播等复杂交互动效。简单列表增删改用 auto-animate（3.28 KB vs 34 KB）。
 
-  This skill should be used when building UIs that need complex animations beyond simple list transitions: gesture controls (drag, hover, tap), scroll-linked animations, parallax effects, shared element transitions, SVG path morphing, spring physics, or orchestrated animation sequences.
-
-  Use when: Adding drag-and-drop interactions, creating scroll-triggered animations, implementing modal dialogs with sophisticated transitions, building carousels with momentum, animating page/route transitions, creating hero sections with parallax, implementing accordion components with smooth expand/collapse, or optimizing animation bundle size with LazyMotion.
-
-  **Important**: For simple list add/remove/sort animations, use the `auto-animate` skill instead (3.28 KB vs 34 KB bundle). Motion is designed for complex interactive animations that require fine-grained control.
+  Use when: drag-and-drop, scroll-triggered animations, modal dialogs with transitions, carousels with momentum, page/route transitions, hero sections with parallax, accordion animations, or optimizing bundle with LazyMotion.
 
 license: MIT
 ---
