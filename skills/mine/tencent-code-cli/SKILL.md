@@ -1,7 +1,7 @@
 ---
 name: tencent-code-cli
 description: |
-  操作腾讯工蜂（code.tencent.com / git.code.tencent.com）代码托管平台的 CLI 工具 tcode。
+  腾讯工蜂 CLI：操作工蜂（code.tencent.com / git.code.tencent.com）代码托管平台的 CLI 工具 tcode。
   封装工蜂 REST API（/api/v3，GitLab v3 兼容），覆盖项目、仓库、分支、Tag、提交、合并请求（MR）、
   代码评审、缺陷单、标签、里程碑、Webhook、版本发布等全部端点。当用户提到工蜂、tcode、
   git.code.tencent.com，或要在工蜂上做任何平台操作（查/建项目、看 MR diff、创建 MR、管缺陷、
