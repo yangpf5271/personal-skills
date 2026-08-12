@@ -16,14 +16,14 @@ npx skills@latest update
 
 ## What's here
 
-A curated set of 28 skills grouped by function into 5 categories. Plus 7 optional `creative-video` skills available as "Other" during install. Each group has its own `README.md` with skill list, recommended combos, and a one-line group-install command. Browse [`skills/`](./skills/) or jump to a group:
+A curated set of 30 skills grouped by function into 5 categories. Plus 7 optional `creative-video` skills available as "Other" during install. Each group has its own `README.md` with skill list, recommended combos, and a one-line group-install command. Browse [`skills/`](./skills/) or jump to a group:
 
 | Group | What it covers | Skills | README |
 | --- | --- | --- | --- |
 | 🎨 `frontend` | 前端编码规范、设计系统、视觉制品、动效、质量检测 | 8 | [skills/frontend/README.md](./skills/frontend/README.md) |
 | 🐍 `python` | Python 现代工具链与编码规范 | 2 | [skills/python/README.md](./skills/python/README.md) |
-| 🔧 `general` | 架构设计、安全、MCP、任务规划、skill 工具、浏览器自动化 | 7 | [skills/general/README.md](./skills/general/README.md) |
-| 📄 `docs` | 文档生成（Word/PDF/PPT/Excel）+ 写作、研究、文字润色 | 8 | [skills/docs/README.md](./skills/docs/README.md) |
+| 🔧 `general` | 架构设计、安全、MCP、任务规划、skill 工具、浏览器自动化、算法 | 8 | [skills/general/README.md](./skills/general/README.md) |
+| 📄 `docs` | 文档生成（Word/PDF/PPT/Excel）+ 写作、研究、标书、文字润色 | 9 | [skills/docs/README.md](./skills/docs/README.md) |
 | ✏️ `mine` | 我的原创（多 agent 编排、日志查询、工蜂 CLI） | 3 | [skills/mine/README.md](./skills/mine/README.md) |
 
 > 🎬 **创意视频制作**（7 skills）：未加入主分组，安装时在 "Other" 中可选。详见 [`skills/creative-video/README.md`](./skills/creative-video/README.md)。
@@ -47,6 +47,7 @@ Each skill is tracked to its upstream where known. Skills with no listed source 
 | general | agent-browser | [vercel-labs/agent-browser](https://github.com/vercel-labs/agent-browser) | `hidden: true` removed locally so it stays visible |
 | general | architecture-designer | [Jeffallan/claude-skills](https://github.com/Jeffallan/claude-skills) | |
 | general | code-security | [semgrep/skills](https://github.com/semgrep/skills) | Includes full `rules/` directory |
+| general | computer-science-algorithms | [community-skills](https://github.com/anthropics/community-skills) | 51 rules / 9 categories; CLRS + cp-algorithms distillation |
 | general | find-skills | [KimYx0207/findskill](https://github.com/KimYx0207/findskill) | Windows-compat fork of [vercel-labs/skills](https://github.com/vercel-labs/skills); kept to avoid the Git Bash empty-output bug |
 | general | mcp-builder | [anthropics/skills](https://github.com/anthropics/skills) | |
 | general | planning-with-files | [OthmanAdi/planning-with-files](https://github.com/OthmanAdi/planning-with-files) | |
@@ -59,6 +60,7 @@ Each skill is tracked to its upstream where known. Skills with no listed source 
 | docs | pptx | [anthropics/skills](https://github.com/anthropics/skills) | |
 | docs | xlsx | [anthropics/skills](https://github.com/anthropics/skills) | |
 | docs | hv-analysis | [khazix/hv-analysis](https://github.com/khazix/hv-analysis) | 横纵分析法：纵轴生命历程 + 横轴竞品对比 → PDF 研究报告 |
+| docs | tender-bid-writer | — | Original (self-authored); 招标需求+大纲 → 技术标 .docx |
 | mine | agent-teams-playbook | — | Original (self-authored) |
 | mine | ccr-log-query | — | Original (self-authored) |
 | mine | tencent-code-cli | — | Original (self-authored) |
