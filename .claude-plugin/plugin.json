@@ -1,6 +1,6 @@
 {
   "name": "personal-skills",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "description": "Personal agent skills collection, grouped by function — frontend, python, general, docs, mine. Plug-and-play skills for coding agents; install what you need, edit freely.",
   "license": "MIT",
   "keywords": [
@@ -23,6 +23,7 @@
     "./skills/general/architecture-designer",
     "./skills/general/code-security",
     "./skills/general/computer-science-algorithms",
+    "./skills/general/database-architecture",
     "./skills/general/radical-simplification",
     "./skills/general/theory-of-constraints",
     "./skills/general/find-skills",
