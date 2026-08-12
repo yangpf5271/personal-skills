@@ -16,13 +16,13 @@ npx skills@latest update
 
 ## What's here
 
-A curated set of 30 skills grouped by function into 5 categories. Plus 7 optional `creative-video` skills available as "Other" during install. Each group has its own `README.md` with skill list, recommended combos, and a one-line group-install command. Browse [`skills/`](./skills/) or jump to a group:
+A curated set of 32 skills grouped by function into 5 categories. Plus 7 optional `creative-video` skills available as "Other" during install. Each group has its own `README.md` with skill list, recommended combos, and a one-line group-install command. Browse [`skills/`](./skills/) or jump to a group:
 
 | Group | What it covers | Skills | README |
 | --- | --- | --- | --- |
 | 🎨 `frontend` | 前端编码规范、设计系统、视觉制品、动效、质量检测 | 8 | [skills/frontend/README.md](./skills/frontend/README.md) |
 | 🐍 `python` | Python 现代工具链与编码规范 | 2 | [skills/python/README.md](./skills/python/README.md) |
-| 🔧 `general` | 架构设计、安全、MCP、任务规划、skill 工具、浏览器自动化、算法 | 8 | [skills/general/README.md](./skills/general/README.md) |
+| 🔧 `general` | 架构设计、安全、MCP、任务规划、skill 工具、浏览器自动化、算法、方法论 | 10 | [skills/general/README.md](./skills/general/README.md) |
 | 📄 `docs` | 文档生成（Word/PDF/PPT/Excel）+ 写作、研究、标书、文字润色 | 9 | [skills/docs/README.md](./skills/docs/README.md) |
 | ✏️ `mine` | 我的原创（多 agent 编排、日志查询、工蜂 CLI） | 3 | [skills/mine/README.md](./skills/mine/README.md) |
 
@@ -48,6 +48,8 @@ Each skill is tracked to its upstream where known. Skills with no listed source 
 | general | architecture-designer | [Jeffallan/claude-skills](https://github.com/Jeffallan/claude-skills) | |
 | general | code-security | [semgrep/skills](https://github.com/semgrep/skills) | Includes full `rules/` directory |
 | general | computer-science-algorithms | [community-skills](https://github.com/anthropics/community-skills) | 51 rules / 9 categories; CLRS + cp-algorithms distillation |
+| general | radical-simplification | [pproenca/dot-skills](https://github.com/pproenca/dot-skills) | 9 cognitive moves for collapsing complexity |
+| general | theory-of-constraints | [pproenca/dot-skills](https://github.com/pproenca/dot-skills) | Goldratt ToC: find → exploit → subordinate → elevate → repeat |
 | general | find-skills | [KimYx0207/findskill](https://github.com/KimYx0207/findskill) | Windows-compat fork of [vercel-labs/skills](https://github.com/vercel-labs/skills); kept to avoid the Git Bash empty-output bug |
 | general | mcp-builder | [anthropics/skills](https://github.com/anthropics/skills) | |
 | general | planning-with-files | [OthmanAdi/planning-with-files](https://github.com/OthmanAdi/planning-with-files) | |
