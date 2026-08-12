@@ -16,12 +16,12 @@ npx skills@latest update
 
 ## What's here
 
-A curated set of 27 skills grouped by function into 5 categories. Plus 7 optional `creative-video` skills available as "Other" during install. Each group has its own `README.md` with skill list, recommended combos, and a one-line group-install command. Browse [`skills/`](./skills/) or jump to a group:
+A curated set of 28 skills grouped by function into 5 categories. Plus 7 optional `creative-video` skills available as "Other" during install. Each group has its own `README.md` with skill list, recommended combos, and a one-line group-install command. Browse [`skills/`](./skills/) or jump to a group:
 
 | Group | What it covers | Skills | README |
 | --- | --- | --- | --- |
 | 🎨 `frontend` | 前端编码规范、设计系统、视觉制品、动效、质量检测 | 8 | [skills/frontend/README.md](./skills/frontend/README.md) |
-| 🐍 `python` | Python 现代工具链与编码规范 | 1 | [skills/python/README.md](./skills/python/README.md) |
+| 🐍 `python` | Python 现代工具链与编码规范 | 2 | [skills/python/README.md](./skills/python/README.md) |
 | 🔧 `general` | 架构设计、安全、MCP、任务规划、skill 工具、浏览器自动化 | 7 | [skills/general/README.md](./skills/general/README.md) |
 | 📄 `docs` | 文档生成（Word/PDF/PPT/Excel）+ 写作、研究、文字润色 | 8 | [skills/docs/README.md](./skills/docs/README.md) |
 | ✏️ `mine` | 我的原创（多 agent 编排、日志查询、工蜂 CLI） | 3 | [skills/mine/README.md](./skills/mine/README.md) |
@@ -43,6 +43,7 @@ Each skill is tracked to its upstream where known. Skills with no listed source 
 | frontend | web-design-engineer | [ConardLi/garden-skills](https://github.com/ConardLi/garden-skills) | Customized locally; not synced from upstream |
 | frontend | web-quality | [addyosmani/web-quality-skills](https://github.com/addyosmani/web-quality-skills) | Upstream skill `web-quality-audit`; renamed locally |
 | python | modern-python | [trailofbits/skills](https://github.com/trailofbits/skills) | uv + ruff + ty + pytest toolchain |
+| python | python-best-practices | [nathan-gage/python-skills](https://github.com/nathan-gage/python-skills) | 70 rules / 8 categories from real PR review patterns |
 | general | agent-browser | [vercel-labs/agent-browser](https://github.com/vercel-labs/agent-browser) | `hidden: true` removed locally so it stays visible |
 | general | architecture-designer | [Jeffallan/claude-skills](https://github.com/Jeffallan/claude-skills) | |
 | general | code-security | [semgrep/skills](https://github.com/semgrep/skills) | Includes full `rules/` directory |
