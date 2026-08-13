@@ -1,0 +1,365 @@
+# ━━━ 关键词索引（步骤7输出时调用·步骤8检查时调用）━━━
+# 用法：步骤7输出分镜时，从常驻库选取基础负面词填入；
+# 步骤8检查时，如发现特定问题，从急救库选取对应负面词追加。
+# 本库为通用库，所有题材/模板均调用。
+
+## 快速索引表
+| 控制需求 | 目标段落 |
+|----------|----------|
+| 按问题类型查负面词（面部/手部/肢体/空间/风格/文字） | SECTION:A-问题分类 |
+| 按严重度查负面词（常驻/情境/急救） | SECTION:B-严重度分级 |
+| 各模型专属负面词偏好 | SECTION:C-模型专属 |
+| 负面提示词拼装规则（各模板怎么填） | SECTION:D-拼装规则 |
+
+═══════════════════════════════════════════════════
+
+════════════════════════════════════════════════════════════
+负面提示词专用库
+references/提示词库-负面提示词.txt ｜ V1.0
+════════════════════════════════════════════════════════════
+
+【为什么需要这个库】
+负面提示词是AI生成的"排除指令"——告诉模型"不要生成什么"。
+当前负面提示词散落在三处：模板B/D无此字段、模板C全局区块统一输出、
+生成检查与规避库.txt SECTION:B有部分按问题分类的处方。但没有统一的、按问题类型组织的负面词库。
+
+本库整合所有负面提示词，按"问题类型×严重度×模型适配"三维组织，
+步骤7输出时自动选取，步骤8检查时按需追加。
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+══════════ SECTION:A-问题分类 ══════════
+按问题类型分类的负面提示词
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+■ A1. 面部崩坏类
+
+通用负面词：
+face distortion, facial feature displacement, asymmetrical face,
+melting face, deformed face, extra eyes, no pupils, crossed eyes,
+misplaced eyes, mouth on forehead, nose deformation, ear deformation,
+face merging with body, multiple faces, faceless, blurred face
+
+中文等效（即梦/海螺等中文模型用）：
+面部变形, 五官位移, 脸不对称, 融脸, 多眼, 无瞳, 斜视,
+嘴部长在额头, 鼻子变形, 耳朵变形, 脸与身体融合, 多脸, 无脸, 面部模糊
+
+细分场景：
+- 特写镜头追加：pore distortion, skin texture breakdown, eye reflection error
+- 群像镜头追加：face blending between characters, identical faces
+
+■ A2. 手部类
+
+通用负面词：
+extra fingers, missing fingers, fused fingers, backward hand,
+six fingers, eight fingers, hand merger, hand passing through object,
+deformed hand, webbed fingers, no thumb, extra thumb, finger as thumb,
+hand with too many joints, floating hand, detached hand
+
+中文等效：
+多指, 缺指, 手指融合, 手反向, 六指, 八指, 手合并, 手穿物体,
+手变形, 蹼状指, 无拇指, 多拇指, 手指过多关节, 悬浮手, 断手
+
+细分场景：
+- 持道具镜头追加：hand not gripping object, object floating in hand
+- 打斗镜头追加：hand clipping through opponent, fist not connecting
+
+■ A3. 肢体类
+
+通用负面词：
+extra limbs, missing limbs, reverse joints, body distortion,
+floating limbs, merged bodies, detached limbs, broken spine,
+impossible pose, dislocated joints, extra legs, three arms,
+body merging with environment, transparent body, half body,
+elongated limbs, shortened limbs, disproportionate body
+
+中文等效：
+多肢, 缺肢, 关节反折, 身体扭曲, 悬浮肢体, 身体融合, 断肢, 脊柱断裂,
+不可能姿势, 脱臼, 多腿, 三臂, 身体与环境融合, 半透明身体, 半身,
+肢体过长, 肢体过短, 身体比例失调
+
+细分场景：
+- 打斗镜头追加：body clipping through opponent, impossible martial arts pose
+- 坐卧镜头追加：body clipping through furniture, floating above seat
+
+■ A4. 空间类
+
+通用负面词：
+character overlap, character position shift, scale inconsistency,
+proportion error, perspective error, character clipping through wall,
+character clipping through furniture, floating character, sinking character,
+character duplicated, character missing, background character suddenly appearing,
+scene layout change, room shape change, furniture position change
+
+中文等效：
+角色重叠, 角色位置偏移, 比例不一致, 透视错误, 角色穿墙,
+角色穿家具, 角色悬浮, 角色下沉, 角色复制, 角色消失, 背景人物突然出现,
+场景布局变化, 房间形状变化, 家具位置变化
+
+细分场景：
+- 多人镜头追加：characters blending, position swap, overlap error
+- 跨视频镜头追加：scene continuity break, layout mismatch with previous shot
+
+■ A5. 风格漂移类
+
+通用负面词：
+style change, style inconsistency, render quality drop,
+material inconsistency, color shift, lighting change,
+cartoon style in realistic scene, realistic style in cartoon scene,
+2D style in 3D scene, 3D style in 2D scene, cel-shading in realistic render,
+realistic texture in cartoon render, art style mismatch between shots
+
+中文等效：
+风格变化, 风格不一致, 渲染质量下降, 材质不一致, 色彩偏移, 光线变化,
+写实场景出现卡通风格, 卡通场景出现写实风格, 3D场景出现2D风格,
+2D场景出现3D风格, 写实渲染出现赛璐璐, 卡通渲染出现写实材质, 分镜间风格不匹配
+
+■ A6. 文字/水印/UI类
+
+通用负面词：
+text, watermark, logo, signature, URL, timestamp, date stamp,
+subtitles, captions, UI elements, buttons, icons, frames, borders,
+QR code, barcode, film perforations, timecode, channel logo
+
+中文等效：
+文字, 水印, 标志, 签名, 网址, 时间戳, 日期戳, 字幕, 标题,
+UI元素, 按钮, 图标, 边框, 二维码, 条形码, 片孔, 时间码, 频道标志
+
+■ A7. 动画/漫剧专属类
+
+通用负面词：
+cel-shading on realistic character, speed lines, impact lines,
+concentration lines, motion lines, halftone dots, comic panels,
+speech bubbles, onomatopoeia text, manga sound effects, anime sweat drop,
+chibi proportions, super deformed, anime style eyes on realistic face
+
+中文等效：
+写实角色出现赛璐璐着色, 速度线, 冲击线, 集中线, 动态线, 半调网点, 漫画分格,
+对话框, 拟声字, 漫画音效, 动漫汗滴, Q版比例, 超变形, 写实脸出现动漫眼
+
+■ A8. 时代穿帮类（古装/仙侠/科幻专属）
+
+古装/仙侠负面词：
+modern clothing, modern accessories, watch, glasses, smartphone,
+modern buildings in background, plastic materials, modern makeup,
+synthetic fabric, zipper, buttons (on ancient clothing), modern hairstyles
+
+中文等效：
+现代服装, 现代配饰, 手表, 眼镜, 智能手机, 背景出现现代建筑,
+塑料材质, 现代妆容, 合成纤维, 拉链, 现代纽扣, 现代发型
+
+科幻负面词：
+medieval weapons in sci-fi scene, magic elements in hard sci-fi,
+fantasy creatures in space, ancient architecture in future city
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+══════════ SECTION:B-严重度分级 ══════════
+按严重度分级
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+■ B1. 常驻级（每镜必加）
+
+这些是基础防崩负面词，无论什么场景、什么镜头都必须加入。
+对应模板C的"全局区块负面参数"和模板B/D全局前缀块的负面提示。
+
+中文版（即梦/海螺等中文模型用）：
+肢体畸形, 多指, 手指融合, 面部变形, 五官位移, 多肢, 关节反折,
+身体扭曲, 文字水印, 画面模糊, 构图失衡, 风格突变
+
+英文版（可灵/Runway/Vidu/Sora等英文模型用）：
+deformed limbs, extra fingers, fused fingers, face distortion,
+facial feature displacement, extra limbs, reverse joints, body distortion,
+text, watermark, blurred image, composition imbalance, style change
+
+■ B2. 情境级（特定场景才加）
+
+根据镜头类型和题材选择性加入。
+
+打斗/动作场景追加：
+impossible martial arts pose, body clipping through opponent, fist not connecting,
+weapon clipping, weapon passing through body, floating weapon
+
+多人/群像场景追加：
+characters blending, identical faces, position swap, face merging,
+extra background characters, character duplication
+
+特写/近景追加：
+pore distortion, skin texture breakdown, eye reflection error,
+asymmetrical pupils, misaligned teeth
+
+古装/仙侠场景追加：
+modern clothing, modern accessories, watch, glasses, smartphone,
+modern buildings in background, plastic materials, zipper
+
+科幻场景追加：
+medieval weapons in sci-fi, magic elements in hard sci-fi,
+fantasy creatures in space setting
+
+室内场景追加：
+character clipping through furniture, floating above seat,
+furniture position change, wall clipping
+
+室外场景追加：
+floating character, impossible terrain, perspective error in landscape
+
+儿童角色追加：
+adult proportions on child, mature facial features on child,
+oversized head, child in adult clothing
+
+■ B3. 急救级（翻车后才加）
+
+当生成结果出现特定问题时，针对性追加。
+配合生成检查与规避库.txt SECTION:B的重试SOP使用。
+
+面部崩毁急救：
+extreme face distortion, multiple faces, faceless, face melting,
+severe asymmetry, facial features merged, nose missing, mouth missing
+
+手部崩毁急救：
+severe hand deformation, hands merged, multiple hands, no hands,
+fingers growing from palm, hand with 10+ fingers, crab claw hand
+
+肢体崩毁急救：
+extra torso, multiple torsos, body split in half, head detached,
+limbs growing from wrong place, body turned inside out
+
+空间穿模急救：
+severe clipping, character half inside wall, character half inside floor,
+object floating in air, furniture overlapping, room geometry broken
+
+风格崩坏急救：
+sudden style change mid-shot, photorealistic turning to cartoon,
+3D turning to 2D, texture popping, material flickering
+
+■ 分级使用规则
+- 常驻级：每镜/全局区块必加，不可选
+- 情境级：步骤7输出时，根据镜头标签自动匹配对应情境词
+- 急救级：步骤8检查发现问题时追加，或用户反馈生成失败时追加
+- 三级叠加：最终负面词 = 常驻 + 情境（如有）+ 急救（如有）
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+══════════ SECTION:C-模型专属 ══════════
+各模型专属负面词偏好
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+不同模型对负面词的响应不同。以下是各模型的偏好和建议。
+
+■ 可灵（Kling）
+- 语言：中英文均可，英文效果略好
+- 特点：对"多指""肢体畸形"响应好，对风格类负面词响应弱
+- 推荐追加：extra fingers, deformed hands, bad anatomy, watermark
+- 不推荐：过长的负面词列表（可灵对长负面词敏感，可能降低画质）
+
+■ 即梦（Jimeng/Dreamina）
+- 语言：中文为主
+- 特点：对中文负面词响应好，对"画面模糊""文字水印"敏感
+- 推荐追加：画面模糊, 文字水印, 肢体畸形, 多指, 面部变形
+- 不推荐：纯英文负面词（即梦中文模型对英文负面词理解有限）
+- 即梦C 2.0特有：支持"画面锁定"类正面约束词，与负面词配合使用效果更好
+
+■ LibTV（Star Video 2.0 / Seedance 2.0）
+- 语言：英文为主
+- 特点：Star Video 2.0 不需要写负面提示词（模型自动处理）
+- Seedance 2.0：需要简洁负面词，过长会降低生成质量
+- 推荐追加（Seedance）：deformed, bad anatomy, watermark, text
+- 不推荐：超过20词的负面词列表
+
+■ Vidu
+- 语言：中英文均可
+- 特点：对"风格突变""构图失衡"响应好
+- 推荐追加：style change, composition imbalance, deformed, watermark
+
+■ 海螺（Hailuo/MiniMax）
+- 语言：中文为主
+- 特点：对"多肢""关节反折"响应好
+- 推荐追加：多肢, 关节反折, 面部变形, 画面模糊, 水印
+
+■ Runway（Gen-2/Gen-3）
+- 语言：英文
+- 特点：对英文负面词响应稳定，对长负面词列表宽容
+- 推荐追加：deformed, disfigured, bad anatomy, wrong proportions,
+  extra limbs, missing limbs, mutated hands, watermark, text
+
+■ Sora
+- 语言：英文
+- 特点：Sora自带较强的安全过滤，负面词需求较低
+- 推荐追加：deformed, watermark, text overlay（精简即可）
+
+■ Veo
+- 语言：英文
+- 特点：对"motion artifacts""temporal inconsistency"响应好
+- 推荐追加：deformed, motion artifacts, watermark, text, style inconsistency
+
+■ 通用规则
+- 用户未指定模型时：使用常驻级中英文混合版
+- 用户指定模型后：按该模型偏好调整负面词语言和长度
+- 模型切换时：负面词随之调整（不切换已LOCKED的镜头，除非用户要求重跑）
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+══════════ SECTION:D-拼装规则 ══════════
+负面提示词拼装规则
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+■ 各模板的负面词输出方式
+
+模板A（15秒一镜到底）：
+- 全局区块输出"负面参数"字段
+- 内容 = 常驻级 + 情境级（根据全镜类型）
+- 急救级在步骤8检查后追加到全局区块
+
+模板B（逐镜文本卡片·12行字段）：
+- 全局前缀块输出"负面参数"字段
+- 内容 = 常驻级 + 情境级（取全片主要场景类型）
+- 严禁在逐镜卡片中输出负面提示词字段
+
+模板C（S级制作·╔═╗框式）：
+- 全局区块统一输出"负面提示"字段
+- 内容 = 常驻级 + 情境级（取全片主要场景类型）
+- 逐镜的视频提示词字段中不重复负面词
+- 急救级在步骤8检查后追加到全局区块
+
+模板D（整合模式·模板B排版）：
+- 同模板B规则
+
+■ 与全局防崩锁词的关系
+全局防崩锁词（空间连续性控制库·可选）= 正面约束：
+  "画面锁定：人物位置固定无偏移，肢体结构正常无崩毁，画面风格统一，无多余畸变元素"
+提示词库-负面提示词 = 反面排除：
+  "肢体畸形, 多指, 面部变形, ..."
+
+两者互补：
+- 防崩锁词从正面告诉模型"应该怎样"
+- 负面词从反面告诉模型"不应该怎样"
+- 同时使用效果最佳（正面+负面双保险）
+- 防崩锁词放提示词最前面（权重最高），负面词放提示词最后面（排除区）
+
+■ 负面词数量控制
+不同模型对负面词数量有不同容忍度：
+- 可灵/即梦：15-25词为宜，过多降低画质
+- Runway/Veo：25-40词可接受
+- LibTV Seedance：10-20词为宜
+- Sora：5-15词即可
+
+超限时按优先级砍：
+1. 先砍急救级（最不常用）
+2. 再砍情境级中的细分场景词
+3. 常驻级绝不砍（基础防崩保障）
+
+■ 拼装示例
+
+模板C全局区块·负面提示（可灵·打斗场景）：
+负面提示：deformed limbs, extra fingers, fused fingers, face distortion,
+facial feature displacement, extra limbs, reverse joints, body distortion,
+text, watermark, blurred image, composition imbalance, style change,
+impossible martial arts pose, body clipping through opponent, fist not connecting,
+weapon clipping, floating weapon
+
+模板B全局前缀块·负面参数（即梦·室内文戏）：
+负面参数：肢体畸形, 多指, 手指融合, 面部变形, 五官位移, 多肢, 关节反折,
+身体扭曲, 文字水印, 画面模糊, 构图失衡, 风格突变,
+角色穿家具, 角色悬浮, 家具位置变化
+
+模板A全局区块·负面参数（LibTV Seedance·仙侠打斗）：
+负面参数：deformed, bad anatomy, extra fingers, face distortion, watermark, text,
+style change, weapon clipping
+
+════════════════════════════════════════════════════════════

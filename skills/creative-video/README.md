@@ -13,10 +13,14 @@
 | [hyperframes-cli](./hyperframes-cli/) | HyperFrames CLI：init/lint/inspect/preview/render/transcribe/tts |
 | [hyperframes-media](./hyperframes-media/) | 素材预处理：TTS 旁白、Whisper 转录、背景移除（u2net） |
 | [gsap](./gsap/) | GSAP 动画参考：核心补间方法（core）、时间线编排（timeline）、性能优化（performance） |
+| [storyboard-script](./storyboard-script/) | AI 漫剧/短剧分镜直出：故事→6 模板提示词（即梦/Seedance/可灵），打斗 13 法则+50 情绪矩阵+仙侠特效库 |
+
+> ⚠️ 本组全部 skill 均未注册在 plugin.json，安装时在 "Other" 中可选。
 
 ## 推荐搭配
 
 - **视频制作全流程**：`video-spec-builder`（分镜规划）→ `video-agency-roles`（链路审查）→ `motion-design`（动效决策）→ `hyperframes`（合成编排）→ `gsap`（动画参考）→ `hyperframes-cli`（预览渲染）
+- **AI 模型直出（即梦/Seedance/可灵）**：`storyboard-script`（故事→可投喂提示词，6 套模板，打斗/文戏/仙侠全覆盖）
 - **带音频的视频**：`hyperframes-media`（TTS/转录）→ `hyperframes`（字幕同步）
 - **新手入门**：`hyperframes-cli`（init 脚手架）→ `hyperframes`（写 HTML）→ `gsap`（参考 API）
 
