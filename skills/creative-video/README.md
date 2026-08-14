@@ -6,8 +6,8 @@
 
 | Skill | 用途 |
 |---|---|
-| [video-spec-builder](./video-spec-builder/) | 分镜规划：生成 video-spec.md，确定每页讲什么、怎么动、何时切换 |
-| [video-agency-roles](./video-agency-roles/) | 制作链路审查：7 角色逐层检查——选题/事实/技术/视觉/审美/节奏/平台包装 |
+| [video-spec-builder](./video-spec-builder/) | 分镜规划：生成 video-spec.md（§0-§9 权威结构），确定每页讲什么、怎么动、何时切换；含问题库、70 组件目录、节奏规范、完整示例 |
+| [video-agency-roles](./video-agency-roles/) | 制作链路审查：7 角色按 spec 字段逐项检查（gate 必过项 + 评分锚点），支持 B站/抖音/YouTube 分支；只诊断不改，改回 video-spec-builder |
 | [motion-design](./motion-design/) | 动效设计：判断每个镜头该用什么运动，缓动/时长/编排/性能/无障碍 |
 | [hyperframes](./hyperframes/) | 视频合成与动效编排：HTML 驱动，GSAP 动画，字幕/旁白/音频响应/转场/视觉样式 |
 | [hyperframes-cli](./hyperframes-cli/) | HyperFrames CLI：init/lint/inspect/preview/render/transcribe/tts |

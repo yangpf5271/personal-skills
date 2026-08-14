@@ -68,7 +68,7 @@ Each skill is tracked to its upstream where known. Skills with no listed source 
 | mine | ccr-log-query | — | Original (self-authored) |
 | mine | tencent-code-cli | — | Original (self-authored) |
 
-> 🎬 creative-video 组（7 skills，不注册在主分组）：hyperframes、hyperframes-cli、hyperframes-media、motion-design、video-spec-builder、video-agency-roles、gsap。来源 [HeyGen/hyperframes](https://github.com/heygen-com/hyperframes)（除 video-agency-roles 为原创）。安装时在 "Other" 中可选。
+> 🎬 creative-video 组（8 skills，不注册在主分组）：hyperframes、hyperframes-cli、hyperframes-media、motion-design、video-spec-builder、video-agency-roles、gsap、storyboard-script。来源 [HeyGen/hyperframes](https://github.com/heygen-com/hyperframes)（除 video-spec-builder、video-agency-roles、storyboard-script 为本地自建；前二者以 video-spec.md §0-§9 为契约咬合——builder 生成、roles 审查）。安装时在 "Other" 中可选。
 
 ## Repository layout
 

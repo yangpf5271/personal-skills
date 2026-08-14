@@ -72,6 +72,7 @@ description: 视频分镜规划：生成 video-spec.md，确定每页讲什么�
     - **结构化输出**：按 `templates/video-spec-template.md` 输出，含分镜表
 
 [文件结构]
+    > 以下为安装后的部署视图；仓库内相对路径一律以本文件所在目录为基准。
     路径基准 = video-spec.md 所在目录（项目根目录）。一棵完整的树：
 
     ```
@@ -234,7 +235,7 @@ description: 视频分镜规划：生成 video-spec.md，确定每页讲什么�
                 **直接在项目根目录生成 `design.md`** —— 必须是 HyperFrames 的格式：
                 YAML 头（colors / typography / rounded / spacing / motion）
                 + 章节（Overview / Colors / Typography / Elevation / Components / Do's and Don'ts）。
-                格式范本见 HyperFrames 的 `visual-styles.md`。
+                格式范本见 hyperframes 技能的 `visual-styles.md`（同仓库 ../hyperframes/visual-styles.md；未安装 hyperframes 时按本节内联格式自建）。
 
     选定主题后写进 `video-spec.md` 的 § 4 视觉规范：
         - 选预设：写预设名，如 `Swiss Pulse`
@@ -310,10 +311,12 @@ description: 视频分镜规划：生成 video-spec.md，确定每页讲什么�
         Spec 生成完毕后（不管是 0-1 模式还是迭代模式），告诉用户：
 
         "video-spec.md 已[生成 / 更新]完毕。
-         接下来是否启动 HyperFrames 生成视频？输入 /hyperframes 开始。"
+         定稿前建议先出一遍审查：输入 /video-agency-roles，7 个角色逐层过一遍。
+         或者直接启动 HyperFrames 生成视频：输入 /hyperframes 开始。"
 
         不需要解释 HyperFrames 怎么干活——它会自己读 video-spec.md。
-        你不再介入。
+        审查只诊断不动手——/video-agency-roles 发现的问题会回到本技能落实，
+        你负责按诊断改 spec（迭代模式），改完用户可回去复审。
 
 [References]
     按需加载，不要一次性全读：
@@ -322,7 +325,7 @@ description: 视频分镜规划：生成 video-spec.md，确定每页讲什么�
     - `references/workflow-iteration.md`    迭代模式详细流程
     - `references/question-bank.md`         追问问题库，按 Phase 组织（每个 Phase 必读）
     - `references/scene-breakdown.md`       逐字稿 → 分镜的拆解方法论
-    - `references/components-catalog.md`    69 个组件的目录与匹配规则（选组件时必读）
+    - `references/components-catalog.md`    74 个组件的目录与匹配规则（选组件时必读）
     - `references/pacing-rules.md`          节奏 / 时长 / 转场密度规范（聊节奏时读）
     - `references/spec-rules.md`            填 video-spec 模板的字段约束 + 一致性校验 + 自检清单（起草 / 迭代 spec 前必读）
     - `references/dialogue-style.md`        对话风格范本（典型表达 / 方案引导 / 影视参考词典）
@@ -348,7 +351,7 @@ description: 视频分镜规划：生成 video-spec.md，确定每页讲什么�
 
     该问的会问,该替你想的直接给方案。我的目标只有一个:让你的视频能拍出来,而且拍得好。
 
-    💡 输入 / 查看可用技能
+    💡 定稿后可用 /video-agency-roles 做出片前审查
 
     现在,说说你想拍什么样的视频?
 
