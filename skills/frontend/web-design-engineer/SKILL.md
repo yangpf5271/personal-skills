@@ -11,7 +11,7 @@ description: |
   - Data visualization (Chart.js / D3, etc.)
   - Design system / UI Kit exploration
   Even if the user doesn't explicitly say "HTML" or "web page," this skill applies whenever the intent is to produce something visual, interactive, or presentational.
-  Not applicable: pure back-end logic, CLI tools, data-processing scripts, non-visual code tasks.
+  Not applicable: pure back-end logic, CLI tools, data-processing scripts, non-visual code tasks, command-line debugging.
 ---
 
 # Web Design Engineer
@@ -58,6 +58,7 @@ Whether and how much to ask depends on how much information has been provided. *
 | "Make 6 slides about the history of butter" | ✅ Too vague — at least ask about tone and audience |
 | "Design onboarding for my food-delivery app" | ✅ Ask heavily: users, flows, brand, variants |
 | "Recreate the composer UI from this codebase" | ❌ Read the code directly — no questions needed |
+| "Make me something nice" / "I don't know what style I want" | ⚡ Don't fire 10 generic taste questions — go straight to Step 3 and present 4 structural direction options |
 
 Key areas to probe (pick as needed — no fixed count required):
 - **Product context**: What product? Target users? Existing design system / brand guidelines / codebase?
@@ -113,23 +114,44 @@ Do **not** skip style selection merely because:
 - A PRD describes content/function but does not define visual style.
 - Industry convention suggests an obvious look.
 
-When style is not already constrained, present 3-5 style directions and stop for the user to choose. Each option must be visually distinct, following the Style Option Diversity Gate above. Each direction should include 2-3 palette variants when color is likely to be a key decision or the user has expressed color uncertainty/preferences.
+When style is not already constrained, present 4 structurally distinct design directions and stop for the user to choose. Treat this as an architecture-first step, not a palette-first step. Each option must be visually distinct, following the Style Option Diversity Gate above, and must also differ in structure, component logic, and interaction model.
+
+Each direction must include:
+- Information architecture: how content/actions are grouped and prioritized
+- Primary layout pattern: split pane / dashboard grid / editorial narrative / canvas / timeline / etc.
+- Component metaphor: cards / panels / sheets / rails / boards / document blocks / command surfaces / etc.
+- Interaction model: browsing / comparing / operating / storytelling / direct manipulation / etc.
+- Typography mood
+- Color strategy: summarize about 3 main palette routes for this direction, or a similarly small number when more appropriate. Keep this high-level and comparative only. Do not turn this into a detailed palette spec, token list, hex list, or full palette variants yet
+- Best for / risk
+
+Hard rules:
+- At least 3 of the 4 directions must differ in page structure, not just color, type, or decoration.
+- Do not present multiple directions that share the same hero/cards/sections skeleton with only theme changes.
+- If the user asks for early color exploration, still pair every color route with a distinct structural concept.
+- Do not provide palette variants before the user selects a direction, unless the user explicitly asks for color-only exploration.
 
 ```markdown
 Style Direction Options:
 1. [Name]
    - Feeling: [what the audience should feel]
-   - Palette sketch: [base / primary / secondary / accent, with lightness and warmth]
-   - Palette variants: [2-3 compact alternatives, e.g. fresh green / warm neutral / cool clean]
+   - Information architecture: [how the page/product is organized]
+   - Primary layout pattern: [dense / airy / modular / asymmetric / canvas / timeline]
+   - Component metaphor: [cards / panels / sheets / rails / boards / document blocks / command surfaces]
+   - Interaction model: [browse / compare / operate / tell a story / manipulate directly]
    - Typography mood: [precise / editorial / humanist / expressive / technical]
+   - Color strategy: [about 3 concise palette routes for this direction, or a similarly small number when more appropriate; no detailed token/hex breakdown yet]
    - Layout rhythm: [dense / airy / modular / asymmetric / canvas / timeline]
    - Surface/material: [flat / paper / tactile / glass / industrial / luminous]
    - Best for / risk: [fit and tradeoff]
 2. [Name]: [same fields]
 3. [Name]: [same fields]
+4. [Name]: [same fields]
 
 Please choose one direction before I build.
 ```
+
+Only after the user selects a direction should you provide 2-4 palette variants inside that chosen direction, when color is still a meaningful open decision.
 
 #### When Adding to an Existing UI
 
@@ -156,7 +178,7 @@ Design Decisions:
 - Border-radius strategy: [large / small / sharp]
 - Shadow hierarchy: [elevation 1–5]
 - Motion style: [easing curves / duration / trigger]
-- For from-scratch, exploratory, or redesign work: Taste axes [density / contrast / novelty / warmth / materiality / motion]
+- For from-scratch, exploratory, or redesign work: Taste axes [density / contrast / novelty / warmth / materiality / motion] — dial definitions and calibration guidance: [references/design-calibration.md](references/design-calibration.md)
 - For from-scratch, exploratory, or redesign work: Primary layout pattern [table / split pane / cards / timeline / dashboard grid / narrative / canvas]
 ```
 
@@ -176,7 +198,11 @@ After v0 is approved — or immediately when the task is clear enough to execute
 
 ### Step 7: Verification
 
-Walk through the "Pre-delivery Checklist" item by item.
+Walk through the "Pre-delivery Checklist" item by item. Additionally, before delivery:
+
+- Run a self-critique pass using [references/critique-guide.md](references/critique-guide.md) — diagnose before fixing; every finding must anchor to a concrete element (layout / type / color / motion), not vague taste
+- Check the artifact against [references/failure-patterns.md](references/failure-patterns.md) — known failure modes (cliché defaults, dead mock data, inconsistent spacing) are cheap to catch by checklist
+- When the user explicitly asks for browser acceptance / QA of a web artifact, follow [references/browser-acceptance.md](references/browser-acceptance.md)
 
 ---
 
@@ -328,7 +354,7 @@ CSS, HTML, JS, and SVG are far more capable than most people realize — **use t
 - **No title screen / cover page** — prototypes should center in the viewport or fill it (with sensible margins), letting the user see the product immediately
 - Use device frames (iPhone / Android / browser window) to enhance realism (see references file)
 - Implement key interaction paths so the user can click through them
-- For exploratory prototypes, provide at least 3 variants toggled via the Tweaks panel. For exact rebuilds, small patches, or clearly specified single-flow prototypes, prioritize fidelity and omit variants unless they clarify a real decision.
+- For exploratory prototypes, first present the structural direction options required by Step 3 and wait for the user's choice. After a direction is selected, provide at least 3 in-direction variants toggled via the Tweaks panel. For exact rebuilds, small patches, or clearly specified single-flow prototypes, prioritize fidelity and omit variants unless they clarify a real decision.
 - Complete state coverage: default / hover / active / focus / disabled / loading / empty / error
 
 ### HTML Slide Decks / Presentations
@@ -384,6 +410,11 @@ Additional requirements:
 
 Providing multiple variants is about **exhausting possibilities so the user can mix and match**, not about delivering the perfect option.
 
+Default exploration order:
+1. Structural directions first
+2. Direction selection by the user
+3. In-direction variants second (palette / density / motion / component treatment)
+
 Explore "atomic variants" across at least these dimensions — mixing conservative, safe options with bold, novel ones:
 
 1. **Layout**: content organization (split pane / card grid / list / timeline)
@@ -391,7 +422,7 @@ Explore "atomic variants" across at least these dimensions — mixing conservati
 3. **Interaction**: motion, feedback, navigation patterns
 4. **Creative**: convention-breaking metaphors, novel UX, strong visual concepts
 
-Strategy: **Start the first few variants safely within the design system; then progressively push boundaries.** Show the user the full spectrum from "safe and functional" to "ambitious and daring" — they'll pick the elements that resonate most.
+Strategy: **Start with broad structural divergence, then refine within the selected system.** Show the user the full spectrum from "safe and functional" to "ambitious and daring" — but do not collapse architecture exploration into theme switching.
 
 ---
 
@@ -403,7 +434,8 @@ Design guidelines:
 - A floating panel in the bottom-right corner (see the reference implementation)
 - Title consistently labeled **"Tweaks"**
 - **Completely hidden** when closed, ensuring the design looks final during presentations
-- In multi-variant scenarios, expose variants as dropdowns/toggles within Tweaks instead of creating multiple files
+- In multi-variant scenarios, expose in-direction variants as dropdowns/toggles within Tweaks instead of creating multiple files
+- Do not use a single Tweaks panel to fake fundamentally different architectures; materially different structures should be proposed as separate direction concepts before implementation
 - Add 1–2 creative tweaks by default when the user is exploring direction or comparing options. For exact, small, or brand-constrained tasks, omit the panel unless requested.
 
 ---
@@ -542,6 +574,10 @@ Complete the following before considering the work delivered (all items must pas
 - [references/design-playbooks.md](references/design-playbooks.md) — Internal design modes, taste calibration, audit/polish/harden passes, variant strategy, and polish checklist
 - [references/components.md](references/components.md) — Component selection and behavior guidance for navigation, tables, forms, feedback, overlays, and mobile UI
 - [references/style-directions.md](references/style-directions.md) — Industry patterns, style directions, typography pairing, and common design anti-patterns
+- [references/critique-guide.md](references/critique-guide.md) — Design critique methodology (absorbed from upstream garden-skills): diagnosis-first review with anchored findings
+- [references/failure-patterns.md](references/failure-patterns.md) — Known failure modes and anti-cliché checks (absorbed from upstream)
+- [references/design-calibration.md](references/design-calibration.md) — Taste calibration dials: density / contrast / novelty / warmth / materiality / motion (absorbed from upstream)
+- [references/browser-acceptance.md](references/browser-acceptance.md) — Browser-based acceptance / QA flow for web artifacts (absorbed from upstream)
 - [references/design-systems/index.md](references/design-systems/index.md) — Index of 54 real-world brand design systems extracted from production websites
 
 ---
