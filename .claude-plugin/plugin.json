@@ -1,7 +1,7 @@
 {
   "name": "personal-skills",
-  "version": "0.3.6",
-  "description": "Personal agent skills collection, grouped by function — frontend, python, general, docs, mine. Plug-and-play skills for coding agents; install what you need, edit freely.",
+  "version": "0.4.0",
+  "description": "Personal agent skills collection, grouped by function — frontend, python, general, security, docs, mine. Plug-and-play skills for coding agents; install what you need, edit freely.",
   "license": "MIT",
   "keywords": [
     "skills",
@@ -30,6 +30,12 @@
     "./skills/general/mcp-builder",
     "./skills/general/planning-with-files",
     "./skills/general/skill-creator",
+    "./skills/security/apk-reverse",
+    "./skills/security/mobile-reverse",
+    "./skills/security/ida-reverse",
+    "./skills/security/dotnet-reverse",
+    "./skills/security/js-reverse",
+    "./skills/security/pentest-tools",
     "./skills/docs/content-research-writer",
     "./skills/docs/docx",
     "./skills/docs/humanizer-zh",

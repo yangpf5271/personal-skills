@@ -16,17 +16,18 @@ npx skills@latest update
 
 ## What's here
 
-A curated set of 33 skills grouped by function into 5 categories. Plus 7 optional `creative-video` skills available as "Other" during install. Each group has its own `README.md` with skill list, recommended combos, and a one-line group-install command. Browse [`skills/`](./skills/) or jump to a group:
+A curated set of 39 skills grouped by function into 6 categories. Plus 8 optional `creative-video` skills available as "Other" during install. Each group has its own `README.md` with skill list, recommended combos, and a one-line group-install command. Browse [`skills/`](./skills/) or jump to a group:
 
 | Group | What it covers | Skills | README |
 | --- | --- | --- | --- |
 | 🎨 `frontend` | 前端编码规范、设计系统、视觉制品、动效、质量检测 | 8 | [skills/frontend/README.md](./skills/frontend/README.md) |
 | 🐍 `python` | Python 现代工具链与编码规范 | 2 | [skills/python/README.md](./skills/python/README.md) |
-| 🔧 `general` | 架构设计、安全、数据库、MCP、任务规划、skill 工具、浏览器自动化、算法、方法论 | 11 | [skills/general/README.md](./skills/general/README.md) |
+| 🔧 `general` | 架构设计、代码安全、数据库、MCP、任务规划、skill 工具、浏览器自动化、算法、方法论 | 11 | [skills/general/README.md](./skills/general/README.md) |
+| 🛡️ `security` | 逆向分析（APK/移动端/IDA/.NET/JS）与授权渗透测试工具链 | 6 | [skills/security/README.md](./skills/security/README.md) |
 | 📄 `docs` | 文档生成（Word/PDF/PPT/Excel）+ 写作、研究、标书、文字润色 | 9 | [skills/docs/README.md](./skills/docs/README.md) |
 | ✏️ `mine` | 我的原创（多 agent 编排、日志查询、工蜂 CLI） | 3 | [skills/mine/README.md](./skills/mine/README.md) |
 
-> 🎬 **创意视频制作**（7 skills）：未加入主分组，安装时在 "Other" 中可选。详见 [`skills/creative-video/README.md`](./skills/creative-video/README.md)。
+> 🎬 **创意视频制作**（8 skills）：未加入主分组，安装时在 "Other" 中可选。详见 [`skills/creative-video/README.md`](./skills/creative-video/README.md)。
 
 ### Skill sources
 
@@ -55,6 +56,12 @@ Each skill is tracked to its upstream where known. Skills with no listed source 
 | general | mcp-builder | [anthropics/skills](https://github.com/anthropics/skills) | |
 | general | planning-with-files | [OthmanAdi/planning-with-files](https://github.com/OthmanAdi/planning-with-files) | |
 | general | skill-creator | [anthropics/skills](https://github.com/anthropics/skills) | |
+| security | apk-reverse | [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | Android APK 逆向：jadx/apktool/Frida |
+| security | mobile-reverse | [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | Android+iOS 统一方法论；description 已中文化 |
+| security | ida-reverse | [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | IDA Pro 二进制逆向，含 start.ps1/open.ps1 |
+| security | dotnet-reverse | [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | dnSpyEx + de4dot，.NET 混淆脱壳与 IL patch |
+| security | js-reverse | [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | JS 逆向：签名定位/AST 去混淆/补环境 |
+| security | pentest-tools | [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | 内嵌 src-hunter 子技能（[MyuriKanao/src-hunter-skill](https://github.com/MyuriKanao/src-hunter-skill)） |
 | docs | content-research-writer | [ComposioHQ/awesome-claude-skills](https://github.com/ComposioHQ/awesome-claude-skills) | |
 | docs | docx | [anthropics/skills](https://github.com/anthropics/skills) | |
 | docs | humanizer-zh | [op7418/Humanizer-zh](https://github.com/op7418/Humanizer-zh) | |
@@ -83,6 +90,7 @@ personal-skills/
 │   │   └── ...
 │   ├── python/
 │   ├── general/
+│   ├── security/
 │   ├── docs/
 │   ├── mine/
 │   └── creative-video/       ← "Other" group (not in plugin.json, optional install)
