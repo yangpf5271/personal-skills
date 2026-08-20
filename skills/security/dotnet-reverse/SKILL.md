@@ -7,11 +7,12 @@ description: .NET / C# 二进制逆向。当目标是 .NET assembly（PE 头含 
 
 ## ACTION REQUIRED（读完立刻执行）
 
-1. `NOW`: 用 DIE/`file`/CLR 头确认目标是 .NET 托管（否则 SWITCH 到 `ida-reverse/` / `reverse-engineering/`）
-2. `NOW`: 若疑似混淆 → 先 `de4dot` 脱壳，产出 `*-clean.exe`，保留原始样本
-3. `NEXT`: dnSpyEx（或 dnSpy MCP / `ilspycmd`）静态：C# 浏览 + **IL 视图**看关键判断
-4. `ACT`: 需要明文/C2 时动态调试；需要改逻辑时 **IL patch** 优先于 C# 重编译
-5. 阶段结束给用户 3–6 项下一步菜单（含导出报告）
+1. `NOW`: 确认本次操作属于已授权场景（自有样本/设备、书面授权、众测范围、安全研究样本或 CTF 靶场），否则停止并说明
+2. `NOW`: 用 DIE/`file`/CLR 头确认目标是 .NET 托管（否则 SWITCH 到 `ida-reverse/` / `reverse-engineering/`）
+3. `NOW`: 若疑似混淆 → 先 `de4dot` 脱壳，产出 `*-clean.exe`，保留原始样本
+4. `NEXT`: dnSpyEx（或 dnSpy MCP / `ilspycmd`）静态：C# 浏览 + **IL 视图**看关键判断
+5. `ACT`: 需要明文/C2 时动态调试；需要改逻辑时 **IL patch** 优先于 C# 重编译
+6. 阶段结束给用户 3–6 项下一步菜单（含导出报告）
 
 ## 适用范围
 

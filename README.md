@@ -16,7 +16,7 @@ npx skills@latest update
 
 ## What's here
 
-A curated set of 39 skills grouped by function into 6 categories. Plus 8 optional `creative-video` skills available as "Other" during install. Each group has its own `README.md` with skill list, recommended combos, and a one-line group-install command. Browse [`skills/`](./skills/) or jump to a group:
+A curated set of 39 registered skills grouped by function into 6 categories. The repository also contains 8 optional `creative-video` skills available as "Other" during install, plus 1 embedded `src-hunter` sub-skill under `pentest-tools`. Each group has its own `README.md` with skill list, recommended combos, and a one-line group-install command. Browse [`skills/`](./skills/) or jump to a group:
 
 | Group | What it covers | Skills | README |
 | --- | --- | --- | --- |
