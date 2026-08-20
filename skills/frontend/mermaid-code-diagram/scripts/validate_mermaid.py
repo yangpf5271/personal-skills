@@ -9,6 +9,7 @@ Mermaid 语法验证器 (Python)
     python validate_mermaid.py                          — 从 stdin 读取
     python validate_mermaid.py <file> --export [dir]   — 校验通过后下载渲染图(默认 PNG)
     python validate_mermaid.py <file> --export --svg   — 下载 SVG 而非 PNG
+    python validate_mermaid.py <file> --export --width 3000 — 指定 PNG 宽度;默认 auto(自动推荐)
 
 退出码:
     0 = 语法正确
@@ -33,6 +34,9 @@ from typing import NamedTuple
 MERMAID_INK_URL = "https://mermaid.ink/img/"
 MERMAID_INK_SVG_URL = "https://mermaid.ink/svg/"
 REQUEST_TIMEOUT = 3  # 秒
+# PNG 推荐宽度区间:mermaid.ink 默认按视口宽度渲染(约 1000-1300px),大图文字发糊。
+AUTO_WIDTH_MIN = 2400   # 自动推荐的下限
+AUTO_WIDTH_MAX = 4800   # 自动推荐的上限(再大渲染慢且没必要)
 
 # Mermaid 保留关键字（不能用作节点 ID）
 RESERVED_KEYWORDS = {
@@ -285,14 +289,18 @@ def check_remote(code: str) -> tuple[bool | None, str]:
     return False, "未知错误"
 
 
-def render_image(code: str, as_svg: bool = False) -> bytes | None:
+def render_image(code: str, as_svg: bool = False, width: int | None = None) -> bytes | None:
     """
     从 mermaid.ink 下载渲染好的图片字节。
     成功返回图片 bytes,失败(网络/渲染错误)返回 None。
+    width 仅对 PNG 生效(None = mermaid.ink 默认视口宽度;SVG 是矢量不需要)。
     """
     prefix = MERMAID_INK_SVG_URL if as_svg else MERMAID_INK_URL
     encoded = base64.urlsafe_b64encode(code.encode("utf-8")).decode("ascii")
-    url = f"{prefix}{encoded}" + ("" if as_svg else "?type=png")
+    if as_svg or width is None:
+        url = f"{prefix}{encoded}" + ("" if as_svg else "?type=png")
+    else:
+        url = f"{prefix}{encoded}?type=png&width={width}"
     try:
         req = Request(url, method="GET")
         req.add_header("User-Agent", "Mozilla/5.0 MermaidValidator/1.0")
@@ -304,6 +312,41 @@ def render_image(code: str, as_svg: bool = False) -> bytes | None:
     except Exception:
         return None
     return None
+
+
+def _png_size(data: bytes) -> tuple[int, int]:
+    """从 PNG 字节流解析 (宽, 高);非 PNG 返回 (0, 0)。"""
+    import struct
+    if len(data) > 24 and data[:8] == b"\x89PNG\r\n\x1a\n" and data[12:16] == b"IHDR":
+        w, h = struct.unpack(">II", data[16:24])
+        return w, h
+    return 0, 0
+
+
+def export_png_auto_width(code: str) -> tuple[bytes | None, str]:
+    """
+    PNG 导出 + 推荐宽度算法(两次请求探测):
+    1. 先按 mermaid.ink 默认视口渲染一次,读出"自然宽度"(按内容紧凑布局的实际宽度);
+    2. 推荐宽度 = clamp(自然宽度 × 2, AUTO_WIDTH_MIN, AUTO_WIDTH_MAX) —— 放大两倍
+       让缩放查看时文字依然清晰,小图不低于 MIN,超大图封顶 MAX;
+    3. 推荐值 > 自然宽度才二次请求,否则直接用首次结果(小图不浪费)。
+    返回 (图片字节, 说明文字)。
+    """
+    img0 = render_image(code, as_svg=False, width=None)
+    if img0 is None:
+        return None, ""
+    w0, _ = _png_size(img0)
+    if w0 == 0:
+        return img0, "宽度探测失败,使用默认渲染"
+    # 大图 ×2 保证缩放可读(下限 2400);小图 ×3 逐步放大即可,不强行拉到 2400(避免字号失比)
+    lower = min(AUTO_WIDTH_MIN, max(w0 * 3, 1200))
+    recommended = max(lower, min(AUTO_WIDTH_MAX, w0 * 2))
+    if recommended <= w0:
+        return img0, f"自然宽度 {w0}px 已足够清晰,无需放大"
+    img1 = render_image(code, as_svg=False, width=recommended)
+    if img1 is None:
+        return img0, f"自然宽度 {w0}px;放大请求失败,回退默认渲染"
+    return img1, f"自然宽度 {w0}px → 自动放大至 {recommended}px"
 
 
 # ─── 格式化输出 ─────────────────────────────────────────────
@@ -329,7 +372,7 @@ def format_issues(issues: list[Issue]) -> str:
 
 def validate_block(code: str, index: int, multi: bool = False,
                    export_dir: str | None = None, as_svg: bool = False,
-                   stem: str = "diagram") -> bool:
+                   stem: str = "diagram", width: int | None = None) -> bool:
     """校验单个 mermaid 代码块。返回 True 表示通过。"""
     block_label = f"代码块 {index + 1}"
     print(f"\n{'─' * 50}")
@@ -381,7 +424,14 @@ def validate_block(code: str, index: int, multi: bool = False,
         if is_valid is not True:
             print(f"  {YELLOW}⚠ 跳过导出: 远程渲染不可用{RESET}")
         else:
-            img = render_image(code, as_svg)
+            note = ""
+            if as_svg:
+                img = render_image(code, as_svg=True)
+            elif width is not None:
+                img = render_image(code, as_svg=False, width=width)
+                note = f"width={width}px(手动)"
+            else:
+                img, note = export_png_auto_width(code)
             if img is None:
                 print(f"  {YELLOW}⚠ 图片下载失败,跳过导出{RESET}")
             else:
@@ -391,7 +441,8 @@ def validate_block(code: str, index: int, multi: bool = False,
                 out_path.mkdir(parents=True, exist_ok=True)
                 file_path = out_path / f"{stem}{suffix}.{ext}"
                 file_path.write_bytes(img)
-                print(f"  {GREEN}⬇ 已导出: {file_path} ({len(img)} bytes){RESET}")
+                note_part = f" [{note}]" if note else ""
+                print(f"  {GREEN}⬇ 已导出: {file_path} ({len(img)} bytes){note_part}{RESET}")
 
     return True
 
@@ -410,6 +461,7 @@ def main():
     # 解析导出参数(不影响原有输入解析)
     export_dir: str | None = None
     as_svg = False
+    export_width: int | None = None  # None = auto(自动推荐宽度)
     rest: list[str] = []
     i = 0
     while i < len(args):
@@ -424,6 +476,17 @@ def main():
         elif a == "--svg":
             as_svg = True
             i += 1
+        elif a == "--width" and i + 1 < len(args):
+            v = args[i + 1]
+            if v.lower() == "auto":
+                export_width = None
+                i += 2
+            elif v.isdigit():
+                export_width = int(v)
+                i += 2
+            else:
+                rest.append(a)
+                i += 1
         else:
             rest.append(a)
             i += 1
@@ -466,7 +529,8 @@ def main():
     all_valid = True
     for i, block in enumerate(blocks):
         if not validate_block(block, i, multi=len(blocks) > 1,
-                              export_dir=export_dir, as_svg=as_svg, stem=stem):
+                              export_dir=export_dir, as_svg=as_svg, stem=stem,
+                              width=export_width):
             all_valid = False
 
     print(f"\n{'═' * 50}")

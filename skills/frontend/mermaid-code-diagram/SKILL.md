@@ -24,11 +24,14 @@ Two layers, zero dependencies (Python only):
 **Optional — standalone image export** (only when the user needs an SVG/PNG file for PPT/Word/IM). The validation script downloads the render from mermaid.ink directly — zero extra dependencies:
 
 ```bash
-python scripts/validate_mermaid.py diagram.mmd --export          # PNG to ./diagram.png
+python scripts/validate_mermaid.py diagram.mmd --export          # PNG, auto-recommended width
 python scripts/validate_mermaid.py diagram.mmd --export out/     # into a directory
-python scripts/validate_mermaid.py diagram.mmd --export --svg    # SVG instead
+python scripts/validate_mermaid.py diagram.mmd --export --svg    # SVG instead (vector, no width needed)
+python scripts/validate_mermaid.py diagram.mmd --export --width 3000   # manual width
 python scripts/validate_mermaid.py doc.md --export out/          # multi-block md → out/doc-1.png, doc-2.png…
 ```
+
+PNG width defaults to **auto**: the script first fetches a default-viewport render, reads the diagram's natural width from the PNG header, then re-renders at `natural × 2` (clamped to 2400–4800; small diagrams scale ×3 gently instead of jumping to 2400).
 
 Export requires network. When offline, ship the Mermaid source — the viewer (GitHub/VSCode/browser) renders it.
 
