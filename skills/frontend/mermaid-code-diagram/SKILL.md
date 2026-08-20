@@ -57,19 +57,16 @@ Export requires network. When offline, ship the Mermaid source — the viewer (G
 
 Do NOT read every file. Use progressive analysis:
 
-**Step 1 — Directory scan:**
-`glob("**/*.py")` or `glob("**/*.ts")` to understand module structure.
+**Step 1 — Detect the stack** — read the dependency manifest first (`pyproject.toml` / `package.json` / `pom.xml` / `go.mod` / `Cargo.toml` / `*.csproj` / `composer.json` / `Gemfile` / `mix.exs`); it identifies both the language and the framework (FastAPI vs Django, NestJS vs Express, Spring Boot vs plain). Then load [references/stack-anchor-map.md](references/stack-anchor-map.md) for that stack's anchors (entry / routes / data models / services / async / config), monorepo handling, and noise directories to exclude.
 
-**Step 2 — Entry points:**
-- Python: `main.py`, `app.py`, `__init__.py`, `pyproject.toml`
-- Node.js: `package.json`, `index.ts`, `app.ts`
-- Java: `pom.xml`, `Application.java`
+**Step 2 — Directory scan:** glob the main source dirs only, excluding `node_modules/` `venv/` `target/` `build/` `dist/` and friends, to understand module structure.
 
-**Step 3 — Targeted reads by diagram type:**
-- **ER** → ORM models (`models.py`, `schema.prisma`, `*.entity.ts`)
-- **Architecture** → Router registrations, dependency injection, config
-- **Sequence** → Specific endpoint handler + service call chain
-- **Class** → Class definitions via `grep("class ")`
+**Step 3 — Targeted reads by diagram type** (per-stack paths in the anchor map):
+- **ER** → ORM models + migrations (migrations reveal the real schema better than models)
+- **Architecture** → routes + service layer + config → service boundaries
+- **Sequence** → one endpoint's full chain: handler → service → repository → external calls
+- **Data flow** → four-anchor scan: sources (routes / MQ consumers / cron) → transforms (services) → sinks (ORM / Redis / object storage) → exports (third-party SDK calls); solid arrows for the main spine, dashed for read-backs and side exits
+- **Class** → class definitions via `grep("class ")`
 
 **Step 4 — GitHub repos:**
 ```bash
