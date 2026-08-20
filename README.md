@@ -37,7 +37,7 @@ Each skill is tracked to its upstream where known. Skills with no listed source 
 | --- | --- | --- | --- |
 | frontend | canvas-design | [anthropics/skills](https://github.com/anthropics/skills) | |
 | frontend | figma | — | Source untraceable (Apache 2.0) |
-| frontend | fireworks-tech-graph | [yizhiyanhua-ai/fireworks-tech-graph](https://github.com/yizhiyanhua-ai/fireworks-tech-graph) | |
+| frontend | mermaid-code-diagram | [dp-archive/archive](https://github.com/dp-archive/archive/tree/main/seed_skills/code-to-diagram) | 代码库→Mermaid 图（.mmd 可编辑、GitHub 原生渲染）；原 skill 名 `code-to-diagram`，改名入库；含零依赖校验脚本 + mermaid.ink 远程导出 |
 | frontend | motion | — | Upstream [jezweb/claude-skills](https://github.com/jezweb/claude-skills) removed it; local copy kept as orphan |
 | frontend | react-frontend-guide | [mrgoonie/claudekit-skills](https://github.com/mrgoonie/claudekit-skills) | Upstream dir is `frontend-development`; renamed locally |
 | frontend | ui-ux-pro-max | [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | |
