@@ -1,6 +1,6 @@
 ---
 name: ida-reverse
-description: IDA Pro 逆向分析：当用户提到逆向、反编译、分析二进制/PE/ELF/APK/DLL/SO、破解、找密码、漏洞分析、病毒分析、固件分析，或需要分析 exe/dll/so/elf/macho/sys 等文件时使用——即使没有明确提到 IDA（如「看看这个exe」「分析这个dll」「帮我破解」「这个软件怎么注册」）。使用内置 scripts/start.ps1、scripts/open.ps1 做确定性的 server 管理与文件打开，不要临时手写 PowerShell 命令。
+description: IDA Pro 授权二进制逆向分析：当用户在自有样本、书面授权、恶意样本分析、漏洞研究或 CTF 靶场中需要分析/反编译 PE/ELF/APK/DLL/SO/Mach-O/SYS、固件、病毒样本或 native 代码时使用——即使没有明确提到 IDA（如「看看这个 exe」「分析这个 dll」「看这个 so 的逻辑」）。使用内置 scripts/start.ps1、scripts/open.ps1 做确定性的 server 管理与文件打开，不要临时手写 PowerShell 命令。
 ---
 
 # IDA Pro 逆向分析技能
