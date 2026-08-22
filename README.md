@@ -16,13 +16,13 @@ npx skills@latest update
 
 ## What's here
 
-A curated set of 39 registered skills grouped by function into 6 categories. The repository also contains 8 optional `creative-video` skills available as "Other" during install, plus 1 embedded `src-hunter` sub-skill under `pentest-tools`. Each group has its own `README.md` with skill list, recommended combos, and a one-line group-install command. Browse [`skills/`](./skills/) or jump to a group:
+A curated set of 44 registered skills grouped by function into 6 categories. The repository also contains 8 optional `creative-video` skills available as "Other" during install, plus 1 embedded `src-hunter` sub-skill under `pentest-tools`. Each group has its own `README.md` with skill list, recommended combos, and a one-line group-install command. Browse [`skills/`](./skills/) or jump to a group:
 
 | Group | What it covers | Skills | README |
 | --- | --- | --- | --- |
 | 🎨 `frontend` | 前端编码规范、设计系统、视觉制品、动效、质量检测 | 8 | [skills/frontend/README.md](./skills/frontend/README.md) |
 | 🐍 `python` | Python 现代工具链与编码规范 | 2 | [skills/python/README.md](./skills/python/README.md) |
-| 🔧 `general` | 架构设计、代码安全、数据库、MCP、任务规划、skill 工具、浏览器自动化、算法、方法论 | 11 | [skills/general/README.md](./skills/general/README.md) |
+| 🔧 `general` | 架构与 API 设计、代码安全、数据库、Git/GitHub 工作流、性能、MCP、任务规划、skill 工具、算法与方法论 | 16 | [skills/general/README.md](./skills/general/README.md) |
 | 🛡️ `security` | 逆向分析（APK/移动端/IDA/.NET/JS）与授权渗透测试工具链 | 6 | [skills/security/README.md](./skills/security/README.md) |
 | 📄 `docs` | 文档生成（Word/PDF/PPT/Excel）+ 写作、研究、标书、文字润色 | 9 | [skills/docs/README.md](./skills/docs/README.md) |
 | ✏️ `mine` | 我的原创（多 agent 编排、日志查询、工蜂 CLI） | 3 | [skills/mine/README.md](./skills/mine/README.md) |
@@ -56,6 +56,11 @@ Each skill is tracked to its upstream where known. Skills with no listed source 
 | general | mcp-builder | [anthropics/skills](https://github.com/anthropics/skills) | |
 | general | planning-with-files | [OthmanAdi/planning-with-files](https://github.com/OthmanAdi/planning-with-files) | |
 | general | skill-creator | [anthropics/skills](https://github.com/anthropics/skills) | |
+| general | api-and-interface-design | [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) | REST/GraphQL 接口契约与模块边界设计 |
+| general | git-workflow-and-versioning | [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) | 提交规范、分支策略、语义化版本发布 |
+| general | performance-optimization | [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) | 先测量后优化；Core Web Vitals / N+1 / profiling |
+| general | verification-before-completion | [obra/superpowers](https://github.com/obra/superpowers) | Evidence before claims：完成前强制跑验证 |
+| general | gh | [cli/cli](https://github.com/cli/cli)（官方 `skills/gh`） | agent 调用 gh 的模式：--json/--jq、分页、gh api 回退；描述加中文前缀 |
 | security | apk-reverse | [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | Android APK 逆向：jadx/apktool/Frida |
 | security | mobile-reverse | [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | Android+iOS 统一方法论；description 已中文化 |
 | security | ida-reverse | [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | IDA Pro 二进制逆向，含 start.ps1/open.ps1 |
