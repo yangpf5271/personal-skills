@@ -40,7 +40,7 @@ Each skill is tracked to its upstream where known. Skills with no listed source 
 | frontend | motion | — | Upstream [jezweb/claude-skills](https://github.com/jezweb/claude-skills) removed it; local copy kept as orphan |
 | frontend | react-frontend-guide | [mrgoonie/claudekit-skills](https://github.com/mrgoonie/claudekit-skills) | Upstream dir is `frontend-development`; renamed locally |
 | frontend | ui-ux-pro-max | [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | |
-| frontend | web-design-engineer | [ConardLi/garden-skills](https://github.com/ConardLi/garden-skills) | 上游已重写为新一代；本地谱系：上游旧版 + 工蜂 fork 的架构优先流程演进 + 离线资源/中文定制 + 选择性吸收新版方法论（critique/failure-patterns/design-calibration/browser-acceptance） |
+| frontend | web-page-engineer | [ConardLi/garden-skills](https://github.com/ConardLi/garden-skills) | 原 web-design-engineer，升级后改名；上游已重写为新一代；本地谱系：上游旧版 + 工蜂 fork 的架构优先流程演进 + 离线资源/中文定制 + 选择性吸收新版方法论（critique/failure-patterns/design-calibration/browser-acceptance） |
 | frontend | web-quality | [addyosmani/web-quality-skills](https://github.com/addyosmani/web-quality-skills) | Upstream skill `web-quality-audit`; renamed locally |
 | python | modern-python | [trailofbits/skills](https://github.com/trailofbits/skills) | uv + ruff + ty + pytest toolchain |
 | python | python-best-practices | [nathan-gage/python-skills](https://github.com/nathan-gage/python-skills) | 70 rules / 8 categories from real PR review patterns |

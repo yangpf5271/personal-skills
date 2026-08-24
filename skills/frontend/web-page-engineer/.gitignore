@@ -1,0 +1,2 @@
+# 测试产物(含复制的 vendor 库与演示 HTML),不进版本库
+.scratch/test-results/

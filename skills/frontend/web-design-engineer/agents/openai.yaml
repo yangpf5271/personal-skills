@@ -1,4 +1,0 @@
-interface:
-  display_name: "Web Design Engineer"
-  short_description: "Build polished visual web artifacts"
-  default_prompt: "Use $web-design-engineer to build a polished, portable web prototype; unless I provide a UI/reference/design system to follow, offer distinct style directions first."

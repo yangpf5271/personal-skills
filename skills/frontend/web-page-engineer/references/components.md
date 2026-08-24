@@ -43,7 +43,7 @@ Choose components by user task first, visual style second.
 
 ## Data Display
 
-- Table: use for comparison, sorting, scanning, bulk actions, and precise values. Align numbers right, keep identifiers sticky when horizontal scroll is needed, and include empty and loading states.
+- Table: use for comparison, sorting, scanning, bulk actions, and precise values. Align numbers right, keep identifiers sticky when horizontal scroll is needed, and include empty and loading states. Keep at most 3 row actions inline with the rest in an overflow menu; bulk workflows add a checkbox column and a batch-action bar (select-all checkbox includes an indeterminate state).
 - Cards: use for heterogeneous items, visual previews, or browse behavior. For operational/product structure, do not make every page section a card; use tables, lists, split panes, inspectors, or unframed sections when they match the task better.
 - List: use for activity, messages, search results, tasks, and compact object collections.
 - Metric tile: include label, value, timeframe, comparison, and meaning. Do not invent numbers.
@@ -70,7 +70,7 @@ Choose components by user task first, visual style second.
 - Loading state: use skeletons for layout-preserving content; use spinner only for unknown-duration actions.
 - Error state: state what failed, consequence, recovery action, and diagnostic detail where useful.
 - Toast: use for temporary confirmation. Do not use as the only place for critical errors.
-- Inline validation: validate near the field. Preserve user input unless it is unsafe.
+- Inline validation: validate near the field, on a deliberate trigger (blur or debounced input, not every keystroke); show the error below the control, and on failed submit scroll to the first error. Preserve user input unless it is unsafe.
 - Success state: confirm completion and show the next useful action.
 
 ---
