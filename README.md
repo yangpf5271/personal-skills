@@ -16,13 +16,13 @@ npx skills@latest update
 
 ## What's here
 
-A curated set of 44 registered skills grouped by function into 6 categories. The repository also contains 8 optional `creative-video` skills available as "Other" during install, plus 1 embedded `src-hunter` sub-skill under `pentest-tools`. Each group has its own `README.md` with skill list, recommended combos, and a one-line group-install command. Browse [`skills/`](./skills/) or jump to a group:
+A curated set of 40 registered skills grouped by function into 6 categories. The repository also contains 8 optional `creative-video` skills available as "Other" during install, plus 1 embedded `src-hunter` sub-skill under `pentest-tools`. Each group has its own `README.md` with skill list, recommended combos, and a one-line group-install command. Browse [`skills/`](./skills/) or jump to a group:
 
 | Group | What it covers | Skills | README |
 | --- | --- | --- | --- |
-| 🎨 `frontend` | 前端编码规范、设计系统、视觉制品、动效、质量检测 | 8 | [skills/frontend/README.md](./skills/frontend/README.md) |
+| 🎨 `frontend` | 前端编码规范、设计系统、视觉制品、动效、质量检测 | 7 | [skills/frontend/README.md](./skills/frontend/README.md) |
 | 🐍 `python` | Python 现代工具链与编码规范 | 2 | [skills/python/README.md](./skills/python/README.md) |
-| 🔧 `general` | 架构与 API 设计、代码安全、数据库、Git/GitHub 工作流、性能、MCP、任务规划、skill 工具、算法与方法论 | 16 | [skills/general/README.md](./skills/general/README.md) |
+| 🔧 `general` | 架构与 API 设计、代码安全、数据库、Git/GitHub 工作流、性能、MCP、skill 工具、算法与方法论 | 13 | [skills/general/README.md](./skills/general/README.md) |
 | 🛡️ `security` | 逆向分析（APK/移动端/IDA/.NET/JS）与授权渗透测试工具链 | 6 | [skills/security/README.md](./skills/security/README.md) |
 | 📄 `docs` | 文档生成（Word/PDF/PPT/Excel）+ 写作、研究、标书、文字润色 | 9 | [skills/docs/README.md](./skills/docs/README.md) |
 | ✏️ `mine` | 我的原创（多 agent 编排、日志查询、工蜂 CLI） | 3 | [skills/mine/README.md](./skills/mine/README.md) |
@@ -36,7 +36,6 @@ Each skill is tracked to its upstream where known. Skills with no listed source 
 | Group | Skill | Upstream source | Notes |
 | --- | --- | --- | --- |
 | frontend | canvas-design | [anthropics/skills](https://github.com/anthropics/skills) | |
-| frontend | figma | — | Source untraceable (Apache 2.0) |
 | frontend | mermaid-code-diagram | [dp-archive/archive](https://github.com/dp-archive/archive/tree/main/seed_skills/code-to-diagram) | 代码库→Mermaid 图（.mmd 可编辑、GitHub 原生渲染）；原 skill 名 `code-to-diagram`，改名入库；含零依赖校验脚本 + mermaid.ink 远程导出 |
 | frontend | motion | — | Upstream [jezweb/claude-skills](https://github.com/jezweb/claude-skills) removed it; local copy kept as orphan |
 | frontend | react-frontend-guide | [mrgoonie/claudekit-skills](https://github.com/mrgoonie/claudekit-skills) | Upstream dir is `frontend-development`; renamed locally |
@@ -45,7 +44,6 @@ Each skill is tracked to its upstream where known. Skills with no listed source 
 | frontend | web-quality | [addyosmani/web-quality-skills](https://github.com/addyosmani/web-quality-skills) | Upstream skill `web-quality-audit`; renamed locally |
 | python | modern-python | [trailofbits/skills](https://github.com/trailofbits/skills) | uv + ruff + ty + pytest toolchain |
 | python | python-best-practices | [nathan-gage/python-skills](https://github.com/nathan-gage/python-skills) | 70 rules / 8 categories from real PR review patterns |
-| general | agent-browser | [vercel-labs/agent-browser](https://github.com/vercel-labs/agent-browser) | `hidden: true` removed locally so it stays visible |
 | general | architecture-designer | [Jeffallan/claude-skills](https://github.com/Jeffallan/claude-skills) | |
 | general | code-security | [semgrep/skills](https://github.com/semgrep/skills) | Includes full `rules/` directory |
 | general | computer-science-algorithms | [community-skills](https://github.com/anthropics/community-skills) | 51 rules / 9 categories; CLRS + cp-algorithms distillation |
@@ -54,12 +52,10 @@ Each skill is tracked to its upstream where known. Skills with no listed source 
 | general | theory-of-constraints | [pproenca/dot-skills](https://github.com/pproenca/dot-skills) | Goldratt ToC: find → exploit → subordinate → elevate → repeat |
 | general | find-skills | [KimYx0207/findskill](https://github.com/KimYx0207/findskill) | Windows-compat fork of [vercel-labs/skills](https://github.com/vercel-labs/skills); kept to avoid the Git Bash empty-output bug |
 | general | mcp-builder | [anthropics/skills](https://github.com/anthropics/skills) | |
-| general | planning-with-files | [OthmanAdi/planning-with-files](https://github.com/OthmanAdi/planning-with-files) | |
 | general | skill-creator | [anthropics/skills](https://github.com/anthropics/skills) | |
 | general | api-and-interface-design | [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) | REST/GraphQL 接口契约与模块边界设计 |
 | general | git-workflow-and-versioning | [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) | 提交规范、分支策略、语义化版本发布 |
 | general | performance-optimization | [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) | 先测量后优化；Core Web Vitals / N+1 / profiling |
-| general | verification-before-completion | [obra/superpowers](https://github.com/obra/superpowers) | Evidence before claims：完成前强制跑验证 |
 | general | gh | [cli/cli](https://github.com/cli/cli)（官方 `skills/gh`） | agent 调用 gh 的模式：--json/--jq、分页、gh api 回退；描述加中文前缀 |
 | security | apk-reverse | [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | Android APK 逆向：jadx/apktool/Frida |
 | security | mobile-reverse | [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | Android+iOS 统一方法论；description 已中文化 |
