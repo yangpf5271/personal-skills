@@ -95,7 +95,7 @@ Admin conventions distilled from mature systems (Carbon, Ant Design):
 
 ### A4 · Assemble
 
-Build order: **seed data → pure state machine → shared shell → pilot screens → remaining screens by state → scenario panel**.
+Build order: **seed data → pure state machine → shared shell → pilot screens → remaining screens by state → scenario panel**. Smoke-test each page via `file://` double-click as soon as it is assembled — never stockpile verification for A5.
 
 - Seed data with realistic density: believable records in realistic volume (tables with a dozen+ rows, full fields), consistent across screens, at least one record per business state, one known initial state per scenario. In-memory only; never fabricated statistics.
 - All transition logic lives in one **pure state machine module** — no DOM inside it; the page calls into it, nothing flows back. The machine is an **internal controller**, never rendered as UI: it answers "what is legal right now" and the pages obey. A validated machine is liftable into the real codebase later. Patterns and skeleton: [references/flow-driven-ui.md](references/flow-driven-ui.md).
@@ -216,6 +216,7 @@ Non-negotiable hard rules:
 2. **Separate `<script type="text/babel">` blocks do not share scope** — export components across files via `Object.assign(window, { Terminal, Line })`.
 3. **No `scrollIntoView`** — it disrupts iframe-embedded previews. Use `element.scrollTop` / `window.scrollTo({...})`.
 4. **Plain-JS shared files must attach their globals explicitly** — `window.UI = UI;`. A top-level `const` does NOT create a `window` property; consumers reading `window.X` get `undefined` and crash at first use. Keep producer and consumer conventions identical across every file.
+5. **JSX never lives in an external file** — `<script type="text/babel" src="...">` is CORS-blocked under `file://` (Babel loads sources via XHR). Inline all JSX in one block or precompile to plain JS. The artifact must open by double-click; never design around a local HTTP server.
 
 Also: no `type="module"` on React script tags; import order React → ReactDOM → Babel → components.
 
@@ -243,6 +244,8 @@ Artifact shape by scale:
 Default to hand-written CSS and plain HTML/CSS/JavaScript; artifacts must run offline. External libraries are optional, not defaults.
 
 Workflow: decide the dependency is necessary → copy only the needed folders from this skill into the output directory (relative paths only: `./vendor/...`, `./assets/fonts/...`) → before delivery, scan authored `*.html` / `*.css` / `*.js` for `http://`, `unpkg`, `jsdelivr`, `googleapis` (copied third-party folders excluded) — none allowed → report copied folders in the final response.
+
+The final response never instructs the user to start a local HTTP server (e.g. `python -m http.server`) to view the artifact — it must open by double-click under `file://`. If serving is genuinely unavoidable for a declared reason, the artifact states that reason explicitly instead of silently downgrading the deliverable.
 
 | Scenario | Default template | Local resources |
 |---|---|---|
@@ -272,10 +275,12 @@ Serif for literary/editorial, sans for product-like interfaces, mono for code/lo
 
 All artifacts:
 
+- [ ] Pages verified by opening each one via `file://` (double-click) — a local HTTP server pass does not substitute
 - [ ] Browser console clean; renders correctly on target devices/viewports; no text overflow
 - [ ] Interactive states covered: hover / focus / active / disabled / loading; empty/error where the scenario warrants
 - [ ] All colors from the declared design system — no rogue hues; no AI clichés
 - [ ] No `scrollIntoView`; cross-file globals explicitly exported via `window.*` (React components and plain-JS shared modules alike)
+- [ ] No `<script type="text/babel" src="...">` — all JSX inlined in one block or precompiled to plain JS
 - [ ] No filler content or fabricated data; component choices match the user task
 - [ ] Authored files reference no remote URLs (copied vendor folders excluded)
 - [ ] Typography intentional for the category and language mix; primary action and recovery paths clear

@@ -1,5 +1,19 @@
 # Version Log
 
+## 2026-08-24 · v2.8 · 防线前移:硬规则第 5 条 + A4 逐页 file:// 冒烟
+
+- 背景:v2.7 只补了结尾闸门,缺陷仍要到 A5 统一验证才暴露,返工面最大;且 JSX 约束散在正文("React + Babel (Inline JSX)" 段、File Management 段)时效力不足——写代码时 agent 真正遵守的是 Non-negotiable hard rules 序列(v2.3 的 window.X 规则落此后再未被踩)。
+- 硬规则新增第 5 条:JSX 不得外置(`text/babel src` 在 file:// 下被 CORS 拦),内联单块或预编译;产物必须双击即开,永不为本地 HTTP server 而设计。
+- A4 build order 追加:每页组装完立即以 `file://` 双击冒烟,不把验证攒到 A5。B 轨道不动:单页产物 Build 与 Verify 本就相邻。
+- 三层防线成型:写前(硬规则)→ 写中(A4 逐页冒烟)→ 写完(checklist 兜底,v2.7)。
+
+## 2026-08-24 · v2.7 · file:// 闸门:JSX 外置禁令与双击验证进检查清单(来自真实执行事故)
+
+- 背景:一次真实执行中,产物把 JSX 外置为 `<script type="text/babel" src="./app.js">`——正中 v2.1 记录的 file:// CORS 限制(白屏);agent 未回改为内联,而是引入 `python -m http.server` 绕过,交付属性从"双击即开"静默降级为"需命令行起服务"。checklist 在 http:// 环境验证照样全绿,偏离一路溜到用户面前。
+- 教训:明文警告(正文 JSX loading constraint)仍被踩——散在正文的约束是"读过去就忘"的,checklist 逐项打钩才是闸门;且验证协议不锚定 `file://` 时,起服务验证会掩盖 file:// 白屏。
+- 通用检查清单新增两项:①逐页以 `file://` 双击方式验证,本地 HTTP server 通过不替代;②禁止 `<script type="text/babel" src="...">`,JSX 内联单块或预编译为纯 JS。
+- Local Vendor Resources 新增交付说明约束:最终回复不得指示用户起本地 HTTP server 查看产物(必须双击即开);确需服务的极少数场景,产物须显式声明理由,不得静默降级。
+
 ## 2026-08-24 · v2.6 · 技能更名:web-design-engineer → web-page-engineer
 
 - 理由:原名中 "design" 源于旧"视觉惊艳"定位,对执行实例有视觉优先的残余引力;双轨道的共同单位是"页面"、立场是"工程",新名与"面向技术的页面设计"定位对齐。触发行为由 description 承担,更名属身份对齐非功能变更。
