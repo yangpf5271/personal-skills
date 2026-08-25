@@ -1,5 +1,38 @@
 # Version Log
 
+## 2026-08-25 · v2.12 · description 收紧至 1024 字符内(平台硬限),触发覆盖零丢失
+
+- 动因:实测原 description 1178 字符,超出 Anthropic Agent Skills 规范的 1024 字符硬限(按官方格式分发会被截断);且产出类型枚举写了两遍(首段 9 类 + bullet 列表重复其中 6 类),违反 writing-for-agents"一个 branch 一个触发词"原则。
+- 重写:合并两遍枚举为一段;bullet 只保留新增触发信息(输入侧:mockups/screenshots/PRDs;业务流程信号词:roles/states/transitions/approval flows;design system 探索);pushy 尾句与负面边界(Not for...)保留,删被覆盖的 "non-visual code tasks";按用户要求移除 Chart.js/D3 工具名(data visualization 语义已覆盖,工具细节属正文 identity)。
+- 结果:1178 → 895 字符(余量 129),159 → 122 词(skill-creator 的 ~100 词软参考线附近)。全部触发 branch 核对无丢失。agents/openai.yaml 不受影响(display_name/short_description/default_prompt 均不复制 description)。
+
+## 2026-08-25 · v2.11 · 闭环审核修复:脚本行注释误报、调用路径 cwd 歧义、块名指代
+
+- 审核动因:用户要求审核 v2.9~v2.10 修改的流程闭环性。主干确认闭环(file:// 三时点防线、A5/B7→checklist 引用、Anti-Patterns 合并无信息丢失);实测抓出 4 处问题,本版全修。
+- **[高] 脚本 `//` 误报(实测复现)**:无空格 JS 行注释(`//eslint-disable-next-line`)被当成协议相对 URL 报出——正常带注释产物会持续误报,"零发现"永不可达,agent 将学会无视扫描结果,闸门 credibility 失效(v2.7 教训重演形态)。修法:URL 检测拆双正则——绝对 `http(s)://` 保持全文扫描(注释内也报,维持 "none allowed" 字面规则);协议相对 `//` 仅在属性/url() 上下文(前导引号/括号/等号)命中。块注释内 https:// 仍报属规则字面语义,非 bug。
+- **[中] 调用路径 cwd 歧义**:`python scripts/verify_artifact.py` 隐含 cwd=技能仓库根,而执行 agent 的 cwd 通常是用户项目目录。两处(Local Vendor workflow、checklist)改为 `python <skill-dir>/scripts/verify_artifact.py <artifact-dir>`,占位符对仗,不依赖 cwd。
+- **[低] A5 块名不一致(既有)**:"visual block" 改为 "All-artifacts block",与 checklist 实际小节名对应。
+- **[低] File Management 指针补定位**:"hard rule 5" → "hard rule 5 (React + Babel)"。
+- 回归:case-1b 7 文件零发现;行注释(带/不带空格)零误报;协议相对 URL 在 HTML src 与 CSS url() 均命中;五类违规(外置 text/babel、type=module、绝对远程 URL、import、fetch)全检出;vendor 与 xmlns 豁免正常。
+- 附注:checklist 机械项引入 python 依赖,常规 agent 环境均具备;不写手扫 fallback 以免重新引入 v2.10 刚删除的 duplication。
+
+## 2026-08-25 · v2.10 · 按 writing-for-agents 规范审查:单一真源收敛,删重复表述
+
+- 依据 writing-for-agents(.agents/skills)agent 文档写作规范复查:信息层级/分支披露/完成判据/checklist 可核对性/leading words(file://、double-click、pilot screens 等术语纪律)均达标;invocation 为 model-invoked + description 承载触发分支,符合 SKILL-MECHANICS。
+- 删四处 duplication(同一 meaning 多处副本,虚增层级地位且花双份 token):①Step 0 弹性法则第 4 条"checklist never skipped"——与第 1 条"runs the full checklist"及 checklist 标题三重重复;②File Management 的 "JSX loading constraint" 段——知识并入硬规则第 5 条(补"plain script/link 外链合法"的 why),File Management 只留产物形态分级;③④checklist 的 text/babel 禁令条与 remote-URL 条——均为 v2.9 脚本扫描项的子集,机械验证超集已涵盖。
+- Anti-Patterns 第 3、4 条合并(Placeholder>fake 与 no filler 语义重叠)。
+- 净 -7 行。JSX/file:// 约束现为三时点三角色:写前规范(硬规则 5,唯一知识源)→ 写中冒烟(A4)→ 交付机械验证(脚本)+ 双击核对(checklist),时点/角色不同不属 duplication。
+- 有意不动:①description 保持 pushy 详尽——与该规范"指针逐词精剪"存在张力,skill-creator 的欠触发对策优先(v2.6 刚定稿);②HTML File Structure 模板段为 no-op 候选(模型默认会写标准骨架),但 no-op 判定 model-relative 需实跑验证,不凭辩论删;③Chinese Typography 仅 8 行,披露收益低于指针成本;④A3 admin conventions 摘要与 components.md 明细属"内联摘要+披露明细"合法层级。
+
+## 2026-08-25 · v2.9 · 按 skill-creator 规范审查:固化交付扫描脚本,删正文冗余
+
+- 依据 skill-creator(claude-plugins-official)技能写作规范复查:结构性规则基本达标——渐进披露(~290 行主文件 + references 按需)、advanced-patterns.md 已带 TOC、design-systems/ 经 index.md 按品牌索引、6 个 references 均在正文带时机引用、description 已是 pushy 风格含正反边界。
+- 删正文 Scope 段:与 frontmatter description 完全重复;规范明确"when to use"信息只进 description 不占正文上下文。
+- 新增 `scripts/verify_artifact.py`:把交付前手扫(v2.7 起的 http/unpkg/jsdelivr/googleapis 扫描)固化为确定性脚本,并扩展 file:// 不兼容写法检测——外置 text/babel、`type="module"`、authored 纯 JS 的顶层 import/export、fetch/XHR(v2.7 事故根因均在此列)。vendor/ 与 assets/fonts/ 自动豁免,xmlns/W3C 命名空间不误报。
+- 接线:Local Vendor Resources 扫描步骤改为跑脚本(零发现才通过);checklist 新增"静态扫描零发现"条目,列 file:// 双击验证之后。
+- 实测:case-1b 产物 7 文件零发现(exit 0);构造坏样例 5 类违规全部命中、豁免项零误报。
+- 两处有意取舍:①design-systems/ 下 20+ 档案文件超 300 行不加逐文件 TOC——按品牌名查阅的档案,入口 index.md 即总目录,符合规则"帮模型定位内容"的意图;②hard rules 保留编号禁令格式——每条均带 why 解释,满足规范的"解释理由"要求,而 v2.3/v2.8 事故换来的闸门语义("Non-negotiable")优先于"少用 MUST"的文风建议。
+
 ## 2026-08-24 · v2.8 · 防线前移:硬规则第 5 条 + A4 逐页 file:// 冒烟
 
 - 背景:v2.7 只补了结尾闸门,缺陷仍要到 A5 统一验证才暴露,返工面最大;且 JSX 约束散在正文("React + Babel (Inline JSX)" 段、File Management 段)时效力不足——写代码时 agent 真正遵守的是 Non-negotiable hard rules 序列(v2.3 的 window.X 规则落此后再未被踩)。

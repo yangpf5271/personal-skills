@@ -1,17 +1,7 @@
 ---
 name: web-page-engineer
 description: |
-  Build high-quality visual Web artifacts using HTML/CSS/JavaScript/React — web pages, landing pages, dashboards, interactive prototypes, HTML slide decks, animated demos, UI mockups, data visualizations, and management-system (admin) UI pages.
-  Use this skill whenever the user's request involves a visual, interactive, or front-end deliverable, including:
-  - Creating web pages, landing pages, dashboards, marketing pages
-  - Building interactive prototypes or UI mockups (with device frames)
-  - Implementing system designs that contain business processes — roles, states, transitions, approval flows — as management-system UI pages (flow logic as an internal control layer)
-  - Turning design mockups, screenshots, or PRDs into interactive implementations
-  - Data visualization (Chart.js / D3, etc.)
-  - Building HTML slide decks / presentations
-  - Design system / UI Kit exploration
-  Even if the user doesn't explicitly say "HTML" or "web page," this skill applies whenever the intent is to produce something visual, interactive, or presentational.
-  Not applicable: pure back-end logic, CLI tools, data-processing scripts, non-visual code tasks, command-line debugging.
+  Build high-quality visual Web artifacts with HTML/CSS/JavaScript/React — web pages, landing pages, marketing pages, dashboards, data visualizations, interactive prototypes, UI mockups (with device frames), HTML slide decks and animated demos, and management-system (admin) UI pages. Use this skill whenever the request involves any visual, interactive, or front-end deliverable: turning design mockups, screenshots, or PRDs into working pages; implementing system designs that contain business processes (roles, states, transitions, approval flows) as management-system UI with the flow logic as an internal control layer; exploring design systems / UI kits. Even if the user never says "HTML" or "web page," the skill applies whenever the intent is something visual, interactive, or presentational. Not for pure back-end logic, CLI tools, data-processing scripts, or command-line debugging.
 ---
 
 # Web Page Engineer
@@ -22,12 +12,6 @@ The quality bar is branch-conditional:
 
 - **Visual exploration** (landing pages, concepts, decks): the bar is *stunning* — bold proportion, whitespace rhythm, type-scale contrast, memorable moments.
 - **Business systems** (Track A): the bar is *flow fidelity and per-screen task fit* — restrained, dense, task-first. The craft shows as alignment, state coverage, keyboard flow, and data-ink, not decoration.
-
-## Scope
-
-✅ Applicable: visual front-end deliverables — pages, prototypes, business-system prototypes, dashboards, visualizations, UI mockups, design systems
-
-❌ Not applicable: back-end APIs, CLI tools, data-processing scripts, non-visual logic, performance tuning
 
 ## Rule Priority
 
@@ -55,7 +39,6 @@ Laws of elasticity:
 - **Internalize, don't skip.** Every lane still declares a design system and runs the full checklist; only the waiting differs. Steps are cheap; round-trips are expensive.
 - **Declare assumptions.** Any decision made without the user ships with the artifact as a stated, overridable assumption.
 - **Only one stop is sacred** — the "wrong understanding = full rework" confirmation. Track A: the flow model. Track B standard lane: the direction. Everything else merges into artifact-first delivery.
-- **The pre-delivery checklist is never skipped** in any lane.
 
 ---
 
@@ -106,7 +89,7 @@ Build order: **seed data → pure state machine → shared shell → pilot scree
 
 ### A5 · Verify and close
 
-Run the full pre-delivery checklist (visual block + Track A block). Then deliver a **closing summary**: what the build covered, which branches remain uncovered, which assumptions shipped.
+Run the full pre-delivery checklist (All-artifacts block + Track A block). Then deliver a **closing summary**: what the build covered, which branches remain uncovered, which assumptions shipped.
 
 ---
 
@@ -160,8 +143,7 @@ Write full components, states, and motion per the technical specs below. Then wa
 
 - Purple-pink-blue gradients, left-border accent cards, gradient-button + big-radius combos — unless inherited from a real brand.
 - Inter / Roboto / Arial / system-ui as lazy defaults; emoji as icons — use `▢` / `[icon]` placeholders instead.
-- **Placeholder > fake**: missing image → aspect-ratio card; missing avatar → initial circle; missing data → ask. Never fabricate stats, testimonials, or logo walls. (Track A exception: scenario seed records are a first-class mechanism, not fabrication.)
-- No filler content; don't add sections unilaterally; if a page looks empty it's a layout problem — solve it with composition, not content.
+- **Placeholder > fake**: missing image → aspect-ratio card; missing avatar → initial circle; missing data → ask. Never fabricate stats, testimonials, or logo walls (Track A exception: scenario seed records are a first-class mechanism, not fabrication). An empty-looking page is a layout problem — solve it with composition, not filler sections or unilaterally added content.
 
 ---
 
@@ -216,7 +198,7 @@ Non-negotiable hard rules:
 2. **Separate `<script type="text/babel">` blocks do not share scope** — export components across files via `Object.assign(window, { Terminal, Line })`.
 3. **No `scrollIntoView`** — it disrupts iframe-embedded previews. Use `element.scrollTop` / `window.scrollTo({...})`.
 4. **Plain-JS shared files must attach their globals explicitly** — `window.UI = UI;`. A top-level `const` does NOT create a `window` property; consumers reading `window.X` get `undefined` and crash at first use. Keep producer and consumer conventions identical across every file.
-5. **JSX never lives in an external file** — `<script type="text/babel" src="...">` is CORS-blocked under `file://` (Babel loads sources via XHR). Inline all JSX in one block or precompile to plain JS. The artifact must open by double-click; never design around a local HTTP server.
+5. **JSX never lives in an external file** — `<script type="text/babel" src="...">` is CORS-blocked under `file://` (Babel loads sources via XHR). Inline all JSX in one block or precompile to plain JS; plain `<script src>` and `<link>` load fine under `file://`, which is why the machine, seed data, and CSS stay external files while JSX cannot. The artifact must open by double-click; never design around a local HTTP server.
 
 Also: no `type="module"` on React script tags; import order React → ReactDOM → Babel → components.
 
@@ -234,8 +216,7 @@ Descriptive filenames; split files over ~1000 lines; major revisions copy-rename
 Artifact shape by scale:
 
 - **Small / single-page artifacts**: one HTML file (plus copied vendor/fonts when needed) — easiest to hand around.
-- **Track A business systems**: a small folder — entry HTML + separate `flow-machine.js` (pure state machine) + `seed.js` + `styles.css`, so the machine stays independent and liftable.
-- **JSX loading constraint**: `<script type="text/babel" src="...">` is blocked under the `file://` protocol (Babel fetches sources via XHR, hit by CORS). Inline all JSX in one `text/babel` block inside the entry HTML, or precompile to plain JS. Plain `<script src>` and `<link rel="stylesheet">` files load fine under `file://` — which is why the machine, seed data, and CSS stay external while JSX cannot.
+- **Track A business systems**: a small folder — entry HTML with all JSX inlined + separate `flow-machine.js` (pure state machine) + `seed.js` + `styles.css`, so the machine stays independent and liftable. Why JSX is the one thing that cannot stay external: hard rule 5 (React + Babel).
 
 ---
 
@@ -243,7 +224,7 @@ Artifact shape by scale:
 
 Default to hand-written CSS and plain HTML/CSS/JavaScript; artifacts must run offline. External libraries are optional, not defaults.
 
-Workflow: decide the dependency is necessary → copy only the needed folders from this skill into the output directory (relative paths only: `./vendor/...`, `./assets/fonts/...`) → before delivery, scan authored `*.html` / `*.css` / `*.js` for `http://`, `unpkg`, `jsdelivr`, `googleapis` (copied third-party folders excluded) — none allowed → report copied folders in the final response.
+Workflow: decide the dependency is necessary → copy only the needed folders from this skill into the output directory (relative paths only: `./vendor/...`, `./assets/fonts/...`) → before delivery, run `python <skill-dir>/scripts/verify_artifact.py <artifact-dir>` — a static scan for remote URLs and every `file://`-incompatible pattern (external JSX, ES modules, fetch/XHR); it must report zero findings → report copied folders in the final response. `vendor/` and `assets/fonts/` are exempt from the scan automatically.
 
 The final response never instructs the user to start a local HTTP server (e.g. `python -m http.server`) to view the artifact — it must open by double-click under `file://`. If serving is genuinely unavoidable for a declared reason, the artifact states that reason explicitly instead of silently downgrading the deliverable.
 
@@ -276,13 +257,12 @@ Serif for literary/editorial, sans for product-like interfaces, mono for code/lo
 All artifacts:
 
 - [ ] Pages verified by opening each one via `file://` (double-click) — a local HTTP server pass does not substitute
+- [ ] Static scan clean: `python <skill-dir>/scripts/verify_artifact.py <artifact-dir>` reports zero findings (remote URLs, external JSX, ES modules, fetch/XHR)
 - [ ] Browser console clean; renders correctly on target devices/viewports; no text overflow
 - [ ] Interactive states covered: hover / focus / active / disabled / loading; empty/error where the scenario warrants
 - [ ] All colors from the declared design system — no rogue hues; no AI clichés
 - [ ] No `scrollIntoView`; cross-file globals explicitly exported via `window.*` (React components and plain-JS shared modules alike)
-- [ ] No `<script type="text/babel" src="...">` — all JSX inlined in one block or precompiled to plain JS
 - [ ] No filler content or fabricated data; component choices match the user task
-- [ ] Authored files reference no remote URLs (copied vendor folders excluded)
 - [ ] Typography intentional for the category and language mix; primary action and recovery paths clear
 
 Track A additions:
