@@ -1,12 +1,59 @@
 # Version Log
 
-## 2026-08-26 · v2.14 · 仓库并列双技能化:接入版分出为 web-page-integrator,本技能定位为 standalone artifact 版
+## 2026-08-26 · v2.20 · 独立为并列技能:更名 web-page-integrator,与 web-page-engineer 互设边界
 
-- 动因:接入版(v2.14~v2.20 在 feat/existing-system-integration 分支演进)与本技能规则实质分叉——交付物(app 代码 vs HTML 产物)、闸门(项目命令 vs file:// 双击)、文件集都不同,同名共存无法同时部署。定为同仓库 `skills/<name>/` 并列双技能(对齐 anthropics/skills 官方布局),各自独立演进与记版本。
-- 本技能整体迁入 `skills/web-page-engineer/`(SKILL.md、references、scripts、vendor、assets、docs、agents、CONTEXT.md),行为无变化;description 尾部与正文首段补兄弟指针:"UI changes inside an existing app codebase → use `web-page-integrator`"。
-- 兄弟技能 `skills/web-page-integrator/` 来自 feat 分支 v2.20 快照,含接口缝(页面需求清单交出接口/库表设计)、grilling 式歧义问询、dev 适配器契约回填等接入版全部规则;共享 references(admin-ui-baseline/components/design-playbooks)双份存在,本仓为源头,分叉风险自担。
-- 部署方式变更:复制 `skills/<name>/` 整目录到技能目录(如 ~/.zcode/skills/<name>/),不再以仓库根为技能目录。
-- feat/existing-system-integration 分支就此退役(保留历史不删)。
+- 动因:接入版与 artifact 版规则已实质分叉(交付物、闸门、文件集都不同),继续以同名分支共存会导致部署撞名、无法同时可用。定为同仓库并列双技能(skills/<name>/ 结构,对齐 anthropics/skills 官方仓库布局)。
+- 更名:frontmatter name 与标题改为 web-page-integrator/Web Page Integrator;"This branch is a codebase integration version" 改为"codebase-integration sibling of web-page-engineer";两处 "this branch" 措辞同步。
+- 边界互指落地:全部 "different skill/version" 泛指改为指名 `web-page-engineer`(description 尾句、Rule Priority 第 4 条、Redesign 终止线、codebase-integration.md 的 demo chrome 条、openai.yaml default_prompt)。
+- description 741 字符(<1024);本技能文件集裁剪为 SKILL.md + references/{codebase-integration, admin-ui-baseline, components, design-playbooks}.md + agents/openai.yaml + version.md,不携带 vendor/scripts/design-systems 等 artifact 版资产。
+- 后续:两条技能在 master 上并列演进,各自 version.md 独立记;feat/existing-system-integration 分支就此退役(保留历史)。
+
+## 2026-08-26 · v2.19 · 衔接点闭环修复:适配器实现权威源、契约到达回接、清单载体、边角路径
+
+- 审核动因:用户要求复查 v2.18 逻辑闭环与衔接点。主干确认闭环(触发→盘点→建模问询→缝→实施→清单→接口状态),抓出 5 处衔接问题,本版全修。
+- [中] 适配器实现权威源:原文案固定"implements the needs list",与"已设计未实现契约视同既有"冲突——契约存在时适配器必须实现契约(真 client 按契约写,适配器只做运行时回填),无契约才是需求清单。已改,消除将来换装不对齐的风险。
+- [中] 契约到达回接显式化:新增 Contract arrival 条款——契约晚到时对齐需求清单(缺口转修订)、页面指向真 client、删除适配器不留双路径、受影响路由重跑验证。原先只靠 Step 0 重入隐式覆盖。
+- [低中] mock 规则与自建适配器调和:mock 规则补"缝规则批准的 service 层 dev 适配器是项目无 mock 机制时的合法 fallback";checklist 数据项同步承认 contract-pending 适配器,并加"契约上线后死适配器清除"。
+- [低] 需求清单载体定义:作为 Final Response 的一节交付(项目有 docs 约定则落文件),接口/库表 owner 可直接消费。
+- [低] 边角路径:歧义问询补"实施/选型中途发现的歧义同样停下问,不临场发明流程模型依赖的规则";Existing-UI Redesign 路径补"改版中发现数据/接口需求折回第 4 节接口缝"。
+
+## 2026-08-26 · v2.18 · 接口缝边界:页面需求清单交出接口/库表设计,歧义按 grilling 轮次问询
+
+- 动因:用户给出具体场景——存量系统 + 新流程文档,页面归本技能,接口与数据库修改/新增归他人;v2.17 的"无契约时前端显式定义 API contract"越界。重新划界:前端责任到接口缝为止,缝上交付物=页面需求清单,缝后(API 语义/schema/库表)整体让出。
+- 新增 "The Interface Seam" 章节:需求清单只写 WHAT(每屏数据项、列表/查询需要、动作 from→to 状态与权限、UI 须区分的错误类别、loading/空态),禁写 HOW(endpoint、方法、schema、错误码、表结构);双通道交出——环境有 api-and-interface-design 则带清单调用它出契约后回接(编排不署名),否则交用户/后端,同时页面经数据访问边界后的 dev 适配器(单点、dev-only、按已确认流程模型实现)继续开发不被阻塞;契约缺口回流为清单修订,不静默丢弃。
+- 歧义处理(用户指定,参考 grill-me/grilling):流程文档不清或与现网行为冲突时按轮次问询——一次问完当前所有无依赖阻塞的问题、每题编号并附推荐答案、可自查的事实(代码/枚举/权限)不问用户、答完再算下一轮,问清前不假设;新/变更业务流在产出需求清单与开写页面前确认一次流程模型。
+- 接线同步:Step 0 盘点增加"已设计未实现"契约(openapi/API 文档)视同既有;实施第 2 步由"显式定义新 API 契约"改为"产出需求清单并走交出通道";checklist 数据项改为"需求清单交出,不页面自造 API 设计";Final Response 增加接口状态行(清单覆盖哪些能力、走了哪条通道、契约到没到、哪些页面仍是适配器回填待后端)。
+- `references/codebase-integration.md` 同步:WHAT/HOW 禁令、双通道、dev 适配器契约回填、缺口回流。
+
+## 2026-08-26 · v2.17 · 收紧接口/mock/状态控制口径:既有接口优先,新接口显式契约
+
+- 动因:用户指出既有系统里接口可能已存在,或任务本身需要设计新接口;沿用原型时代的 mock/状态机口径会诱导页面本地造数据、强塞 standalone 状态机,与真实项目接入目标冲突。
+- SKILL.md 数据规则改为:先用 host app 既有 API/query/store/schema/type/form conventions;mock 只能使用项目已有 mock/fixture/test-data 机制;若无后端契约,必须显式记录新接口 contract,不得藏在页面本地 mock 数据里。
+- 状态控制改为:业务 UI 的真源是后端 status、API contract、权限、feature flags 与现有 query/store 层;复杂门禁用 `canApprove(record,user)` / `getAvailableActions(...)` 这类 guard/helper,正式状态机只在宿主架构已有该模式时使用。
+- `references/codebase-integration.md` 同步补:已有接口优先于 mock;项目级 MSW/mock server/fixtures/Storybook/test factory 才可用;新接口需写 endpoint/operation、request/response/error、权限、状态流转、loading/empty/error 行为。
+
+## 2026-08-26 · v2.16 · 堵上预览例外口:独立 preview/prototype 彻底分流出本分支
+
+- 动因:用户审核 v2.15 后指出仍保留“用户明确要求 separate prototype 时可例外”的口子,会让专属既有系统接入版在边界请求下回到预览模式。
+- SKILL.md Rule Priority 第 4 条改为硬分流:不创建 standalone HTML、vendored demo assets、scenario panels、parallel mock apps 或 separate prototypes;独立 preview/prototype 应使用其他 skill/version,不由本分支处理。
+- `references/codebase-integration.md` 与 `agents/openai.yaml` 同步堵口:禁止 demo-only chrome、alternate preview routes、separate prototype surfaces;默认提示词明确 independent previews belong to a different skill/version。
+
+## 2026-08-26 · v2.15 · 专属既有系统接入版:去掉 standalone preview/artifact 模式
+
+- 动因:用户明确希望该分支不是兼容版,而是“基于已有系统生成新页面并接入业务”的专属版本,去掉预览模式。v2.14 的双模式分流仍保留 artifact/file:///scenario panel 心智,不适合作为专用执行提示。
+- SKILL.md 整体改写为 codebase-integration-only:交付物=既有前端项目内的路由/页面/组件/状态/样式/测试改动;明确不是 standalone HTML preview、mock artifact、本地 demo 或独立设计画布。
+- 主流程改为:Step 0 读取 host contract → Business Page Integration(角色/状态/流转/屏幕/场景) → 继承设计系统 → 选择最近本地模式 → 接入 host app(route/nav/layout/data/state/permission) → 项目验证。
+- 删除执行路径中的预览模式规则:不再要求 file://、verify_artifact.py、React+Babel、vendor、本地 HTML、Tweaks panel、scenario ball、max-permission demo shell。保留管理系统设计原则,但全部通过 host app 的组件/token/权限/数据层实现。
+- `references/codebase-integration.md` 同步收紧为唯一模式引用:强调 host app 合约、复用组件/token、禁止平行设计系统与 demo-only chrome、用项目原生命令验证;独立 HTML 预览不是替代验证。
+- `agents/openai.yaml` 同步:short_description/default_prompt 改为既有前端系统页面接入,默认先识别 host contract,再通过宿主项目 route/component/token/state/data/verification workflow 实现;禁止默认生成 standalone preview/mock artifact。
+
+## 2026-08-26 · v2.14 · 既有系统接入模式:区分 standalone artifact 与 codebase integration
+
+- 动因:用户提出新分支讨论“在既有系统上进行设计开发、直接接入既有项目”。原技能默认产出 HTML artifact,file:///verify_artifact.py/checklist 都围绕离线交付;若直接套到业务项目代码,会把 artifact 闸门误用到 host app,也会诱导生成平行组件/样式体系。
+- 新增 `references/codebase-integration.md`:定义先读 host app 合约(framework/router/layout/component library/tokens/state/data/validation commands)、复用既有组件与 token、保持路由/权限/表单/状态约定、用项目原生 lint/typecheck/test/build/browser smoke 验证。
+- SKILL.md 分诊新增 delivery mode:artifact mode 继续产出可双击 HTML 并走 file:// 闸门;codebase integration mode 直接改用户项目,按 host app 架构/依赖/验证命令闭环。触发词包括“接入既有项目/直接改项目/在现有系统里加页面”等。
+- Track A 改造:业务流仍以内控逻辑驱动 UI,但 codebase mode 使用 host app 的 state/query/store/API 层,不强塞 standalone mock state machine;demo-only scenario panel 仅 artifact mode 默认存在。
+- Checklist 分流:All deliverables 保留渲染/交互/无障碍/token/内容质量;Standalone artifact additions 保留 file://、静态扫描、window.*;Codebase integration additions 新增 host contracts、复用约束、项目检查与风险报告;Track A 条目区分 artifact 与 codebase 行为。
 
 ## 2026-08-26 · v2.13 · 吸收管理系统 UI 共性原则为稳定引用基线
 

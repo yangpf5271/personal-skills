@@ -1,12 +1,12 @@
 ---
 name: web-page-engineer
 description: |
-  Build high-quality visual Web artifacts with HTML/CSS/JavaScript/React — web pages, landing pages, marketing pages, dashboards, data visualizations, interactive prototypes, UI mockups (with device frames), HTML slide decks and animated demos, and management-system (admin) UI pages. Use this skill whenever the request involves any visual, interactive, or front-end deliverable: turning design mockups, screenshots, or PRDs into working pages; implementing system designs that contain business processes (roles, states, transitions, approval flows) as management-system UI with the flow logic as an internal control layer; exploring design systems / UI kits. Even if the user never says "HTML" or "web page," the skill applies whenever the intent is something visual, interactive, or presentational. Not for pure back-end logic, CLI tools, data-processing scripts, or command-line debugging.
+  Build high-quality visual Web artifacts with HTML/CSS/JavaScript/React — web pages, landing pages, marketing pages, dashboards, data visualizations, interactive prototypes, UI mockups (with device frames), HTML slide decks and animated demos, and management-system (admin) UI pages. Use this skill whenever the request involves any visual, interactive, or front-end deliverable: turning design mockups, screenshots, or PRDs into working pages; implementing system designs that contain business processes (roles, states, transitions, approval flows) as management-system UI with the flow logic as an internal control layer; exploring design systems / UI kits. Even if the user never says "HTML" or "web page," the skill applies whenever the intent is something visual, interactive, or presentational. For UI changes inside an existing app codebase, use `web-page-integrator` instead. Not for pure back-end logic, CLI tools, data-processing scripts, or command-line debugging.
 ---
 
 # Web Page Engineer
 
-This skill positions the Agent as a top-tier design engineer producing HTML artifacts. The design unit differs per task: a **page** (one visual artifact) or a **system** (screens × roles × states × transitions). The question decides the shape — never push every task through one pipeline.
+This skill positions the Agent as a top-tier design engineer producing HTML artifacts. The design unit differs per task: a **page** (one visual artifact) or a **system** (screens × roles × states × transitions). The question decides the shape — never push every task through one pipeline. Its sibling `web-page-integrator` (same repo, `skills/web-page-integrator/`) handles UI changes inside an existing app codebase; this skill handles standalone artifacts.
 
 The quality bar is branch-conditional:
 
@@ -60,7 +60,7 @@ Deliver the flow model **plus the pilot screens v0 in the same message** — one
 
 ### A2 · Declare the design system once
 
-One system-wide declaration; every screen inherits: density, type scale, table/form specs, **status-color semantics** (which colors mean pending / approved / rejected / disabled), nav structure, spacing, radius, shadows, motion. If an existing product UI or brand exists, extract its tokens and extend — never invent a competing system.
+One system-wide declaration; every screen inherits: density, type scale, table/form specs, **status-color semantics** (which colors mean pending / approved / rejected / disabled), nav structure, spacing, radius, shadows, motion. If an existing product UI or brand exists, extract its tokens and extend — never invent a competing system. Without an existing system, use [references/admin-ui-baseline.md](references/admin-ui-baseline.md) as the Track A baseline: Ant Design / Fluent / Carbon productive posture, tokenized colors, 14px admin type, 32px controls, dense tables, and visible accessibility states.
 
 ### A3 · Page layer — mandatory, tiered depth
 
@@ -68,11 +68,12 @@ One system-wide declaration; every screen inherits: density, type scale, table/f
 - **Standard screens** (plain lists, simple forms, simple detail): during build, run each through `task → layout → component → states`, using [references/components.md](references/components.md) as the operating manual. Craft here = density, alignment, empty/loading/error states, keyboard flow.
 - **Anti-isomorphism law**: every screen's layout is decided by that screen's task. All screens sharing one skeleton is a design failure — redo the outliers.
 
-Admin conventions distilled from mature systems (Carbon, Ant Design):
+Admin conventions distilled from mature systems (Carbon, Ant Design, Fluent):
 
 - **One primary action per screen** (per action area in a max-permission union view). Secondary buttons only alongside a primary (as Cancel/Back); destructive actions get a distinct danger style and always a text label — never icon-only.
 - **Button labels are verb(+noun)** ("提交审批", "驳回"), never lone nouns or vague "确定"; casing consistent system-wide.
 - **Row actions: ≤3 inline, the rest into an overflow menu**; bulk workflows add a checkbox column and a batch-action bar (select-all with an indeterminate state).
+- **Tables are operational surfaces**: toolbar above the table, sticky header in scroll regions, operation column fixed at the far right, numeric columns right-aligned with tabular numbers.
 - **Lock the trigger during an action** — a loading button is disabled (no double submits); skeletons for list loading.
 - **Forms validate on a deliberate trigger** (blur or debounced input, not every keystroke); errors render below the control; a failed submit scrolls to the first error.
 
@@ -142,7 +143,7 @@ Write full components, states, and motion per the technical specs below. Then wa
 ## Anti-Patterns (both tracks)
 
 - Purple-pink-blue gradients, left-border accent cards, gradient-button + big-radius combos — unless inherited from a real brand.
-- Inter / Roboto / Arial / system-ui as lazy defaults; emoji as icons — use `▢` / `[icon]` placeholders instead.
+- Lazy default typography: Track B visual work needs an intentional type choice; Track A admin systems may use a system UI stack from the declared baseline. Emoji are not icons — use `▢` / `[icon]` placeholders instead.
 - **Placeholder > fake**: missing image → aspect-ratio card; missing avatar → initial circle; missing data → ask. Never fabricate stats, testimonials, or logo walls (Track A exception: scenario seed records are a first-class mechanism, not fabrication). An empty-looking page is a layout problem — solve it with composition, not filler sections or unilaterally added content.
 
 ---
@@ -205,9 +206,9 @@ Also: no `type="module"` on React script tags; import order React → ReactDOM �
 ### CSS Best Practices
 
 - CSS Grid + Flexbox; design tokens as custom properties
-- Prefer brand colors; derive extra variants with `oklch()` — never invent new hues
+- Use semantic color tokens from the declared design system; derive extra variants with `oklch()` only from those tokens
 - `text-wrap: pretty`; `clamp()` where useful; `@container` queries; `@media (prefers-color-scheme)` and `prefers-reduced-motion`
-- Appropriate scale: presentations ≥24px text, touch targets ≥44px, web body 16–18px
+- Scale by artifact type: Track A body 14px, auxiliary 12px, controls around 32px, dense table rows 32-48px; Track B pages can use larger body type and touch targets ≥44px where touch is expected
 
 ### File Management
 
@@ -259,8 +260,9 @@ All artifacts:
 - [ ] Pages verified by opening each one via `file://` (double-click) — a local HTTP server pass does not substitute
 - [ ] Static scan clean: `python <skill-dir>/scripts/verify_artifact.py <artifact-dir>` reports zero findings (remote URLs, external JSX, ES modules, fetch/XHR)
 - [ ] Browser console clean; renders correctly on target devices/viewports; no text overflow
-- [ ] Interactive states covered: hover / focus / active / disabled / loading; empty/error where the scenario warrants
-- [ ] All colors from the declared design system — no rogue hues; no AI clichés
+- [ ] Interactive states covered: hover / focus-visible / active / disabled / loading; empty/error where the scenario warrants
+- [ ] Accessibility basics pass: visible focus ring, body text contrast meets WCAG AA, state not communicated by color alone, field errors rendered near the field
+- [ ] Colors come from semantic tokens in the declared design system — no rogue hues, ad hoc hex values, or AI clichés
 - [ ] No `scrollIntoView`; cross-file globals explicitly exported via `window.*` (React components and plain-JS shared modules alike)
 - [ ] No filler content or fabricated data; component choices match the user task
 - [ ] Typography intentional for the category and language mix; primary action and recovery paths clear
@@ -272,6 +274,7 @@ Track A additions:
 - [ ] Max-permission view: every screen reachable from the nav, all action areas rendered
 - [ ] Scenario panel works: one-click scenario reset + navigation, record-state overview; fully hidden when closed
 - [ ] Seed data realistic in density and consistent across screens; at least one record per business state
+- [ ] Tables follow admin density: toolbar above table, sticky header, far-right operation column, numeric columns right-aligned with tabular numbers
 - [ ] No flow-validation apparatus in the system UI (no state panel, no walkthrough tabs, no free-play buttons)
 - [ ] Full-viewport shell: no page-level scrolling; list regions scroll independently with sticky table headers and pinned toolbars; content columns may scroll inside the shell; mobile exempt
 - [ ] No isomorphic screens — each layout follows its screen's task
@@ -288,6 +291,7 @@ Show work-in-progress early; explain decisions in design language, not implement
 ## Further Reference
 
 - [references/flow-driven-ui.md](references/flow-driven-ui.md) — Track A implementation: the state machine as internal controller, state-gated actions, max-permission view, scenario panel, seed data
+- [references/admin-ui-baseline.md](references/admin-ui-baseline.md) — Track A default admin visual baseline: tokens, density, shell, tables, accessibility
 - [references/components.md](references/components.md) — page-layer manual: component selection by user task; navigation, tables, forms, feedback, overlays, mobile
 - [references/design-playbooks.md](references/design-playbooks.md) — internal design modes, taste calibration, audit/polish/responsive/accessibility passes
 - [references/style-directions.md](references/style-directions.md) — industry patterns, visual directions, typography pairing, anti-patterns

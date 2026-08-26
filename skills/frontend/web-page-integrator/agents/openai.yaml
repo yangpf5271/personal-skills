@@ -1,0 +1,4 @@
+interface:
+  display_name: "Web Page Integrator"
+  short_description: "既有前端系统页面接入:读宿主项目并生成/改造业务 UI"
+  default_prompt: "Use $web-page-integrator for integrated UI work inside an existing frontend app. First identify the host contract: framework, router/layout, component library, design tokens, data/state layer, permissions, and validation commands. Then implement the requested business/admin page or UI change through the host app's routes, components, tokens, state/data, and verification workflow. Do not create standalone HTML previews, mock artifacts, scenario panels, parallel demo apps, or separate prototypes; independent previews belong to $web-page-engineer."
