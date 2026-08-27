@@ -1,7 +1,7 @@
 ---
 name: web-page-engineer
 description: |
-  Build high-quality visual Web artifacts with HTML/CSS/JavaScript/React — web pages, landing pages, marketing pages, dashboards, data visualizations, interactive prototypes, UI mockups (with device frames), HTML slide decks and animated demos, and management-system (admin) UI pages. Use this skill whenever the request involves any visual, interactive, or front-end deliverable: turning design mockups, screenshots, or PRDs into working pages; implementing system designs that contain business processes (roles, states, transitions, approval flows) as management-system UI with the flow logic as an internal control layer; exploring design systems / UI kits. Even if the user never says "HTML" or "web page," the skill applies whenever the intent is something visual, interactive, or presentational. For UI changes inside an existing app codebase, use `web-page-integrator` instead. Not for pure back-end logic, CLI tools, data-processing scripts, or command-line debugging.
+  Build high-quality visual Web artifacts with HTML/CSS/JavaScript/React — web pages, landing pages, marketing pages, dashboards, data visualizations, interactive prototypes, UI mockups, HTML slide decks and animated demos, and management-system (admin) UI pages. Use this skill whenever the request involves a visual, interactive, or front-end deliverable as a standalone artifact: turning design mockups, screenshots, or PRDs into working pages; implementing system designs that contain business processes (roles, states, transitions, approval flows) as management-system UI with the flow logic as an internal control layer; exploring design systems / UI kits. Even if the user never says "HTML" or "web page," the skill applies whenever a visual, interactive, or presentational intent must ship standalone. For UI changes inside an existing app codebase, use `web-page-integrator` instead. Not for pure back-end logic, CLI tools, data-processing scripts, or command-line debugging.
 ---
 
 # Web Page Engineer
@@ -60,7 +60,7 @@ Deliver the flow model **plus the pilot screens v0 in the same message** — one
 
 ### A2 · Declare the design system once
 
-One system-wide declaration; every screen inherits: density, type scale, table/form specs, **status-color semantics** (which colors mean pending / approved / rejected / disabled), nav structure, spacing, radius, shadows, motion. If an existing product UI or brand exists, extract its tokens and extend — never invent a competing system. Without an existing system, use [references/admin-ui-baseline.md](references/admin-ui-baseline.md) as the Track A baseline: Ant Design / Fluent / Carbon productive posture, tokenized colors, 14px admin type, 32px controls, dense tables, and visible accessibility states.
+One system-wide declaration; every screen inherits: density, type scale, table/form specs, **status-color semantics** (which colors mean pending / approved / rejected / disabled), nav structure, spacing, radius, shadows, motion. If an existing product UI or brand exists, extract its tokens and extend — never invent a competing system. Without an existing system, use [references/admin-ui-baseline.md](references/admin-ui-baseline.md) as the Track A baseline: Ant Design / Fluent / Carbon productive posture, tokenized colors, 14px admin type, 32px controls, dense tables, and visible accessibility states. This declaration ships as `design-spec.md` next to the artifact (companion rules in File Management).
 
 ### A3 · Page layer — mandatory, tiered depth
 
@@ -128,7 +128,7 @@ Fast lane: pick the direction yourself, declare it as an assumption, and expose 
 
 ### B4 · Declare the design system
 
-Before code, in Markdown: color palette, typography, spacing system, radius strategy, shadow hierarchy, motion style; for exploratory work add taste axes (density / contrast / novelty / warmth / materiality / motion) and the primary layout pattern.
+Before code, in Markdown: color palette, typography, spacing system, radius strategy, shadow hierarchy, motion style; for exploratory work add taste axes (density / contrast / novelty / warmth / materiality / motion) and the primary layout pattern. For deliverables that redesign or prototype an existing product, this declaration ships as `design-spec.md` next to the artifact (companion rules in File Management).
 
 ### B5 · v0 early
 
@@ -218,6 +218,7 @@ Artifact shape by scale:
 
 - **Small / single-page artifacts**: one HTML file (plus copied vendor/fonts when needed) — easiest to hand around.
 - **Track A business systems**: a small folder — entry HTML with all JSX inlined + separate `flow-machine.js` (pure state machine) + `seed.js` + `styles.css`, so the machine stays independent and liftable. Why JSX is the one thing that cannot stay external: hard rule 5 (React + Babel).
+- **`design-spec.md` companion** — for artifacts that could later land in a real codebase via `web-page-integrator` (all Track A deliverables; Track B work that redesigns or prototypes an existing product; skip self-contained creative pieces like decks, animations, one-off demos). It is the integrator-facing design record so a chosen direction lands without reverse-engineering the markup. Content: tokens as CSS custom properties (colors by semantic role, type scale, spacing, radius, shadows, motion), shell & density numbers, status-color semantics, **delta vs the current design** (kept / changed / why — when a current version exists), open assumptions, and Tweaks variants (the default plus the list). It ships next to the HTML as a sibling file the artifact never references or depends on, is finalized at delivery to match what actually shipped, and is not read by the delivery scanner.
 
 ---
 
@@ -266,6 +267,7 @@ All artifacts:
 - [ ] No `scrollIntoView`; cross-file globals explicitly exported via `window.*` (React components and plain-JS shared modules alike)
 - [ ] No filler content or fabricated data; component choices match the user task
 - [ ] Typography intentional for the category and language mix; primary action and recovery paths clear
+- [ ] `design-spec.md` present and finalized to match the shipped artifact when the deliverable could land in a real codebase (tokens, shell & density, status semantics, delta vs current, assumptions) — skipped only for self-contained creative pieces
 
 Track A additions:
 

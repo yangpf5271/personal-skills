@@ -1,4 +1,4 @@
 interface:
   display_name: "Web Page Engineer"
-  short_description: "面向技术的页面工程:管理系统页面 + 单页面视觉交付物"
-  default_prompt: "Use $web-page-engineer. Follow Step 0 triage: if my request contains business flows, states, or multiple roles, run Track A — model the system first (flow model + screen inventory with role × task × states + pilot screens v0), confirm with me in one round, then build management-system pages with the flow machine as an internal controller. For single-page visual tasks, run Track B lanes: an existing visual source means build directly; an open style gets one round of structurally distinct directions."
+  short_description: "独立 Web 交付物:管理系统页面原型 + 单页面视觉设计"
+  default_prompt: "Use $web-page-engineer. Follow Step 0 triage: if my request contains business flows, states, or multiple roles, run Track A — model the system first (flow model + screen inventory with role × task × states + pilot screens v0), confirm with me in one round, then build management-system pages with the flow machine as an internal controller. For single-page visual tasks, run Track B lanes: an existing visual source means build directly; an open style gets one round of structurally distinct directions. If my request is UI changes inside an existing app codebase, switch to $web-page-integrator instead."

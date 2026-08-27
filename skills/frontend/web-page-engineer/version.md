@@ -1,5 +1,18 @@
 # Version Log
 
+## 2026-08-27 · v2.16 · 触发判别键收紧:贪婪触发句限定 standalone artifact,补 openai 入口兄弟分流
+
+- 审核动因:与接入版共享触发词(admin pages/dashboards/roles, states, transitions, approval flows 逐字相同),判别键应为产物落点。接入版 description 以 "inside an existing web app" 位置先行,本版中段贪婪句 "whenever the request involves any visual...deliverable" 丢失 artifact 限定,会吞掉接入版辖域,结尾分流句权重压不住。
+- 修复:description 贪婪句补 "as a standalone artifact","Even if" 句补 "to be delivered standalone"——两边均以"产物落点"为第一判别键。agents/openai.yaml default_prompt 补 "If my request is UI changes inside an existing app codebase, switch to $web-page-integrator"(此前仅接入版反向分流,不对称);short_description 改为"独立 Web 交付物:管理系统页面原型 + 单页面视觉设计"消除入口歧义。
+- 结果:description 982 字符(初版收紧后曾压线 1024,零余量有截断风险,再收两处措辞:删 "(with device frames)"、"Even if" 句改写为 "must ship standalone")。
+
+## 2026-08-26 · v2.15 · design-spec.md 交接物:方向产物附带可供接入版直接消费的设计说明
+
+- 动因:与 web-page-integrator 的接力链存在缝——拍板后接入版只拿到评审稿 HTML,token/密度/状态语义要靠反向扫描代码还原。这些信息在 A2/B4 声明里本就存在,落成交接文件近零成本。
+- 规则落点(File Management 为唯一知识源,A2/B4 指针,checklist 闸门):`design-spec.md` 随产物同目录交付;触发=可能经 web-page-integrator 落地的产物(Track A 必带,Track B 改造/原型化既有产品必带,deck/动画/一次性 demo 不带);内容=token(CSS custom properties)/shell 与密度/状态色语义/相对现状 Delta(保留/改变/为什么)/待定假设/Tweaks 变体(默认值+清单)。
+- 纪律:交付时定稿并与成品逐项核对(防 B4 声明与实物漂移);HTML 不引用不依赖该文件(单文件可携性不变);verify_artifact.py 只扫 html/css/js,.md 不进扫描,示例 URL 无误报风险(已核实 SCAN_EXTS)。
+- 与接入版 v2.21 配对:文件名固定 design-spec.md,双技能指针机械可靠。
+
 ## 2026-08-26 · v2.14 · 仓库并列双技能化:接入版分出为 web-page-integrator,本技能定位为 standalone artifact 版
 
 - 动因:接入版(v2.14~v2.20 在 feat/existing-system-integration 分支演进)与本技能规则实质分叉——交付物(app 代码 vs HTML 产物)、闸门(项目命令 vs file:// 双击)、文件集都不同,同名共存无法同时部署。定为同仓库 `skills/<name>/` 并列双技能(对齐 anthropics/skills 官方布局),各自独立演进与记版本。
