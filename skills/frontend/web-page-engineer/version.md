@@ -1,5 +1,18 @@
 # Version Log
 
+## 2026-08-27 · v2.18 · 布局实现细节层:基线增 Scroll Architecture + Page Assembly,components 增 Master-Detail
+
+- 动因:用户追问"页面不滚内部滚/多卡片对齐之类的实现细节规则",检索市面(antd/Carbon/NN/g/MDN/web.dev 2026-08 时点)后确认该层空白——已有覆盖止于宏观布局与动作语法。
+- `references/admin-ui-baseline.md` 新增两节:①Scroll Architecture——满视口壳+每层 min-height:0(既有 v2.4 知识入基线)、overscroll-behavior: contain 防滚动链、scrollbar-gutter: stable 防布局抖动(已 Baseline)、sticky 祖先不得有 overflow(静默失效第一坑)、锚点 scroll-margin-top、sticky 头小而不透明不动画、模态开时锁 body 滚;②Page Assembly——卡片等高(stretch+容器 100%,非 body)、间距 16/24、4→2→1 折叠、禁瀑布流、空卡最小高度;表单标签列统一宽、控件宽度随内容长度、筛选三列、长表单 sticky 提交栏+阴影、抽屉 378/736 档;筛选超行折叠"展开/收起"、已选条件持久、溢出进 popover;页头四件套、宽壳内可读列宽上限 720-840px;响应式降级阶梯(1280/1024/768,断点不改信息架构)。
+- `references/components.md` 新增 Master-Detail 节:列表-详情 1/3:2/3 可调分隔条、查看走抽屉/分栏保上下文与多字段编辑走页面的深度判据、窄屏折叠单列+返回、返回时保留列表选中和滚动位。
+- 两共享引用四份副本全部同步(diff 校验一致)。
+
+## 2026-08-27 · v2.17 · 共享基线增补 Action Placement Grammar:动作分区/工具栏构成/换行纪律/底部对齐
+
+- 动因:用户指出技能缺少业务排版微观语法(按钮何时换行、怎么对齐、单独按钮与列表如何共处)。现有覆盖止于中观(组件选型/宏布局),Admin Conventions 只散落零星几条。
+- `references/admin-ui-baseline.md` 新增四组规则:①动作分区——每区域一个动作槽位(页头/列表工具栏/行尾/表单底部),同一动作不双槽位出现,单独按钮归其所属区域("新建"属列表→工具栏);②工具栏构成——左筛选右操作、搜索框定宽不挤压按钮、批量操作选中后才出现;③换行纪律——按钮组内部永不拆断、按组换行、禁 margin-left:auto 顶按钮(源自同事 mock 评审真实换行失控事故);④底部对齐——表单/弹窗右对齐主键最右(antd/Element/TDesign 惯例,Windows 主键在左,二选一全局一致),表单底部固定槽位,长表单可顶部重复提交栏。
+- 共享基线双份同步(integrator 副本已 cp 对齐,diff 校验一致);宿主有约定时此语法让位,不越权。
+
 ## 2026-08-27 · v2.16 · 触发判别键收紧:贪婪触发句限定 standalone artifact,补 openai 入口兄弟分流
 
 - 审核动因:与接入版共享触发词(admin pages/dashboards/roles, states, transitions, approval flows 逐字相同),判别键应为产物落点。接入版 description 以 "inside an existing web app" 位置先行,本版中段贪婪句 "whenever the request involves any visual...deliverable" 丢失 artifact 限定,会吞掉接入版辖域,结尾分流句权重压不住。

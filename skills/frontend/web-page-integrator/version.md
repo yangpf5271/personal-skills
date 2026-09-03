@@ -1,5 +1,32 @@
 # Version Log
 
+## 2026-08-27 · v2.24 · 同步布局实现细节层:Scroll Architecture/Page Assembly 进基线,Master-Detail 进组件手册
+
+- 动因与内容同 artifact 版 v2.18(共享引用,源头在 web-page-engineer 侧撰写,本技能副本 cp 同步)。要点:滚动架构七条(含 overscroll-behavior/scrollbar-gutter/sticky 祖先坑三个现代 CSS 细节)、页面装配六组(卡片等高/表单宽型/筛选折叠/页头四件套/可读列宽/降级阶梯)、主从分栏与深度判据(查看→抽屉保上下文,编辑→页面)。
+- 接线:无需新指针——基线经第 2 节弱宿主兜底路径进入,组件手册经第 3 节模式选择路径进入,均为既有引用链。
+
+## 2026-08-27 · v2.23 · 同步共享基线:Action Placement Grammar 微观排版语法进 admin-ui-baseline
+
+- 动因:用户指出缺少业务排版微观语法(按钮换行/对齐/单独按钮与列表共处)。该层规则对两技能通用,落共享基线 admin-ui-baseline.md 单一真源,本技能副本同步(diff 校验一致)。
+- 内容四组:动作分区槽位(页头/工具栏/行尾/表单底部,动作不双槽位)、工具栏构成(左筛选右操作/搜索定宽/批量操作选中后现)、换行纪律(组内 nowrap/按组换行/禁 margin-left:auto)、底部对齐(右对齐主键最右,与宿主约定冲突时宿主优先——沿用本技能设计来源/宿主让位既有层级)。
+- 接线:无需新增指针——本技能第 2 节已规定"宿主弱或不一致时以 admin-ui-baseline 兜底",新语法自动进入兜底范围;宿主已有按钮布局约定时以宿主为准。
+
+## 2026-08-27 · v2.22 · 限制冲突修复:特性边界例外条款 + 设计系统节让位
+
+- 审核动因:限制面两处规则打架。①"Keep changes close to the feature boundary / Do not reformat broad areas" 与"方案驱动 token 全局变更"矛盾——token/theme 是全局资产,改主题文件天然波及所有页面,执行改版 spec 会被自己的限制拦住。②Business Page Integration 第 2 节写死"extend 现有体系/禁竞争 palette",与手持已拍板 spec 做新页面的设计来源纪律冲突。
+- 修复①:File Management 保全规则加例外——执行已拍板设计来源时,Delta 段即合法改动范围(token/theme 更新在范围内,经 CSS 变量自然传播);但不借新 token 之名重写全应用页面 markup(逐页传播由用户另行圈范围);Delta 之外保全规则照旧。codebase-integration.md 同步。
+- 修复②:第 2 节补"An approved design source overrides this",与 Rule 2/设计来源纪律对齐。
+- 配套:兄弟技能 artifact 版同日 v2.16 收紧触发判别键(贪婪句限定 standalone artifact + openai 入口反向分流),两技能触发面以"产物落点"为第一判别键。
+
+## 2026-08-26 · v2.21 · 设计来源两态:token 变更权在探索版/拍板方案,接入版只执行不自创
+
+- 动因:与 artifact 版 v2.15 的 design-spec.md 交接物配对。经三轮推演修正两个关键认知:①接入版不必然覆盖 token——token 变更权在探索版(经拍板写进 spec)或既有方案,接入版是执行者不是设计者;②"已定方案"的载体不止 spec 一种,设计稿图片、带设计信息的文档同为合法来源,需提取后执行。
+- Rule 2 改写:设计来源(design-spec/设计稿图片/带设计的文档)列为用户上下文,已拍板的设计来源驱动视觉层含其定义的 token 更新——不打 Rule 1 的补丁,spec 属 Rule 2 辖域,优先级结构不动。
+- Step 0 盘点加"设计来源";"Code outranks screenshots"改为分工句:现状看代码,目标看设计来源(图片值为近似,声明假设,关键值确认)。
+- Redesign 路径重写为两态:无设计来源=现有 token 内排布/打磨(token 零改动),要新观感无来源必须回 web-page-engineer 探索;有设计来源=提取执行(spec 直接消费,图片/文档提取+近似假设+关键值问询),Delta 段为落地范围契约,token 更新=替换不分叉,双态共同禁令=接入版永不自创 token/方向变更。
+- checklist 新增:token/视觉变更可溯源到设计来源;无来源零 token 变更;图片提取近似值已声明、关键值已确认。
+- `references/codebase-integration.md` 同步:设计来源盘点、现状/目标分工、design-source discipline 条(含 token 替换不分叉与无来源分流)。
+
 ## 2026-08-26 · v2.20 · 独立为并列技能:更名 web-page-integrator,与 web-page-engineer 互设边界
 
 - 动因:接入版与 artifact 版规则已实质分叉(交付物、闸门、文件集都不同),继续以同名分支共存会导致部署撞名、无法同时可用。定为同仓库并列双技能(skills/<name>/ 结构,对齐 anthropics/skills 官方仓库布局)。

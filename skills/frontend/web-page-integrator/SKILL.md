@@ -13,7 +13,7 @@ The unit of work is a **host-app change**: route registration, page/component co
 ## Rule Priority
 
 1. **Host app wins**: existing framework, router, layout shell, components, tokens, icon set, data layer, permissions, i18n, tests, and build commands override generic design advice.
-2. **User-provided context wins**: PRDs, screenshots, mockups, business specs, existing pages, and explicit constraints shape the change.
+2. **User-provided context wins**: PRDs, business specs, explicit constraints, and **decided design sources** — a `design-spec.md` from `web-page-engineer`, approved design mockups/images, or documents carrying design decisions — shape the change. An approved design source drives the visual layer, including the token updates it defines.
 3. **System consistency wins over novelty**: new UI must look and behave like it belongs to the product.
 4. **Production integration wins over preview speed**: do not create standalone HTML, vendored demo assets, scenario panels, parallel mock apps, or separate prototypes. If the request is for an independent preview/prototype, use `web-page-engineer` instead.
 5. **Business behavior is part of UI**: roles, states, transitions, illegal actions, loading, empty, error, and permission variants must be represented in the host app.
@@ -32,9 +32,10 @@ Before writing code, identify the **host contract**:
 - Page patterns: analogous list/detail/form/dashboard pages, table components, drawers/modals, empty/error/loading states.
 - Data and state: existing API clients, query/store layer, schemas/types, API docs or OpenAPI specs (contracts designed but not yet implemented count as existing), form conventions, and any project-level mocks/fixtures/test data factories.
 - Business guards: permissions, roles, feature flags, state-dependent action rules.
+- Design sources (when the task has a decided direction): a `design-spec.md` handed over from `web-page-engineer`, approved design mockups or images, or documents carrying design decisions.
 - Verification: lint, typecheck, tests, build, Storybook, dev server, browser smoke-test route.
 
-State the host contract briefly before implementation when it affects design or file choices. Code outranks screenshots: screenshots guide matching, but source conventions decide implementation.
+State the host contract briefly before implementation when it affects design or file choices. Division of authority: the **current system** is read from code (source conventions decide how the app works today); the **target design** is read from design sources (a spec, mockup, or document is authoritative for the intended look — image-extracted values are approximate, so declare them as assumptions and confirm critical ones).
 
 ---
 
@@ -62,7 +63,7 @@ For new or changed business flows, confirm the flow model with the user (one rou
 
 Declare the inherited design system once: density, type scale, table/form specs, status-color semantics, nav structure, spacing, radius, shadows, motion, and accessibility conventions.
 
-If the host app has an established design system, extend it. Do not introduce a competing palette, font stack, spacing scale, icon library, CSS framework, or component primitive.
+If the host app has an established design system, extend it. Do not introduce a competing palette, font stack, spacing scale, icon library, CSS framework, or component primitive. An approved design source overrides this — its tokens and treatments replace the host's, per the design-source discipline.
 
 If the host app is weak or inconsistent, use [references/admin-ui-baseline.md](references/admin-ui-baseline.md) only as a stabilizing baseline, then express it through the project's own tokens/classes/components.
 
@@ -130,12 +131,21 @@ For business flows, the source of truth is the host app's backend status, API co
 
 ## Existing-UI Redesign Or Extension
 
-Use this path when the task is visual refresh, layout improvement, component refinement, or screenshot-to-existing-app implementation.
+Use this path when the task is visual refresh, layout improvement, component refinement, or design-to-existing-app implementation. It runs in one of two states, decided by whether a **design source** exists (see Step 0). In both states, the integrator never initiates token or visual-direction changes of its own.
+
+**Without a design source — refine within the existing token system:**
 
 - Read the existing vocabulary first: color ratio, density, spacing, hover/focus feedback, component anatomy, table/form patterns, icon style, motion, and copy tone.
 - Preserve recognizable product behavior unless the user explicitly asks to change it.
-- Improve by aligning, simplifying, clarifying hierarchy, and using existing primitives better.
-- New visual ideas must be translated into host tokens/components, not bolted on as custom one-off CSS.
+- Improve by aligning, simplifying, clarifying hierarchy, and using existing primitives better — layout and polish only, tokens untouched.
+- If the request asks for a *new look* rather than better execution, do not invent a direction: run `web-page-engineer`'s exploration first (review drafts + `design-spec.md`) and come back with an approved source.
+
+**With a design source — execute the decided design:**
+
+- Consume `design-spec.md` directly: tokens, shell & density, status-color semantics, and the delta-vs-current section. From mockup images or design-bearing documents, extract the design information and state assumptions for approximate or unstated values; confirm critical ones (brand color, status-color semantics) with the user per the ambiguity rules.
+- The design source drives the visual layer, including token updates it defines — updating the host's token/theme values is in scope; replace the old treatment, never fork a parallel system. Host architecture still governs routing, components, and verification.
+- The delta section is the scope contract: what it marks as kept must stay, what it marks as changed must land, and gaps go back to the user rather than being silently improvised.
+- Translate the design into host components and tokens; never bolt it on as one-off CSS.
 - Data or interface needs discovered during redesign follow section 4 (The Interface Seam).
 - If the request is only a mockup or visual direction and there is no app to change, stop and use `web-page-engineer`.
 
@@ -167,7 +177,7 @@ Follow [references/codebase-integration.md](references/codebase-integration.md).
 - Edit files where the host app expects the feature: routes, page modules, local components, stores/queries, tests, and styles.
 - Split files when they exceed local norms or mix unrelated concerns.
 - Add a new shared component only after checking existing shared/local components.
-- Preserve user changes and unrelated work in the repository. Do not reformat broad areas or rewrite neighboring features to fit the new page.
+- Preserve user changes and unrelated work in the repository. Do not reformat broad areas or rewrite neighboring features to fit the new page. Exception when executing an approved design source: its delta section is the sanctioned change scope — updating the host's token/theme values is in scope and propagates naturally through CSS custom properties; do not additionally rewrite page markup across the app just because token values changed (per-page propagation is separately scoped by the user). Outside the delta, these preserve rules hold.
 
 ---
 
@@ -178,6 +188,7 @@ All integrated app changes:
 - [ ] Host contract identified: framework, router/layout, component system, tokens, data/state layer, permissions, and available validation commands.
 - [ ] Route/nav/layout integration follows host conventions; no orphan page or parallel shell.
 - [ ] UI reuses existing components, tokens, icons, forms, tables, overlays, state conventions, and accessibility/i18n patterns.
+- [ ] Design-source discipline holds: token/visual changes trace to an approved design source (`design-spec.md`, mockup, or design-bearing document); without a source, zero token changes — layout and polish only; image-extracted values declared as assumptions with critical ones confirmed.
 - [ ] Data uses existing (or designed-but-unimplemented) API clients, schemas/types, query/store contracts, project-level mocks/fixtures, or a contract-pending dev adapter per the interface seam; new backend needs went out as a needs list through a handoff channel — never as page-authored API designs or hidden page-local mock data; stale adapters removed once their contract is live.
 - [ ] Flow-model ambiguities resolved with the user in rounds (or explicitly declared as assumptions when the user defers); nothing silently assumed for new/changed flows.
 - [ ] Business states represented: enabled/disabled actions, terminal notes, blocked reasons, loading, empty, and error states where relevant.

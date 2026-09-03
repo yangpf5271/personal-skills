@@ -7,10 +7,11 @@ Use this reference for component-heavy product UIs, dashboards, forms, tables, n
 1. [Selection Principle](#selection-principle)
 2. [Navigation](#navigation)
 3. [Data Display](#data-display)
-4. [Inputs](#inputs)
-5. [Feedback](#feedback)
-6. [Overlays](#overlays)
-7. [Mobile](#mobile)
+4. [Master-Detail](#master-detail)
+5. [Inputs](#inputs)
+6. [Feedback](#feedback)
+7. [Overlays](#overlays)
+8. [Mobile](#mobile)
 
 ---
 
@@ -49,6 +50,15 @@ Choose components by user task first, visual style second.
 - Metric tile: include label, value, timeframe, comparison, and meaning. Do not invent numbers.
 - Chart: choose the simplest chart that answers the user's decision. Use semantic color, direct labels, and annotations where useful.
 - Timeline: use for history, lifecycle, approvals, and incident narratives.
+
+---
+
+## Master-Detail
+
+- Split pane: list left, detail right, roughly 1/3 : 2/3, with a resizable divider when users triage or compare quickly.
+- Depth criteria: viewing or minor edits → drawer or split pane preserving list context; multi-field editing or focused work → full detail page with a back path.
+- Narrow screens collapse the split into a single column with back navigation.
+- Preserve list selection and scroll position when returning from a detail view.
 
 ---
 
