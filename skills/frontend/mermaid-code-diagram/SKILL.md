@@ -7,13 +7,15 @@ description: "代码生成 Mermaid 图：Generate architecture diagrams, ER diag
 
 Generate production-quality diagrams from source code via Mermaid.js. The Mermaid source itself is the primary deliverable — embed it in Markdown and it renders natively on GitHub/GitLab/VSCode. Syntax is verified by the bundled zero-dependency validation script; image files download on demand from the mermaid.ink render service. No Node.js, no Chromium, no `mmdc`.
 
+Let `SKILL_ROOT` be the directory containing this `SKILL.md`. Resolve every bundled resource from `SKILL_ROOT`, not from the target project. Do not look for `scripts/` or `references/` under the user's workspace unless the user explicitly copied them there.
+
 ## Environment
 
 **No install required.** Syntax validation runs through the bundled script:
 
 ```bash
-python scripts/validate_mermaid.py <file.md | diagram.mmd>   # exit 0 = valid
-python scripts/validate_mermaid.py --code "flowchart TD
+python "$SKILL_ROOT/scripts/validate_mermaid.py" <file.md | diagram.mmd>   # exit 0 = valid
+python "$SKILL_ROOT/scripts/validate_mermaid.py" --code "flowchart TD
     A --> B"
 ```
 
@@ -24,23 +26,25 @@ Two layers, zero dependencies (Python only):
 **Optional — standalone image export** (only when the user needs an SVG/PNG file for PPT/Word/IM). The validation script downloads the render from mermaid.ink directly — zero extra dependencies:
 
 ```bash
-python scripts/validate_mermaid.py diagram.mmd --export          # PNG, auto-recommended width
-python scripts/validate_mermaid.py diagram.mmd --export out/     # into a directory
-python scripts/validate_mermaid.py diagram.mmd --export --svg    # SVG instead (vector, no width needed)
-python scripts/validate_mermaid.py diagram.mmd --export --width 3000   # manual width
-python scripts/validate_mermaid.py doc.md --export out/          # multi-block md → out/doc-1.png, doc-2.png…
+python "$SKILL_ROOT/scripts/validate_mermaid.py" diagram.mmd --export          # PNG, auto-recommended width
+python "$SKILL_ROOT/scripts/validate_mermaid.py" diagram.mmd --export out/     # into a directory
+python "$SKILL_ROOT/scripts/validate_mermaid.py" diagram.mmd --export --svg    # SVG instead (vector, no width needed)
+python "$SKILL_ROOT/scripts/validate_mermaid.py" diagram.mmd --export --width 3000   # manual width
+python "$SKILL_ROOT/scripts/validate_mermaid.py" doc.md --export out/          # multi-block md → out/doc-1.png, doc-2.png…
 ```
 
 PNG width defaults to **auto**: the script first fetches a default-viewport render, reads the diagram's natural width from the PNG header, then re-renders at `natural × 2` (clamped to 2400–4800; small diagrams scale ×3 gently instead of jumping to 2400).
 
 Export requires network. When offline, ship the Mermaid source — the viewer (GitHub/VSCode/browser) renders it.
 
+Remote render/export sends the Mermaid source to `mermaid.ink`. For private, internal, or sensitive diagrams, do not use remote render checks or `--export` unless the user explicitly approves external rendering. Use local pre-check/manual review and deliver the Mermaid source instead.
+
 ## Workflow
 
 1. **Analyze** — Read the codebase to understand structure (`glob`, `grep`, `read`)
 2. **Plan** — Decide diagram type(s) based on user request and code patterns
 3. **Generate** — Write the Mermaid source (`.mmd` file or ` ```mermaid ` block in Markdown)
-4. **Validate** — Run `python scripts/validate_mermaid.py <file>`; fix and re-run until exit 0
+4. **Validate** — Run `python "$SKILL_ROOT/scripts/validate_mermaid.py" <file>`; for private, internal, or sensitive diagrams, avoid remote rendering unless the user approves. Fix and re-run until exit 0.
 5. **Verify** — Confirm all code entities are represented and data flow directions are correct; when a rendered image was produced, read it back and check visually
 
 ## Diagram Type Selection
@@ -60,7 +64,7 @@ Export requires network. When offline, ship the Mermaid source — the viewer (G
 
 Do NOT read every file. Use progressive analysis:
 
-**Step 1 — Detect the stack** — read the dependency manifest first (`pyproject.toml` / `package.json` / `pom.xml` / `go.mod` / `Cargo.toml` / `*.csproj` / `composer.json` / `Gemfile` / `mix.exs`); it identifies both the language and the framework (FastAPI vs Django, NestJS vs Express, Spring Boot vs plain). Then load [references/stack-anchor-map.md](references/stack-anchor-map.md) for that stack's anchors (entry / routes / data models / services / async / config), monorepo handling, and noise directories to exclude.
+**Step 1 — Detect the stack** — read the dependency manifest first (`pyproject.toml` / `package.json` / `pom.xml` / `go.mod` / `Cargo.toml` / `*.csproj` / `composer.json` / `Gemfile` / `mix.exs`); it identifies both the language and the framework (FastAPI vs Django, NestJS vs Express, Spring Boot vs plain). Then load `$SKILL_ROOT/references/stack-anchor-map.md` for that stack's anchors (entry / routes / data models / services / async / config), monorepo handling, and noise directories to exclude.
 
 **Step 2 — Directory scan:** glob the main source dirs only, excluding `node_modules/` `venv/` `target/` `build/` `dist/` and friends, to understand module structure.
 
@@ -79,11 +83,11 @@ Then apply the same progressive scan.
 
 ## Optional: Standalone Image Export
 
-Only when the user explicitly needs an image file (PPT / Word / IM / email). Otherwise skip — the Mermaid source embedded in Markdown is the deliverable. Export = `python scripts/validate_mermaid.py <file> --export [--svg]` (downloads the mermaid.ink render; PNG is 2x-sharp by default).
+Only when the user explicitly needs an image file (PPT / Word / IM / email). Otherwise skip — the Mermaid source embedded in Markdown is the deliverable. Export = `python "$SKILL_ROOT/scripts/validate_mermaid.py" <file> --export [--svg]` (downloads the mermaid.ink render; PNG is 2x-sharp by default).
 
 ## Mermaid Syntax Reference
 
-For detailed patterns and examples per diagram type, see [references/mermaid-patterns.md](references/mermaid-patterns.md).
+For detailed patterns and examples per diagram type, read `$SKILL_ROOT/references/mermaid-patterns.md`.
 
 Key rules:
 - Short IDs, descriptive labels: `DB[("PostgreSQL 16")]`
@@ -98,12 +102,13 @@ Key rules:
 **Pick the delivery form by destination:**
 
 - Diagram lives in project docs (GitHub/GitLab/VSCode) → embed the Mermaid source directly in the Markdown as a ` ```mermaid ` fenced block — these render natively, need no `mmdc`, stay editable and diffable. This is the default.
-- Standalone image needed (PPT / Word / IM / email) → download via `scripts/validate_mermaid.py --export` (optional, see below)
+- Standalone image needed (PPT / Word / IM / email) → download via `$SKILL_ROOT/scripts/validate_mermaid.py --export` (optional, see below)
 - Always keep the `.mmd` source alongside any rendered file — never ship images only
 
 Other conventions:
 
 - Write `.mmd` source + rendered files to workspace
+- Write Markdown explanations, document titles, section headings, and diagram labels in Chinese by default. Use another language only when the user explicitly asks for it or the target document is already written in another language.
 - Descriptive names: `architecture.mmd`, `er-diagram.png`, `api-sequence.svg`
 - Multiple diagrams → create `diagrams/` folder with index
 
@@ -112,5 +117,5 @@ Other conventions:
 - All entities/modules from the code are represented
 - Relationships and data flow directions are correct
 - Labels readable, not truncated or overlapping
-- No Mermaid syntax errors — `python scripts/validate_mermaid.py` exits 0 before delivery; syntax reference: [references/mermaid-patterns.md](references/mermaid-patterns.md)
+- No Mermaid syntax errors — `python "$SKILL_ROOT/scripts/validate_mermaid.py"` exits 0 before delivery; syntax reference: `$SKILL_ROOT/references/mermaid-patterns.md`
 - When a rendered image exists, visually verify it
