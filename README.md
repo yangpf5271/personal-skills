@@ -74,7 +74,7 @@ Each skill is tracked to its upstream where known. Skills with no listed source 
 | docs | hv-analysis | [khazix/hv-analysis](https://github.com/khazix/hv-analysis) | 横纵分析法：纵轴生命历程 + 横轴竞品对比 → PDF 研究报告 |
 | docs | tender-bid-writer | — | Original (self-authored); 招标需求+大纲 → 技术标 .docx |
 | mine | agent-teams-playbook | — | Original (self-authored) |
-| mine | ccr-log-query | — | Original (self-authored) |
+| mine | mcr-log-query | — | Original (self-authored); MCR 日志查询 |
 | mine | tencent-code-cli | — | Original (self-authored) |
 
 > 🎬 creative-video 组（8 skills，不注册在主分组）：hyperframes、hyperframes-cli、hyperframes-media、motion-design、video-spec-builder、video-agency-roles、gsap、storyboard-script。来源 [HeyGen/hyperframes](https://github.com/heygen-com/hyperframes)（除 video-spec-builder、video-agency-roles、storyboard-script 为本地自建；前二者以 video-spec.md §0-§9 为契约咬合——builder 生成、roles 审查）。安装时在 "Other" 中可选。

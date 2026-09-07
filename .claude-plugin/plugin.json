@@ -48,7 +48,7 @@
     "./skills/docs/hv-analysis",
     "./skills/docs/tender-bid-writer",
     "./skills/mine/agent-teams-playbook",
-    "./skills/mine/ccr-log-query",
+    "./skills/mine/mcr-log-query",
     "./skills/mine/tencent-code-cli"
   ]
 }

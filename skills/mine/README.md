@@ -7,7 +7,7 @@
 | Skill | 用途 |
 |---|---|
 | [agent-teams-playbook](./agent-teams-playbook/) | 多代理/子代理协作编排手册：决定何时拆分任务、分配子 agent、收集结果 |
-| [ccr-log-query](./ccr-log-query/) | 查询 Claude Code Router 日志：trace 列表/详情、请求追踪、上游响应（通过 CCR HTTP API） |
+| [mcr-log-query](./mcr-log-query/) | 查询 MCR 日志：trace 列表/详情、请求追踪、上游响应（通过 MCR HTTP API） |
 | [tencent-code-cli](./tencent-code-cli/) | 腾讯工蜂 CLI（tcode）：项目/仓库/分支/MR/代码评审/缺陷单/Webhook 等全部端点 |
 
 ## 说明
@@ -17,5 +17,5 @@
 ## 整组安装
 
 ```bash
-npx skills@latest add yangpf5271/personal-skills --skill agent-teams-playbook --skill ccr-log-query --skill tencent-code-cli
+npx skills@latest add yangpf5271/personal-skills --skill agent-teams-playbook --skill mcr-log-query --skill tencent-code-cli
 ```
