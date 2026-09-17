@@ -1,6 +1,6 @@
 ---
 name: agent-teams-playbook - 多代理协作编排
-version: "7.1.1"
+version: "7.1.2"
 description: |
   多代理/子代理协作编排手册。Multi-agent / subagent orchestration playbook.
   核心场景：创建/构建/组建 agent 团队、多 agent 协作、并行 agent 处理、复杂任务编排、团队协调、swarm/蜂群模式、批量迁移、大规模代码审查。
