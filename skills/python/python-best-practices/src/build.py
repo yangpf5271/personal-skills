@@ -6,7 +6,7 @@ prefix, and generates a single document with table of contents, abstract, and
 expanded rules — matching the Vercel agent-skills layout.
 
 Usage:
-    python src/build.py
+    uv run src/build.py
 
 Run from the skill root (the directory containing `rules/`, `metadata.json`, etc.)
 """

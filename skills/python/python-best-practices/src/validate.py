@@ -15,7 +15,7 @@ Checks:
 Exits with a non-zero status if any rule fails.
 
 Usage:
-    python src/validate.py
+    uv run src/validate.py
 
 Run from the skill root.
 """
@@ -26,6 +26,8 @@ import re
 import sys
 from dataclasses import dataclass, field
 from pathlib import Path
+
+from counter_signals import has_counter_signal
 
 VALID_IMPACTS: frozenset[str] = frozenset(
     {"CRITICAL", "HIGH", "MEDIUM-HIGH", "MEDIUM", "LOW-MEDIUM", "LOW"}
@@ -163,6 +165,13 @@ def validate_rule(
     if trigger and not references:
         issue.issues.append(
             f"body mentions {trigger!r} (version/library) but `references` is missing"
+        )
+
+    if not has_counter_signal(body):
+        issue.issues.append(
+            "no counter-signal paragraph (a standalone paragraph opening with a "
+            "marker like **When ...** / **Scope:** / **Preserve ...** that says "
+            "when NOT to apply the rule)"
         )
 
     return issue

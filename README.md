@@ -16,7 +16,7 @@ npx skills@latest update
 
 ## What's here
 
-A curated set of 41 registered skills grouped by function into 6 categories. The repository also contains 8 optional `creative-video` skills available as "Other" during install, plus 1 embedded `src-hunter` sub-skill under `pentest-tools`. Each group has its own `README.md` with skill list, recommended combos, and a one-line group-install command. Browse [`skills/`](./skills/) or jump to a group:
+A curated set of 41 registered skills grouped by function into 6 categories. The repository also contains 20 optional `creative-video` skills available as "Other" during install, plus 1 embedded `src-hunter` sub-skill under `pentest-tools`. Each group has its own `README.md` with skill list, recommended combos, and a one-line group-install command. Browse [`skills/`](./skills/) or jump to a group:
 
 | Group | What it covers | Skills | README |
 | --- | --- | --- | --- |
@@ -27,7 +27,7 @@ A curated set of 41 registered skills grouped by function into 6 categories. The
 | 📄 `docs` | 文档生成（Word/PDF/PPT/Excel）+ 写作、研究、标书、文字润色 | 9 | [skills/docs/README.md](./skills/docs/README.md) |
 | ✏️ `mine` | 我的原创（多 agent 编排、日志查询、工蜂 CLI） | 3 | [skills/mine/README.md](./skills/mine/README.md) |
 
-> 🎬 **创意视频制作**（8 skills）：未加入主分组，安装时在 "Other" 中可选。详见 [`skills/creative-video/README.md`](./skills/creative-video/README.md)。
+> 🎬 **创意视频制作**（20 skills）：未加入主分组，安装时在 "Other" 中可选。与上游 heygen-com/hyperframes marketplace 版同步（2026-09-18）；`hyperframes` 为强制总入口，工作流技能引用核心技能，建议整组安装。原 8 个旧版技能（含本地自建的 video-spec-builder / video-agency-roles / storyboard-script）已随上游重构移除。详见 [`skills/creative-video/README.md`](./skills/creative-video/README.md)。
 
 ### Skill sources
 
@@ -39,15 +39,15 @@ Each skill is tracked to its upstream where known. Skills with no listed source 
 | frontend | mermaid-code-diagram | [dp-archive/archive](https://github.com/dp-archive/archive/tree/main/seed_skills/code-to-diagram) | 代码库→Mermaid 图（.mmd 可编辑、GitHub 原生渲染）；原 skill 名 `code-to-diagram`，改名入库；含零依赖校验脚本 + mermaid.ink 远程导出 |
 | frontend | motion | — | Upstream [jezweb/claude-skills](https://github.com/jezweb/claude-skills) removed it; local copy kept as orphan |
 | frontend | react-frontend-guide | [mrgoonie/claudekit-skills](https://github.com/mrgoonie/claudekit-skills) | Upstream dir is `frontend-development`; renamed locally |
-| frontend | ui-ux-pro-max | [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | |
+| frontend | ui-ux-pro-max | [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | 上游已插件化；本地取 `.claude/skills/ui-ux-pro-max` 单技能目录，`${CLAUDE_PLUGIN_ROOT}` 引用改写为 `$SKILL_ROOT`，剥离测试 |
 | frontend | web-page-engineer | [ConardLi/garden-skills](https://github.com/ConardLi/garden-skills) | 原 web-design-engineer，升级后改名；上游已重写为新一代；本地谱系：上游旧版 + 工蜂 fork 的架构优先流程演进 + 离线资源/中文定制 + 选择性吸收新版方法论（critique/failure-patterns/design-calibration/browser-acceptance）；重构为并列双技能之一（artifact 版） |
 | frontend | web-page-integrator | [ConardLi/garden-skills](https://github.com/ConardLi/garden-skills) | web-page-engineer 的姊妹技能（接入版），在现有应用代码库中接入前端 UI 改动，产出生产级 app 代码 |
-| frontend | web-quality | [addyosmani/web-quality-skills](https://github.com/addyosmani/web-quality-skills) | Upstream skill `web-quality-audit`; renamed locally |
+| frontend | web-quality | [addyosmani/web-quality-skills](https://github.com/addyosmani/web-quality-skills) | Upstream skill `web-quality-audit`; renamed locally; v2 起为套件（总审计 + 5 个专项参考技能内嵌，引用已改写为目录内相对路径） |
 | python | modern-python | [trailofbits/skills](https://github.com/trailofbits/skills) | uv + ruff + ty + pytest toolchain |
-| python | python-best-practices | [nathan-gage/python-skills](https://github.com/nathan-gage/python-skills) | 70 rules / 8 categories from real PR review patterns |
+| python | python-best-practices | [nathan-gage/python-skills](https://github.com/nathan-gage/python-skills) | 75 rules / 8 categories from real PR review patterns |
 | general | architecture-designer | [Jeffallan/claude-skills](https://github.com/Jeffallan/claude-skills) | |
 | general | code-security | [semgrep/skills](https://github.com/semgrep/skills) | Includes full `rules/` directory |
-| general | computer-science-algorithms | [community-skills](https://github.com/anthropics/community-skills) | 51 rules / 9 categories; CLRS + cp-algorithms distillation |
+| general | computer-science-algorithms | — | 51 rules / 9 categories; CLRS + cp-algorithms distillation; upstream repo gone (404), local copy kept as orphan |
 | general | database-architecture | — | PostgreSQL 18: UUIDv7, temporal constraints, zero-downtime migration, indexing |
 | general | radical-simplification | [pproenca/dot-skills](https://github.com/pproenca/dot-skills) | 9 cognitive moves for collapsing complexity |
 | general | theory-of-constraints | [pproenca/dot-skills](https://github.com/pproenca/dot-skills) | Goldratt ToC: find → exploit → subordinate → elevate → repeat |
@@ -71,13 +71,13 @@ Each skill is tracked to its upstream where known. Skills with no listed source 
 | docs | pdf | [anthropics/skills](https://github.com/anthropics/skills) | |
 | docs | pptx | [anthropics/skills](https://github.com/anthropics/skills) | |
 | docs | xlsx | [anthropics/skills](https://github.com/anthropics/skills) | |
-| docs | hv-analysis | [khazix/hv-analysis](https://github.com/khazix/hv-analysis) | 横纵分析法：纵轴生命历程 + 横轴竞品对比 → PDF 研究报告 |
+| docs | hv-analysis | [KKKKhazix/khazix-skills](https://github.com/KKKKhazix/khazix-skills) | 横纵分析法：纵轴生命历程 + 横轴竞品对比 → PDF 研究报告；原 khazix/hv-analysis 已并入该仓库，内容与本地一致 |
 | docs | tender-bid-writer | — | Original (self-authored); 招标需求+大纲 → 技术标 .docx |
 | mine | agent-teams-playbook | — | Original (self-authored) |
 | mine | mcr-log-query | — | Original (self-authored); MCR 日志查询 |
 | mine | tencent-code-cli | — | Original (self-authored) |
 
-> 🎬 creative-video 组（8 skills，不注册在主分组）：hyperframes、hyperframes-cli、hyperframes-media、motion-design、video-spec-builder、video-agency-roles、gsap、storyboard-script。来源 [HeyGen/hyperframes](https://github.com/heygen-com/hyperframes)（除 video-spec-builder、video-agency-roles、storyboard-script 为本地自建；前二者以 video-spec.md §0-§9 为契约咬合——builder 生成、roles 审查）。安装时在 "Other" 中可选。
+> 🎬 creative-video 组（20 skills，不注册在主分组）：hyperframes、hyperframes-core、hyperframes-cli、hyperframes-animation、hyperframes-creative、hyperframes-keyframes、hyperframes-audio、media-use、embedded-captions、hyperframes-registry、general-video、faceless-explainer、motion-graphics、product-launch-video、pr-to-video、music-to-video、talking-head-recut、slideshow、remotion-to-hyperframes、figma。全部来源 [heygen-com/hyperframes](https://github.com/heygen-com/hyperframes) marketplace `skills/` 目录（2026-09-18 全量替换旧版 8 技能；上游 `.claude/skills/` 为仓库内部技能，未收录；原本地自建 video-spec-builder、video-agency-roles、storyboard-script 及旧版 gsap、motion-design、hyperframes-media 已移除）。安装时在 "Other" 中可选。
 
 ## Repository layout
 

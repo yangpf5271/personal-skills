@@ -7,8 +7,8 @@
 | Skill | 用途 |
 |---|---|
 | [react-frontend-guide](./react-frontend-guide/) | React/TypeScript 前端开发规范（Suspense/MUI v7/TanStack Router） |
-| [web-quality](./web-quality/) | Web 质量检测：Lighthouse 性能 + WCAG 2.2 可访问性 + SEO 一体化审计 |
-| [ui-ux-pro-max](./ui-ux-pro-max/) | UI/UX 设计智能系统（84 风格/192 调色板/9 技术栈），规划/构建/审查 UI 代码 |
+| [web-quality](./web-quality/) | Web 质量检测 v2：证据主导审计（性能/CWV/可访问性/SEO/最佳实践/agentic browsing），内嵌 5 个专项参考技能 |
+| [ui-ux-pro-max](./ui-ux-pro-max/) | UI/UX 设计智能系统（79 风格/192 调色板/119 UX 准则/22 技术栈），自带检索脚本，规划/构建/审查 UI |
 | [web-page-engineer](./web-page-engineer/) | 顶级 Web 页面工程师，产出独立 HTML/CSS/JS/React 视觉制品（页面/落地页/仪表板/原型/管理系统 UI） |
 | [web-page-integrator](./web-page-integrator/) | 在现有应用代码库中接入前端 UI 改动（路由/组件/状态/权限/数据层），产出生产级 app 代码 |
 | [motion](./motion/) | React 动画库 Motion（原 Framer Motion）：手势/滚动/弹簧/布局动画 |
