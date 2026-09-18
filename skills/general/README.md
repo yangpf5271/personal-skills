@@ -1,6 +1,6 @@
 # General Skills（通用工程与工具）
 
-语言无关的软件工程能力和开发工具：架构与 API 设计、安全扫描、数据库、Git 工作流、性能优化、MCP 构建、任务规划，以及 skill 发现/创建和浏览器自动化。
+语言无关的软件工程能力和开发工具：架构与 API 设计、安全扫描、数据库、Git 工作流、性能优化、MCP 构建、任务规划、禅道（ZenTao）项目管理，以及 skill 发现/创建和浏览器自动化。
 
 ## Skills
 
@@ -19,6 +19,8 @@
 | [find-skills](./find-skills/) | 发现和安装 agent skill（Windows 兼容版，修复 Git Bash 空输出问题） |
 | [skill-creator](./skill-creator/) | 创建/修改/优化 skill，跑 eval 评估 skill 触发准确性和性能 |
 | [gh](./gh/) | GitHub CLI（gh）调用模式：--json/--jq 结构化输出、分页防截断、search vs list、gh api 回退（官方出品） |
+| [zentao-cli](./zentao-cli/) | ZenTao CLI：查询/维护禅道产品、项目、需求、任务、Bug，状态流转与进展汇总；CLI 未安装时引导安装（官方 skill 入库定制） |
+| [zentao-tour](./zentao-tour/) | 禅道上手导览：按角色（产品/项目经理/测试/开发/高管）聊天式了解禅道对象与工作流，授权范围内用真实环境演练（官方 skill 入库定制） |
 
 ## 推荐搭配
 
@@ -32,9 +34,10 @@
 - **复杂问题简化**：`radical-simplification`（9 把认知刀，换角度把复杂度塌缩）
 - **流程/流水线优化**：`theory-of-constraints`（定位唯一瓶颈，别在非瓶颈上浪费时间）
 - **搭工具生态**：`find-skills`（找现成 skill）→ `skill-creator`（自己造）→ `mcp-builder`（给 agent 加自定义工具）
+- **禅道项目管理**：`zentao-cli`（日常查询与流转操作）+ `zentao-tour`（新人按角色上手禅道）
 
 ## 整组安装
 
 ```bash
-npx skills@latest add yangpf5271/personal-skills --skill architecture-designer --skill api-and-interface-design --skill code-security --skill computer-science-algorithms --skill database-architecture --skill git-workflow-and-versioning --skill performance-optimization --skill radical-simplification --skill theory-of-constraints --skill mcp-builder --skill find-skills --skill skill-creator --skill gh
+npx skills@latest add yangpf5271/personal-skills --skill architecture-designer --skill api-and-interface-design --skill code-security --skill computer-science-algorithms --skill database-architecture --skill git-workflow-and-versioning --skill performance-optimization --skill radical-simplification --skill theory-of-constraints --skill mcp-builder --skill find-skills --skill skill-creator --skill gh --skill zentao-cli --skill zentao-tour
 ```

@@ -32,6 +32,8 @@
     "./skills/general/git-workflow-and-versioning",
     "./skills/general/performance-optimization",
     "./skills/general/gh",
+    "./skills/general/zentao-cli",
+    "./skills/general/zentao-tour",
     "./skills/security/apk-reverse",
     "./skills/security/mobile-reverse",
     "./skills/security/ida-reverse",
