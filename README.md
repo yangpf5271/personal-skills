@@ -66,6 +66,11 @@ Each skill is tracked to its upstream where known. Skills with no listed source 
 | security | dotnet-reverse | [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | dnSpyEx + de4dot，.NET 混淆脱壳与 IL patch |
 | security | js-reverse | [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | JS 逆向：签名定位/AST 去混淆/补环境 |
 | security | pentest-tools | [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | 内嵌 src-hunter 子技能（[MyuriKanao/src-hunter-skill](https://github.com/MyuriKanao/src-hunter-skill)） |
+| security | reverse-engineering | [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | 通用二进制逆向总纲：非 PE/WASM/固件/自定义 VM、OLLVM、CTF 菜谱；内嵌 dsl-vm-reverse 子技能（随组注册）；description 已中文化 |
+| security | firmware-pentest | [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | IoT 固件渗透链：binwalk/EMBA/Firmadyne/QEMU 仿真；description 已中文化 |
+| security | api-security | [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | REST/GraphQL/WebSocket API 安全评估（JWT/OAuth）；description 已中文化 |
+| security | llm-security | [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | LLM 应用/Agent 安全评估（OWASP LLM Top 10 + Agentic AI Top 10）；description 已中文化 |
+| security | supply-chain-security | [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | SBOM/SCA/CI-CD/容器镜像 供应链安全评估；description 已中文化 |
 | docs | content-research-writer | [ComposioHQ/awesome-claude-skills](https://github.com/ComposioHQ/awesome-claude-skills) | |
 | docs | docx | [anthropics/skills](https://github.com/anthropics/skills) | |
 | docs | humanizer-zh | [op7418/Humanizer-zh](https://github.com/op7418/Humanizer-zh) | |
