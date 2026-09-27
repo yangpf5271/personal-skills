@@ -62,7 +62,7 @@ Each skill is tracked to its upstream where known. Skills with no listed source 
 | general | zentao-tour | [easysoft/zentao-cli](https://github.com/easysoft/zentao-cli) `skills/zentao-tour`（`zentao add-skill` 官方 skill） | 基线 0.3.0-beta.1（2026-09-19 入库）。定制同 zentao-cli：CLI 未安装时引导安装、支持离线讲解；上游更新需合并，勿直接覆盖 |
 | security | apk-reverse | [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | Android APK 逆向：jadx/apktool/Frida |
 | security | mobile-reverse | [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | Android+iOS 统一方法论；description 已中文化 |
-| security | ida-reverse | [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | IDA Pro 二进制逆向，含 start.ps1/open.ps1 |
+| security | ida-reverse | [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | IDA Pro 二进制逆向：MCP supervisor 保活体系（watchdog/recover/自启动）+ start/open 脚本组 |
 | security | dotnet-reverse | [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | dnSpyEx + de4dot，.NET 混淆脱壳与 IL patch |
 | security | js-reverse | [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | JS 逆向：签名定位/AST 去混淆/补环境 |
 | security | pentest-tools | [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | 内嵌 src-hunter 子技能（[MyuriKanao/src-hunter-skill](https://github.com/MyuriKanao/src-hunter-skill)） |

@@ -10,7 +10,7 @@
 |---|---|
 | [apk-reverse](./apk-reverse/) | Android APK 逆向：jadx/apktool 解包反编译、smali 修改重打包、Frida 动态 Hook，按需切换 so/native 分析（联动 ida-reverse） |
 | [mobile-reverse](./mobile-reverse/) | 移动端逆向方法论（Android + iOS）：APK/IPA 分析、Frida/Objection 运行时注入、SSL Pinning 绕过、OWASP MSTG 平台保护检查 |
-| [ida-reverse](./ida-reverse/) | IDA Pro 授权二进制逆向：PE/ELF/SO/DLL/Mach-O 反编译分析、漏洞研究、恶意样本/固件/native 代码分析；内置 start.ps1/open.ps1 脚本做确定性 server 管理与文件打开 |
+| [ida-reverse](./ida-reverse/) | IDA Pro 授权二进制逆向：PE/ELF/SO/DLL/Mach-O 反编译分析、漏洞研究、恶意样本/固件/native 代码分析；内置 start/open 脚本组 + MCP supervisor 保活体系（watchdog 巡检、recover 强制恢复、登录自启动、死锁自愈，ida-pro-mcp 2.x） |
 | [dotnet-reverse](./dotnet-reverse/) | .NET/C# 逆向：dnSpyEx + de4dot 反编译托管程序，ConfuserEx/SmartAssembly 等脱壳，IL patch 优先于重编译；红队 Sharp* 工具与 info-stealer 样本分析 |
 | [js-reverse](./js-reverse/) | 前端 JavaScript 逆向：签名/加密参数链路定位、AST 去混淆、本地补环境复现、运行时采样与证据化输出（js-reverse-mcp / jshookmcp） |
 | [pentest-tools](./pentest-tools/) | 渗透测试工具链：侦察→枚举→验证流水线，scope 范围契约 + Evidence 降误报门禁；内嵌 `src-hunter/` 子技能（19 类攻击 playbook、305 结构化 payload、WAF 绕过变体、HackerOne/WooYun 真实案例统计） |
