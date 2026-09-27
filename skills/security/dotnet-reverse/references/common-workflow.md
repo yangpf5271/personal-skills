@@ -153,7 +153,7 @@ catch (CustomException e) {
 4. 常见：AES-256-CBC with Key==IV（Codegate 2013 模式，见 reverse-engineering/tools.md .NET 段）
 ```
 
-参考 `references/sharp-tools.md` 里红队工具的具体配置结构。
+参考 `sharp-tools.md` 里红队工具的具体配置结构。
 
 ## 与 reverse-engineering 的边界
 

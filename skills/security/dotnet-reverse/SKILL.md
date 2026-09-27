@@ -23,7 +23,7 @@ description: .NET / C# 二进制逆向。当目标是 .NET assembly（PE 头含 
 - 脱混淆 ConfuserEx / SmartAssembly / Babel / Eazfuscator / .NET Reactor 等壳
 - 逆向 .NET loader / info-stealer / RAT 的解密与 C2 逻辑
 - 对 C# 程序做 patch（改判断、改常量、keygen）
-- 分析 IL2CPP 之前的 Mono/Unity 托管层（注意：IL2CPP 编译后是 native，走 `reverse-engineering/` + seed-014）
+- 分析 IL2CPP 之前的 Mono/Unity 托管层（注意：IL2CPP 编译后是 native，走 `reverse-engineering/`）
 
 如果目标是纯 native 二进制（C/C++/Go/Rust 编译、无 CLR），请改用 `reverse-engineering/`、`ida-reverse/` 或 `radare2/`。
 
@@ -155,7 +155,7 @@ File → Save Module → 替换原文件
 
 ## 何时切出
 
-- IL2CPP 编译的 Unity 游戏 → `reverse-engineering/` + `seed-014_unity-il2cpp-reverse.md`（IL2CPP 是 native，不走 dnSpy）
+- IL2CPP 编译的 Unity 游戏 → `reverse-engineering/`（IL2CPP 是 native，不走 dnSpy）
 - NativeAOT 产物 → `reverse-engineering/`（同上，native）
 - 纯 native PE（无 CLR）→ `reverse-engineering/` / `ida-reverse/`
 - 需要符号/函数批量迁移到别的版本 → `binary-diff/`
