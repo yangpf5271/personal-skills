@@ -1,5 +1,5 @@
 ---
-name: agent-teams-playbook - 多代理协作编排
+name: agent-teams-playbook
 version: "7.1.11"
 description: |
   多代理/子代理协作编排手册。Multi-agent / subagent orchestration playbook.
