@@ -42,7 +42,7 @@ Each skill is tracked to its upstream where known. Skills with no listed source 
 | frontend | ui-ux-pro-max | [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | 上游已插件化；本地取 `.claude/skills/ui-ux-pro-max` 单技能目录，`${CLAUDE_PLUGIN_ROOT}` 引用改写为 `$SKILL_ROOT`，剥离测试 |
 | frontend | web-page-engineer | [ConardLi/garden-skills](https://github.com/ConardLi/garden-skills) | 原 web-design-engineer，升级后改名；上游已重写为新一代；本地谱系：上游旧版 + 工蜂 fork 的架构优先流程演进 + 离线资源/中文定制 + 选择性吸收新版方法论（critique/failure-patterns/design-calibration/browser-acceptance）；重构为并列双技能之一（artifact 版） |
 | frontend | web-page-integrator | [ConardLi/garden-skills](https://github.com/ConardLi/garden-skills) | web-page-engineer 的姊妹技能（接入版），在现有应用代码库中接入前端 UI 改动，产出生产级 app 代码 |
-| frontend | web-quality | [addyosmani/web-quality-skills](https://github.com/addyosmani/web-quality-skills) | Upstream skill `web-quality-audit`; renamed locally; v2 起为套件（总审计 + 5 个专项参考技能内嵌，引用已改写为目录内相对路径） |
+| frontend | web-quality | [addyosmani/web-quality-skills](https://github.com/addyosmani/web-quality-skills) | Upstream skill `web-quality-audit`; renamed locally; v2 起为套件（总审计 + 5 个专项参考技能内嵌，引用已改写为目录内相对路径）；内嵌子技能已标记 `user-invocable: false`（本地定制，同步时保留） |
 | python | modern-python | [trailofbits/skills](https://github.com/trailofbits/skills) | uv + ruff + ty + pytest toolchain |
 | python | python-best-practices | [nathan-gage/python-skills](https://github.com/nathan-gage/python-skills) | 75 rules / 8 categories from real PR review patterns |
 | general | architecture-designer | [Jeffallan/claude-skills](https://github.com/Jeffallan/claude-skills) | |
@@ -65,8 +65,8 @@ Each skill is tracked to its upstream where known. Skills with no listed source 
 | security | ida-reverse | [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | IDA Pro 二进制逆向：MCP supervisor 保活体系（watchdog/recover/自启动）+ start/open 脚本组 |
 | security | dotnet-reverse | [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | dnSpyEx + de4dot，.NET 混淆脱壳与 IL patch |
 | security | js-reverse | [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | JS 逆向：签名定位/AST 去混淆/补环境 |
-| security | pentest-tools | [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | 内嵌 src-hunter 子技能（[MyuriKanao/src-hunter-skill](https://github.com/MyuriKanao/src-hunter-skill)） |
-| security | reverse-engineering | [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | 通用二进制逆向总纲：非 PE/WASM/固件/自定义 VM、OLLVM、CTF 菜谱；内嵌 dsl-vm-reverse 子技能（随组注册）；description 已中文化 |
+| security | pentest-tools | [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | 内嵌 src-hunter 子技能（[MyuriKanao/src-hunter-skill](https://github.com/MyuriKanao/src-hunter-skill)）；子技能已标记 `user-invocable: false`（本地定制，同步时保留） |
+| security | reverse-engineering | [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | 通用二进制逆向总纲：非 PE/WASM/固件/自定义 VM、OLLVM、CTF 菜谱；内嵌 dsl-vm-reverse 子技能（随组注册，已标记 `user-invocable: false`）；description 已中文化 |
 | security | firmware-pentest | [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | IoT 固件渗透链：binwalk/EMBA/Firmadyne/QEMU 仿真；description 已中文化 |
 | security | api-security | [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | REST/GraphQL/WebSocket API 安全评估（JWT/OAuth）；description 已中文化 |
 | security | llm-security | [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | LLM 应用/Agent 安全评估（OWASP LLM Top 10 + Agentic AI Top 10）；description 已中文化 |
