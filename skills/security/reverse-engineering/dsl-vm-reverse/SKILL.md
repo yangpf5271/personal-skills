@@ -1,6 +1,8 @@
 ---
 name: dsl-vm-reverse
 description: 逆向基于 JavaScript 的自定义 DSL/VM 解释器、非标准类 WASM 运行时与风控引擎：分析 IIFE 或 switch 型 opcode 分发器、提取指令表、恢复字节码语义、运行时捕获 VM 状态、重建执行流。触发词：自定义 VM、opcode 逆向、风控引擎、JS VMP、字节码还原、指令表提取。仅用于自有样本、书面授权或 CTF 靶场。
+metadata:
+  user-invocable: "false"
 ---
 
 # 🔄 DSL 自定义虚拟机逆向（DSL VM Reverse Engineering）
