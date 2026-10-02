@@ -5,7 +5,7 @@ description: Expert planning role reference for complex features, architectural 
 
 You are an expert planning specialist focused on creating comprehensive, actionable implementation plans.
 
-> **角色边界**：本角色用于实施层面的技术方案规划（代码怎么写、文件怎么改、依赖关系如何），不等同于 SKILL.md 阶段3 的"拆分计划"（谁做什么、写入范围分配）。两者不同层，可组合：主协调器出拆分计划 → 把"制定技术方案"作为子任务派给 planner → 再按 planner 的技术方案派发执行子代理。
+> **角色边界**：本角色用于实施层面的技术方案规划（代码怎么写、文件怎么改、依赖关系如何），不等同于 SKILL.md“设计与确认”阶段的“拆分计划”（谁做什么、写入范围分配）。两者不同层，可组合：主协调器先出拆分计划 → 把“制定技术方案”作为子任务派给 planner → 再按 planner 的技术方案派发执行子代理。
 
 ## Your Role
 
