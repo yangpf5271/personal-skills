@@ -34,26 +34,29 @@ npm install -g zentao-cli   # 或 bun / pnpm install -g zentao-cli
 npx zentao-cli <参数>        # 不全局安装时的一次性运行方式
 ```
 
-机器上没有包管理器或安装失败时，把官方下载引导页交给用户：https://www.zentao.net/download/cli-86306.html （含安装、登录鉴权、MCP 接入与 FAQ）。安装期间不必中断 tour，可先离线讲解对象与工作流。
-
-让用户在自己的交互终端登录，按提示输入服务地址、账号和凭证：
+需要登录时，由 Agent 发起浏览器登录并保持命令进程运行，让用户在本机浏览器中填写服务地址、用户名和密码：
 
 ```bash
-zentao login
+zentao login --web
 ```
 
-不要让用户把密码或 Token 发到聊天里，也不要把真实凭证写进命令参数、示例、日志或仓库文件。无法进行交互输入时，使用用户已安全注入的 `ZENTAO_URL`、`ZENTAO_ACCOUNT` 和 `ZENTAO_PASSWORD` / `ZENTAO_TOKEN`；需要强制按这些环境变量登录时使用 `zentao login --useEnv`。不要为检查变量而打印值。
+机器上没有包管理器或安装失败时，把官方下载引导页交给用户：https://www.zentao.net/download/cli-86306.html （含安装、登录鉴权、MCP 接入与 FAQ）。安装期间不必中断 tour，可先离线讲解对象与工作流。
 
-默认配置在 `~/.config/zentao/zentao.json`，保存账号、服务器和 Token，不保存密码。`--config` / `ZENTAO_CONFIG_FILE` 可指定其他配置文件；沿用用户当前配置，不读取或展示整份凭证文件。
+未自动打开浏览器时，将命令输出的本机链接交给用户手动打开。等待命令报告登录成功后，再重试原业务命令。远程服务器或容器中的本机链接属于 CLI 执行端；无法在该执行端打开页面时，让用户在相同执行环境的交互终端运行 `zentao login --no-browser`，不要反复启动登录进程。
+
+不要让用户把密码或 Token 发到聊天里，也不要读取浏览器表单或把真实凭证写进命令参数、示例、日志或仓库文件。已有自动化环境可使用安全注入的 `ZENTAO_URL`、`ZENTAO_ACCOUNT` 和 `ZENTAO_PASSWORD` / `ZENTAO_TOKEN`；需要强制按这些环境变量登录时使用 `zentao login --useEnv`。不要为检查变量而打印值。
+
+配置保存账号、服务器和 Token，不保存密码。路径按 `--config`、`ZENTAO_CONFIG_FILE`、`$XDG_CONFIG_HOME/zentao/zentao.json`、`~/.config/zentao/zentao.json` 的顺序选择；XDG 必须是绝对路径。显式更换目录后不会迁移或回退读取旧配置。沿用用户当前路径，不读取或展示整份凭证文件；业务认证支持只读配置。
 
 ## 就绪检查与离线帮助
 
 ```bash
-zentao profile
+zentao profile --help
+zentao profile --effective --format=json
 zentao product --pick=id,name --page=1 --recPerPage=5
 ```
 
-第一条只读本地账号列表，不验证凭证、连通性或角色；第二条才是一次真实的只读业务请求。用户已指定别的业务范围时，可用该范围内的只读请求替代产品查询。产品返回空列表不代表服务未连通，更不代表必须新建产品。没有本地 profile（E1006）但已配置环境凭证时，也不能据此认定无法使用。
+先确认安装版本支持 `--effective`，再用它查看实际来源与账号。`source=environment` 表示完整环境凭据且不读取本地 Profile，`source=profile` 表示本地账号；`verified=false` 表示尚未验证。最后一条才是真实的只读业务请求。用户已指定别的业务范围时，可用该范围内的只读请求替代产品查询。产品返回空列表不代表服务未连通，更不代表必须新建产品。旧版本的 `profile` 只读本地账号，没有本地 Profile 时的 `E1006` 不能证明环境凭据不可用。
 
 CLI 已安装但尚未登录时，仍可使用：
 

@@ -1,18 +1,18 @@
 ---
 name: zentao-cli
-display_name: ZenTao CLI
+display_name: 禅道CLI
 display_name_en: ZenTao CLI
 description: 使用 ZenTao CLI 查询和维护禅道中的产品、项目、需求、任务与 Bug，执行状态流转并汇总进展。当用户要求操作禅道数据、查询禅道中的个人待办，或安装、配置和排查 zentao-cli 问题时使用。
-description_zh: 使用 ZenTao CLI 查询和维护禅道中的产品、项目、需求、任务与 Bug，执行状态流转并汇总进展。当用户要求操作禅道数据、查询禅道中的个人待办，或安装、配置和排查 zentao-cli 问题时使用。
-description_en: Use ZenTao CLI to query and maintain products, projects, requirements, tasks, and bugs in ZenTao, perform status transitions, and summarize progress. Use it when the user requests to operate on ZenTao data, query personal to-dos in ZenTao, or install, configure, and troubleshoot zentao-cli issues.
+description_zh: 由禅道官方（https://www.zentao.net/）提供的 ZenTao CLI，可查询与维护禅道中的产品、项目、需求、任务和 Bug，支持执行状态流转并汇总进展。适用于操作禅道数据、查询个人待办，以及安装、配置和排查 zentao-cli 问题等场景。
+description_en: Official ZenTao CLI from ZenTao (https://www.zentao.net/). Query and maintain products, projects, requirements, tasks, and bugs in ZenTao; perform status transitions and summarize progress. For operating on ZenTao data, querying personal to-dos, and installing, configuring, or troubleshooting zentao-cli issues.
 license: MIT
-version: 0.3.0
+version: 0.3.1
 author: 禅道软件
 maintainer: Sun Hao <sunhao@chandao.com>
 metadata:
   repository: https://github.com/easysoft/zentao-cli.git
   keywords: [zentao, 禅道, cli, project-management]
-  version: 0.3.0
+  version: 0.3.1
 ---
 
 # 禅道 CLI
@@ -26,15 +26,14 @@ metadata:
 ```bash
 zentao --version
 zentao help
-zentao profile --format=json
+zentao profile --help
+zentao profile --effective --format=json
 ```
 
 - `help`、模块/操作 `--help`、`props` 无需登录。先查帮助再准备请求，不必为查看参数连接服务器。
-- `profile` 只列出本地保存的账号和站点，不校验 Token、网络或业务角色。需要验证连接时，在用户要访问的范围内执行一个只读查询。
-- 未配置本地账号时 `profile` 返回 `E1006`；完整环境凭证仍可用于业务命令。不要据此断言服务不可用。
+- 先确认安装版本支持 `profile --effective`。它只读显示业务命令实际使用的 `source`（`environment` / `profile`）、站点、账号和凭据类型，不输出凭据、不发起网络请求。环境来源的 `configFile=null`；`verified=false` 表示尚未验证，需要时在用户指定范围内执行只读业务查询。
+- 不带 `--effective` 的 `profile` 只列出本地账号；本地未配置时的 `E1006` 不代表完整环境凭据不可用。旧版本不支持新选项时，保留这一区分，不读取凭据文件或打印环境变量来代替诊断。
 - `zentao` 命令不存在时，按下节「未安装时的安装引导」处理；缺命令不是凭证、网络或服务器问题，不要据此断言禅道不可用。
-
-用户要求安装或更新技能时，使用 `zentao add-skill <agent>`；需要导出到自定义目录时，使用 `zentao add-skill --output ./exported-skills`。两种形式互斥，都会递归包含参考资料。只处理用户指定目标，重跑前保留同名技能中用户需要的定制。
 
 ### 未安装时的安装引导
 
@@ -48,19 +47,29 @@ npx zentao-cli <参数>        # 不全局安装时的一次性运行方式
 - 优先用用户机器上已有的包管理器；都没有或安装失败时，把官方下载引导页交给用户：https://www.zentao.net/download/cli-86306.html （含安装、登录鉴权、MCP 接入与 FAQ），不在对话里替用户执行来源不明的安装脚本。
 - 安装后回到「开始工作」检查版本与 profile，再继续原任务；安装被拒或失败时报告现状并停止，不改用编造的接口或网页操作代替 CLI。
 
+用户要求安装或更新技能时，使用 `zentao add-skill <agent>`；需要导出到自定义目录时，使用 `zentao add-skill --output ./exported-skills`。两种形式互斥，都会递归包含参考资料。只处理用户指定目标，重跑前保留同名技能中用户需要的定制。
+
 ### 认证与账号选择
 
-业务命令缺少凭证会报错，不会自动弹出登录。需要登录时让用户在自己的交互终端执行 `zentao login`，由 CLI 收集凭证。不要在对话里收集密码或 Token，不要读取、打印凭证环境变量或本地凭证文件。
+已有可用凭证时直接复用。需要首次登录或重新认证时，优先推荐浏览器验证，由 Agent 发起并等待用户完成。终端交互和环境变量用于浏览器不可用、自动化环境或用户明确选择的场景。
+
+业务命令缺少凭证会报错，不会自动弹出登录。先用 `zentao login --help` 确认当前安装版本支持 `--web`；不支持时提示升级 CLI，或使用该版本支持的登录方式。支持时，Agent 执行 `zentao login --web` 并保持进程运行，让用户在本机浏览器页面填写禅道地址、用户名和密码；未自动打开时，将命令输出的本机链接交给用户。等待命令报告登录成功后，再重试原业务命令。不要在对话里收集密码或 Token，不要读取、打印凭证环境变量、本地凭证文件或浏览器表单内容。
+
+可用 `--message <text>` 自定义登录页副标题，提示用户完成后回到当前 Agent，例如 `zentao login --web --message "完成登录后，回到 Codex 即可继续使用禅道。"`；该选项仅显示纯文本。
+
+沿用原命令的配置路径。远程服务器或容器中的本机链接属于 CLI 执行端，不能当作用户电脑上的链接；无法在该执行端打开页面时，让用户在相同执行环境的交互终端执行 `zentao login --no-browser`，或由运行环境提供完整凭证。不要反复启动登录进程。
 
 自动化凭证由运行环境提供：`ZENTAO_URL` + `ZENTAO_ACCOUNT` + `ZENTAO_TOKEN` 或 `ZENTAO_PASSWORD`。同源同时提供 Token 和密码时优先 Token。业务命令优先使用完整环境凭证，再回退到当前保存的 Profile。
+
+完整环境凭证用于业务命令时不读取或写入本地 Profile，不改变本地默认账号，也不继承本地 Profile 的配置；需要时通过命令行选项覆盖 CLI 默认配置。仅在用户要求验证并保存环境凭证时执行 `zentao login --useEnv`。使用已保存 Profile 的业务命令不会更新最近使用时间、重写配置文件或修改权限，可在配置目录只读时运行；登录、退出、切换账号和修改配置仍需要写入权限。
 
 ```bash
 zentao profile 'admin@https://zentao.example.com'
 ```
 
-上述命令切换本地默认账号；完整环境凭证仍会优先，不能仅凭切换成功认定后续请求使用了该账号。需由运行环境维护者调整凭证来源。
+上述命令切换本地默认账号；完整环境凭证仍会优先，不能仅凭切换成功认定后续请求使用了该账号。切换后可单独执行 `zentao profile --effective --format=json` 核对，`--effective` 不能与切换账号同时使用。需由运行环境维护者调整凭证来源。
 
-默认凭证文件为 `~/.config/zentao/zentao.json`；自定义路径可用全局 `--config <路径>` 或 `ZENTAO_CONFIG_FILE`，前者优先。沿用用户选定的配置路径，不通过直接读取文件确认身份。
+配置路径优先级为 `--config` → `ZENTAO_CONFIG_FILE` → `$XDG_CONFIG_HOME/zentao/zentao.json` → `~/.config/zentao/zentao.json`。XDG 仅接受绝对路径，未设置、为空或为相对路径时使用最后一项。设置 XDG 后不会迁移或回退读取旧文件，沿用用户选定的路径，不通过直接读取文件确认身份。Agent 无权访问默认目录时，可由运行环境注入完整凭据，或挂载一个可读配置目录并用 `--config` 指定；访问权限由运行环境配置，凭据不提交到仓库。
 
 ## 查找命令与参数
 
@@ -124,9 +133,12 @@ zentao doc myDocs --spaceID=1 --libID=2
 
 | 错误码 | 处理 |
 |--------|------|
-| E1001 / E1006 | 凭证不完整或没有可用配置；请用户交互登录或配置完整环境凭证 |
-| E1003 / E1004 | 账号密码错误或 Token 失效；请用户重新登录 |
-| E1005 / E1007 | 配置不可读或指定 Profile 不存在；核对配置路径，使用 profile 查看可用账号 |
+| E1001 / E1006 | 凭证不完整或没有可用配置；按上述认证顺序优先发起浏览器登录 |
+| E1003 / E1004 | 账号密码错误或 Token 失效；按上述认证顺序重新登录，使用环境凭证时由运行环境维护者更新 |
+| E1005 | 配置读取失败；JSON 输出的 `error.details.reason` 区分 `invalid_json`、`invalid_structure`、`unreadable`，核对路径、格式或权限，不直接覆盖损坏的配置 |
+| E1007 | 指定 Profile 不存在；使用 profile 查看可用账号 |
+| E1011 | 配置写入失败；核对目录权限和磁盘空间，可通过 `error.details.systemCode` 查看原系统错误码，不重复登录 |
+| E1008 / E1009 / E1010 | 浏览器登录取消、超时或本地服务无法启动；按用户意愿重试，或使用终端交互登录 |
 | E2001 / E2005 | 模块或动作不存在；查本地帮助 |
 | E2002 | 对象或接口未找到；核对 ID、范围和具体错误 URL，不立即断定记录已删除 |
 | E2003 / E2004 / E2007 / E2009 | 缺参数、类型/选项错误或无效 JSON；对照动作帮助修正 |

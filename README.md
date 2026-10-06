@@ -58,8 +58,8 @@ Each skill is tracked to its upstream where known. Skills with no listed source 
 | general | git-workflow-and-versioning | [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) | 提交规范、分支策略、语义化版本发布 |
 | general | performance-optimization | [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) | 先测量后优化；Core Web Vitals / N+1 / profiling |
 | general | gh | [cli/cli](https://github.com/cli/cli)（官方 `skills/gh`） | agent 调用 gh 的模式：--json/--jq、分页、gh api 回退；描述加中文前缀 |
-| general | zentao-cli | [easysoft/zentao-cli](https://github.com/easysoft/zentao-cli) `skills/zentao-cli`（`zentao add-skill` 官方 skill） | 基线 v0.3.0（2026-09-19 入库）。入库定制：CLI 未安装时新增安装引导章节，指向[官网下载页](https://www.zentao.net/download/cli-86306.html)；上游更新时需 diff `skills/` 目录合并，勿直接覆盖 |
-| general | zentao-tour | [easysoft/zentao-cli](https://github.com/easysoft/zentao-cli) `skills/zentao-tour`（`zentao add-skill` 官方 skill） | 基线 0.3.0-beta.1（2026-09-19 入库）。定制同 zentao-cli：CLI 未安装时引导安装、支持离线讲解；上游更新需合并，勿直接覆盖 |
+| general | zentao-cli | [easysoft/zentao-cli](https://github.com/easysoft/zentao-cli) `skills/zentao-cli`（`zentao add-skill` 官方 skill） | 基线 v0.3.1（2026-10-06 同步，含浏览器登录与 profile --effective）。入库定制：CLI 未安装时新增安装引导章节，指向[官网下载页](https://www.zentao.net/download/cli-86306.html)；上游更新时需 diff `skills/` 目录合并，勿直接覆盖 |
+| general | zentao-tour | [easysoft/zentao-cli](https://github.com/easysoft/zentao-cli) `skills/zentao-tour`（`zentao add-skill` 官方 skill） | 基线 v0.3.1（2026-10-06 同步，含浏览器登录）。定制同 zentao-cli：CLI 未安装时引导安装、支持离线讲解；上游更新需合并，勿直接覆盖 |
 | security | apk-reverse | [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | Android APK 逆向：jadx/apktool/Frida |
 | security | mobile-reverse | [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | Android+iOS 统一方法论；description 已中文化 |
 | security | ida-reverse | [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) | IDA Pro 二进制逆向：MCP supervisor 保活体系（watchdog/recover/自启动）+ start/open 脚本组 |
