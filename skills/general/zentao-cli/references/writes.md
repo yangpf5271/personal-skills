@@ -15,7 +15,14 @@ zentao story change 11 --data '{"title":"调整后的需求标题","reviewer":["
 zentao doc createMyDoc --spaceID=1 --libID=2 --data '{"title":"开发说明","content":"# 正文","contentType":"doc"}'
 ```
 
-`reviewer` 是否必填及其余要求以当前动作帮助为准。不要机械补审批人或覆盖现有字段。
+`story`、`requirement`、`epic` 的 `create` / `change` 在未提供有效 `reviewer`（省略、空数组或只含空白字符串）时跳过评审。SDK 0.8.2 会发送 `needNotReview: "1"`，状态默认 `active`；需要保留草稿时显式传入 `status: "draft"`，空状态字符串仍会回落为 `active`。有有效评审人时状态固定为 `reviewing`，即使同时指定了其他状态。不要机械补评审人；`change` 不会自动保留对象原来的草稿状态。
+
+```bash
+zentao story create --productID=1 --title="草稿需求" --status=draft
+zentao requirement change 11 --data '{"title":"调整后的草稿","reviewer":[],"status":"draft"}'
+```
+
+上述 `status` 也可由 MCP 的 `params.status` 或 `params.data.status` 传入，`reviewer` 使用账号数组。其余字段要求以当前动作帮助为准。
 
 长文本可以先写入 JSON 文件，再通过 stdin 传入：
 
@@ -36,6 +43,44 @@ CLI 对 `type=update` 的操作启用补全：当该模块存在同路径的详�
 - 不能把 GET 返回的所有字段原样回传，返回属性不一定可写。
 - 没有匹配详情接口的更新不会自动补全，例如项目、版本、发布、待办的更新。按帮助准备必要字段；需要现值时从所属列表或其他受支持的查询获取。
 - `change`、`resolve`、`start`、`finish` 等状态动作不使用更新补全；按各自动作的必填项提交。
+
+命名更新也按路径匹配详情，例如 `workflow updateFlow` 会先调用 `getFlow`，保留未显式修改的导航和位置字段：
+
+```bash
+zentao workflow updateFlow --flowID=5 --name="新的工作流名称"
+```
+
+## 代码库、SSH 公钥与对象关联
+
+代码库接口需站点已配置 GitFox，并具备操作、空间及产品访问权限。先查询可用空间和目标空间下的代码库，再用实际空间、产品 ID 创建：
+
+```bash
+zentao space list --recPerPage=20 --format=json
+zentao repo list --spaceID=10 --recPerPage=20 --format=json
+zentao repo create --data '{"space":10,"product":[12,13],"name":"demo_repo"}'
+```
+
+`space` 是正整数，`product` 是非空正整数数组。不能用逗号分隔字符串或字符串数组代替；MCP 同样使用 `params.product: [12,13]`，顶层 `product` 数字简写不适用于此动作。私有代码库使用 `acl: "private"`，并提供非空 `members` 账号数组。创建返回 ID；克隆地址需从目标空间的代码库列表读取 `url.http` / `url.ssh`，字段可能缺省。创建超时或后续步骤失败时，先查列表核对是否已经创建，再决定是否重试。
+
+用户要求添加 SSH 公钥时，使用用户指定的完整单行公钥文本，替换下方占位内容；不提交私钥：
+
+```bash
+zentao my createSSH --data '{"name":"developer","publicKey":"ssh-ed25519 <完整公钥内容> developer@example.com"}'
+```
+
+GitFox 负责公钥完整性及重复检查。该操作修改当前 Token 用户的密钥，不是查询；MCP 只读模式会拒绝执行。
+
+先查已有关系或候选对象。解除关联时选择用户授权删除且 `relationType=custom` 的关系，读取该条记录的 `relationID`；下方 `8` 是关系记录 ID 示例：
+
+```bash
+zentao relation list --objectType=story --objectID=42 --format=json
+zentao relation candidates --objectType=story --objectID=42 --relatedObjectType=bug --format=json
+zentao relation unlink --relationID=8 --yes
+```
+
+SDK 0.8.1 起，`relation unlink` 只使用关系记录 `relationID`，不能用关联对象 ID 或 `relationKey` 代替。此动作的位置 ID / `--id` 也表示 `relationID`；旧的五个路径参数已停用，脚本需要迁移。查询关联与候选对象仍使用 `objectType`、`objectID` 等参数。
+
+当前 SDK 的 `relation link` 将 `relation` 声明为数组，但说明和请求示例使用对象映射；在上游契约统一前，不据此拼接新增关联请求。
 
 ## 常用状态操作
 
