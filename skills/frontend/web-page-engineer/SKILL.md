@@ -58,9 +58,11 @@ Ingest the system design / PRD / flow diagrams and produce, before any styling:
 
 Deliver the flow model **plus the pilot screens v0 in the same message** — one round of feedback corrects both the flow understanding and the design direction. Use domain language throughout: labels read like the business, not the code.
 
+When the flow document is vague, batch every clarifying question into that single confirmation round — number them, give your recommended answer, ask them all at once; never split across multiple rounds. 「不知道 / 延后」 are legal user answers; unresolved points ship as stated, overridable assumptions. Deliberate contrast with the sibling `web-page-integrator`: it forbids improvising flow-model rules because it edits production code; this skill ships artifacts, so internalized assumptions with declared override points **are** the design — but every internalized domain rule must appear in the shipped assumptions, never silently.
+
 ### A2 · Declare the design system once
 
-One system-wide declaration; every screen inherits: density, type scale, table/form specs, **status-color semantics** (which colors mean pending / approved / rejected / disabled), nav structure, spacing, radius, shadows, motion. If an existing product UI or brand exists, extract its tokens and extend — never invent a competing system. Without an existing system, use [references/admin-ui-baseline.md](references/admin-ui-baseline.md) as the Track A baseline: Ant Design / Fluent / Carbon productive posture, tokenized colors, 14px admin type, 32px controls, dense tables, and visible accessibility states. This declaration ships as `design-spec.md` next to the artifact (companion rules in File Management).
+One system-wide declaration; every screen inherits: density, type scale, table/form specs, **status-color semantics** (which colors mean pending / approved / rejected / disabled), nav structure, spacing, radius, shadows, motion. If an existing product UI or brand exists, extract its tokens and extend — never invent a competing system. Without an existing system, use [references/ui-baseline.md](references/ui-baseline.md) as the Track A baseline (Part I universal + Part II admin): Ant Design / Fluent / Carbon productive posture, tokenized colors, 14px admin type, 32px controls, dense tables, and visible accessibility states. This declaration ships as `design-spec.md` next to the artifact (companion rules in File Management).
 
 ### A3 · Page layer — mandatory, tiered depth
 
@@ -105,7 +107,7 @@ Run the full pre-delivery checklist (All-artifacts block + Track A block). Then 
 | Screenshot → prototype | ⚠️ only if interactions are unclear |
 | Existing codebase → rebuild/extend | ❌ read the code directly |
 
-Probe as needed: product context, output type, variation dimensions, constraints.
+Probe as needed: product context, output type, variation dimensions, constraints. Ask-heavily means one batched round of questions, not multiple stops — probes merge into the single confirmation round or ship as declared assumptions; the Step 0 stop budget is the ceiling.
 
 ### B2 · Gather design context (by priority)
 
@@ -128,7 +130,7 @@ Fast lane: pick the direction yourself, declare it as an assumption, and expose 
 
 ### B4 · Declare the design system
 
-Before code, in Markdown: color palette, typography, spacing system, radius strategy, shadow hierarchy, motion style; for exploratory work add taste axes (density / contrast / novelty / warmth / materiality / motion) and the primary layout pattern. For deliverables that redesign or prototype an existing product, this declaration ships as `design-spec.md` next to the artifact (companion rules in File Management).
+Before code, in Markdown: color palette, typography, spacing system, radius strategy, shadow hierarchy, motion style; for exploratory work add taste axes (density / contrast / novelty / warmth / materiality / motion) and the primary layout pattern. Track B artifacts follow the universal rules in [references/ui-baseline.md](references/ui-baseline.md) Part I (visual consistency sweep, interaction states, scroll mechanics, action placement); Part II applies only to admin-style screens. For deliverables that redesign or prototype an existing product, this declaration ships as `design-spec.md` next to the artifact (companion rules in File Management).
 
 ### B5 · v0 early
 
@@ -218,7 +220,7 @@ Artifact shape by scale:
 
 - **Small / single-page artifacts**: one HTML file (plus copied vendor/fonts when needed) — easiest to hand around.
 - **Track A business systems**: a small folder — entry HTML with all JSX inlined + separate `flow-machine.js` (pure state machine) + `seed.js` + `styles.css`, so the machine stays independent and liftable. Why JSX is the one thing that cannot stay external: hard rule 5 (React + Babel).
-- **`design-spec.md` companion** — for artifacts that could later land in a real codebase via `web-page-integrator` (all Track A deliverables; Track B work that redesigns or prototypes an existing product; skip self-contained creative pieces like decks, animations, one-off demos). It is the integrator-facing design record so a chosen direction lands without reverse-engineering the markup. Content: tokens as CSS custom properties (colors by semantic role, type scale, spacing, radius, shadows, motion), shell & density numbers, status-color semantics, **delta vs the current design** (kept / changed / why — when a current version exists), open assumptions, and Tweaks variants (the default plus the list). It ships next to the HTML as a sibling file the artifact never references or depends on, is finalized at delivery to match what actually shipped, and is not read by the delivery scanner.
+- **`design-spec.md` companion** — for artifacts that could later land in a real codebase via `web-page-integrator` (all Track A deliverables; Track B work that redesigns or prototypes an existing product; skip self-contained creative pieces like decks, animations, one-off demos). It is the integrator-facing design record so a chosen direction lands without reverse-engineering the markup. Start with a `spec-version:` field and fixed section headings so the token block is mechanically diffable: `Tokens` (CSS custom properties — colors by semantic role, type scale, spacing, radius, shadows, motion), `Shell & Density`, `Status Semantics`, `Delta vs Current` (kept / changed / why — when a current version exists), `Assumptions`, `Tweaks` (default plus list), and an optional `Screen Map` (per-screen task → layout → component) for consumers that need it. It ships next to the HTML as a sibling file the artifact never references or depends on, is finalized at delivery to match what actually shipped, and its presence is asserted for Track A deliveries via `verify_artifact.py --require-design-spec` (contents stay prose).
 
 ---
 
@@ -267,7 +269,7 @@ All artifacts:
 - [ ] No `scrollIntoView`; cross-file globals explicitly exported via `window.*` (React components and plain-JS shared modules alike)
 - [ ] No filler content or fabricated data; component choices match the user task
 - [ ] Typography intentional for the category and language mix; primary action and recovery paths clear
-- [ ] `design-spec.md` present and finalized to match the shipped artifact when the deliverable could land in a real codebase (tokens, shell & density, status semantics, delta vs current, assumptions) — skipped only for self-contained creative pieces
+- [ ] `design-spec.md` present (asserted for Track A via `python <skill-dir>/scripts/verify_artifact.py <artifact-dir> --require-design-spec`) and finalized to match the shipped artifact — skipped only for self-contained creative pieces
 
 Track A additions:
 
@@ -282,6 +284,10 @@ Track A additions:
 - [ ] No isomorphic screens — each layout follows its screen's task
 - [ ] Closing summary delivered: covered / uncovered branches / assumptions
 
+### Gate axes (wiring status)
+
+Mechanical and wired: `file://` static scan (`verify_artifact.py`), design-spec presence (`--require-design-spec`). Mechanically assertable but **not yet wired** — run manually or wire when needed: headless `file://` smoke (e.g. Playwright `page.goto` + console errors), rogue-hex grep outside token declarations, `window.*` export grep, global `const styles =` grep (hard rule 1 currently has zero coverage in both gates). Every other checklist item is a judgment item by design — do not mechanize quality scores (Goodhart).
+
 ---
 
 ## Collaborating with the User
@@ -293,7 +299,7 @@ Show work-in-progress early; explain decisions in design language, not implement
 ## Further Reference
 
 - [references/flow-driven-ui.md](references/flow-driven-ui.md) — Track A implementation: the state machine as internal controller, state-gated actions, max-permission view, scenario panel, seed data
-- [references/admin-ui-baseline.md](references/admin-ui-baseline.md) — Track A default admin visual baseline: tokens, density, shell, tables, accessibility
+- [references/ui-baseline.md](references/ui-baseline.md) — shared UI baseline: Part I universal (consistency sweep, states, scroll, action placement), Part II admin/B-end (shell, density, tables, filter machinery); Track A uses both, Track B uses Part I
 - [references/components.md](references/components.md) — page-layer manual: component selection by user task; navigation, tables, forms, feedback, overlays, mobile
 - [references/design-playbooks.md](references/design-playbooks.md) — internal design modes, taste calibration, audit/polish/responsive/accessibility passes
 - [references/style-directions.md](references/style-directions.md) — industry patterns, visual directions, typography pairing, anti-patterns

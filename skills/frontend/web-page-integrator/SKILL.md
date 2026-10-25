@@ -55,7 +55,7 @@ Extract before styling:
 
 Use domain language in labels and messages. Labels read like the business, not the code.
 
-**Ambiguity resolution — ask, don't guess.** When the flow document is unclear or conflicts with existing system behavior — undefined states or transitions, unspecified illegal actions, backend status enums that don't match the documented states, unclear role permissions — ask the user in grilling style (see the `grill-me`/`grilling` skill if present): one round at a time, every currently unblocked question numbered with your recommended answer, facts looked up from the codebase yourself rather than asked. Wait for the answers before the next round; stop when nothing is silently assumed. Ambiguities discovered later — during pattern selection or implementation — get the same treatment: stop and ask; never improvise a rule the flow model depends on.
+**Ambiguity resolution — ask, don't guess.** When the flow document is unclear or conflicts with existing system behavior — undefined states or transitions, unspecified illegal actions, backend status enums that don't match the documented states, unclear role permissions — ask the user in grilling style (see the `grill-me`/`grilling` skill if present): one round at a time, every currently unblocked question numbered with your recommended answer, facts looked up from the codebase yourself rather than asked (business semantics go to the user; anything readable from code — enums, permissions, current behavior — does not). Wait for the answers before the next round; stop when nothing is silently assumed. 「不知道 / 延后」 are legal answers — say so when asking, and ship deferred answers as explicit assumptions in the final response. Ambiguities discovered later — during pattern selection or implementation — get the same treatment: stop and ask; never improvise a rule the flow model depends on.
 
 For new or changed business flows, confirm the flow model with the user (one round) before producing the needs list and building screens — a wrong flow model poisons both the pages and the interface needs list.
 
@@ -65,7 +65,7 @@ Declare the inherited design system once: density, type scale, table/form specs,
 
 If the host app has an established design system, extend it. Do not introduce a competing palette, font stack, spacing scale, icon library, CSS framework, or component primitive. An approved design source overrides this — its tokens and treatments replace the host's, per the design-source discipline.
 
-If the host app is weak or inconsistent, use [references/admin-ui-baseline.md](references/admin-ui-baseline.md) only as a stabilizing baseline, then express it through the project's own tokens/classes/components.
+If the host app is weak or inconsistent, use [references/ui-baseline.md](references/ui-baseline.md) as the stabilizing baseline — Part I (universal) for any host, Part I + Part II for admin/B-end hosts — then express it through the project's own tokens/classes/components.
 
 ### 3. Choose The Closest Local Pattern
 
@@ -98,11 +98,11 @@ Handoff channels:
 - If the environment provides an interface design skill (e.g. `api-and-interface-design`), invoke it with the needs list to produce the contract, then return here and wire the page. The page skill orchestrates but never authors the contract.
 - Otherwise hand the needs list to the user or backend team. Do not wait idle: wire the page through a **dev adapter** behind the data-access boundary — the adapter implements the agreed contract when one exists, otherwise the needs list (transitions follow the confirmed flow model). With a designed-but-unimplemented contract, write the real client against the contract and use the adapter as its runtime backing until the backend is live. The adapter is clearly marked dev-only, single location at the service layer, mechanically replaceable.
 
-The needs list is delivered as a section of the final response (and written to the project's docs location if one exists), so the interface and database owners can consume it as-is.
+The needs list is delivered as a section of the final response (and written to the project's docs location if one exists), so the interface and database owners can consume it as-is — together with the current contract/adapter status (which capabilities are contract-pending, which adapters remain). On re-entry — a later change request to the same app — read that record first: Step 0 restores contract and adapter state from it instead of re-confirming the flow model from scratch.
 
 Gap feedback: when a delivered contract cannot express something the UI needs, send it back as a needs-list amendment; never silently drop the requirement.
 
-Contract arrival: when a contract lands after pages shipped on the adapter, reconcile it against the needs list (gaps become amendments), point the page at the real client, delete the adapter rather than leaving both paths, and re-run verification on the affected routes.
+Contract arrival: when a contract lands after pages shipped on the adapter, reconcile it against the needs list (gaps become amendments), point the page at the real client, delete the adapter rather than leaving both paths, re-run verification on the affected routes, and record the arrival in the same project-docs location.
 
 ### 5. Implement In The Host App
 
@@ -137,12 +137,14 @@ Use this path when the task is visual refresh, layout improvement, component ref
 
 - Read the existing vocabulary first: color ratio, density, spacing, hover/focus feedback, component anatomy, table/form patterns, icon style, motion, and copy tone.
 - Preserve recognizable product behavior unless the user explicitly asks to change it.
+- Before touching anything, ask one discriminator question: 「保持现有观感做精修，还是允许观感变化？」 (refine within the current look, or allow the look to change). 「不知道 / 延后」 is a legal answer — proceed as refine-within-current-look and declare the assumption. Ambiguities discovered mid-redesign get the same stop-and-ask treatment as the business-page path.
 - Improve by aligning, simplifying, clarifying hierarchy, and using existing primitives better — layout and polish only, tokens untouched.
+- For polish/refresh tasks, run the design-playbooks passes in order: audit (findings rated blocker / major / minor) → fix blockers and majors before minors → the Polish Checklist → harden re-check at the smallest and largest target viewports. Treat [references/ui-baseline.md](references/ui-baseline.md) as the reference for what correct looks like, scoped by host type (Part I only for C-end hosts; Part I + Part II for admin hosts) — strictly as a layout, composition, and consistency reference: its Token Baseline values describe what a B-end token system looks like and never authorize writing token values into a host that lacks them; tokens stay untouched in this state.
 - If the request asks for a *new look* rather than better execution, do not invent a direction: run `web-page-engineer`'s exploration first (review drafts + `design-spec.md`) and come back with an approved source.
 
 **With a design source — execute the decided design:**
 
-- Consume `design-spec.md` directly: tokens, shell & density, status-color semantics, and the delta-vs-current section. From mockup images or design-bearing documents, extract the design information and state assumptions for approximate or unstated values; confirm critical ones (brand color, status-color semantics) with the user per the ambiguity rules.
+- Consume `design-spec.md` directly: tokens, shell & density, status-color semantics, and the delta-vs-current section — check its `spec-version:` field; if absent or clearly stale relative to the review draft, treat the draft as authoritative and say so. From mockup images or design-bearing documents, extract the design information and state assumptions for approximate or unstated values; confirm critical ones (brand color, status-color semantics) with the user per the ambiguity rules.
 - The design source drives the visual layer, including token updates it defines — updating the host's token/theme values is in scope; replace the old treatment, never fork a parallel system. Host architecture still governs routing, components, and verification.
 - The delta section is the scope contract: what it marks as kept must stay, what it marks as changed must land, and gaps go back to the user rather than being silently improvised.
 - Translate the design into host components and tokens; never bolt it on as one-off CSS.
@@ -189,6 +191,9 @@ All integrated app changes:
 - [ ] Route/nav/layout integration follows host conventions; no orphan page or parallel shell.
 - [ ] UI reuses existing components, tokens, icons, forms, tables, overlays, state conventions, and accessibility/i18n patterns.
 - [ ] Design-source discipline holds: token/visual changes trace to an approved design source (`design-spec.md`, mockup, or design-bearing document); without a source, zero token changes — layout and polish only; image-extracted values declared as assumptions with critical ones confirmed.
+- [ ] Token discipline verified mechanically: no-source `git diff` over the host's token/theme files is empty; bare-hex grep over changed files is clean or justified.
+- [ ] With a source that updates token/theme values: pages receiving new values but not circled in the delta are listed and reported (propagation impact), not silently absorbed.
+- [ ] Polish tasks closed loop: every audit finding fixed, or skipped with a stated reason and impact (skips summarized in the final response); blockers and majors addressed before minors.
 - [ ] Data uses existing (or designed-but-unimplemented) API clients, schemas/types, query/store contracts, project-level mocks/fixtures, or a contract-pending dev adapter per the interface seam; new backend needs went out as a needs list through a handoff channel — never as page-authored API designs or hidden page-local mock data; stale adapters removed once their contract is live.
 - [ ] Flow-model ambiguities resolved with the user in rounds (or explicitly declared as assumptions when the user defers); nothing silently assumed for new/changed flows.
 - [ ] Business states represented: enabled/disabled actions, terminal notes, blocked reasons, loading, empty, and error states where relevant.
@@ -207,6 +212,7 @@ Lead with what changed in the app. Include:
 - Files or routes changed.
 - Host patterns reused.
 - Business states/branches covered and not covered.
+- Business-language acceptance summary (for non-technical requesters): what the page can now do in domain terms, what to check in order to accept it — plus optional visual evidence (before/after screenshots) when the change is visual.
 - Interface status: which capabilities the needs list covers, which channel it went to, which contracts arrived, and which pages remain dev-adapter-backed pending backend.
 - Verification commands run and their results.
 - Any skipped checks, new dependencies, assumptions, or remaining risks.
@@ -218,6 +224,6 @@ Do not tell the user to open a standalone HTML file or start a preview server un
 ## Further Reference
 
 - [references/codebase-integration.md](references/codebase-integration.md) — existing-app contracts, component reuse, routing/state/data conventions, project verification.
-- [references/admin-ui-baseline.md](references/admin-ui-baseline.md) — fallback admin baseline for weak or incomplete host systems: tokens, density, shell, tables, accessibility.
+- [references/ui-baseline.md](references/ui-baseline.md) — fallback baseline for weak hosts: Part I universal (consistency sweep, states, scroll, action placement) + Part II admin/B-end (shell, density, tables, filter machinery), scoped by host type.
 - [references/components.md](references/components.md) — component selection by user task: navigation, tables, forms, feedback, overlays, mobile.
 - [references/design-playbooks.md](references/design-playbooks.md) — audit, polish, responsive, and accessibility passes.

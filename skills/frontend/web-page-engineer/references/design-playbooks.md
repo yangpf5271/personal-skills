@@ -62,8 +62,8 @@ Default by category:
 ### Audit Pass
 
 1. Identify the user's primary task on each screen.
-2. List visual, interaction, content, accessibility, and responsive issues by severity.
-3. Fix structural problems before decoration.
+2. List visual, interaction, content, accessibility, and responsive issues, each rated one severity: `blocker` (breaks the task, flow, or data), `major` (clearly harms the task or system consistency), `minor` (polish).
+3. Fix blockers and majors (structural) before minors (decoration); a finding may be skipped only with a stated reason and impact.
 4. Recheck states and smallest viewport after visual changes.
 
 ### Shape Pass

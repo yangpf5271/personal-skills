@@ -20,7 +20,11 @@ caused a real-world white screen or offline failure):
 vendor/ and assets/fonts/ folders are exempt (third-party copies).
 Exit code 0 = clean, 1 = findings.
 
-Usage: python <skill-dir>/scripts/verify_artifact.py <artifact-dir>
+Usage: python <skill-dir>/scripts/verify_artifact.py <artifact-dir> [--require-design-spec]
+
+--require-design-spec fails when design-spec.md is absent from the artifact
+root — use it for Track A / direction deliverables whose companion spec is
+mandatory (existence is mechanically assertable; spec contents stay prose).
 """
 import re
 import sys
@@ -78,10 +82,13 @@ def scan_file(path: Path):
     return findings
 
 def main():
-    if len(sys.argv) != 2:
+    argv = sys.argv[1:]
+    require_spec = "--require-design-spec" in argv
+    argv = [a for a in argv if a != "--require-design-spec"]
+    if len(argv) != 1 or argv[0].startswith("--"):
         print(__doc__)
         return 2
-    root = Path(sys.argv[1])
+    root = Path(argv[0])
     if not root.is_dir():
         print(f"not a directory: {root}")
         return 2
@@ -94,6 +101,10 @@ def main():
             continue
         scanned += 1
         findings.extend(scan_file(path))
+
+    if require_spec and not (root / "design-spec.md").is_file():
+        findings.append(("design-spec.md", 0,
+                         "missing required companion (Track A / direction deliverables must ship one)"))
 
     if findings:
         for rel, line, msg in findings:

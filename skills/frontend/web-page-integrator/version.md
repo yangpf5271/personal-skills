@@ -1,5 +1,33 @@
 # Version Log
 
+## 2026-10-09 · v2.27 · engineer 议会配套:spec-version 消费提示 + 共享计数真源
+
+- 动因:engineer 侧议会(房间 c-20261009-114305-f21m)修复批的配套改动。spec 增 spec-version 字段后,消费端需对应检查;共享副本计数修正需双侧知晓。
+- Redesign 有源态消费条款:检查 spec-version 字段——缺失或相对评审稿明显陈旧时,以评审稿为准并声明。
+- 共享引用计数真源(C6 修复):3 文件 × 2 技能 = 6 份仓库副本(历史日志中"四份/双份"表述作废,以 CLAUDE.md 与本条为准);同步校验用仓库级 python scripts/check_shared_refs.py;部署副本由使用者手动统一同步。
+
+## 2026-10-09 · v2.26 · 议会修复批:按评审判定书 11 项共识行动项落齐
+
+- 动因:agent-council 评审(房间 c-20261009-110040-fdah,判定书 .scratch/council/ 下)裁定「规则已完善」不成立——C3/C4/C5 击穿、C1/C2 部分不成立、C6 未证;文本架构幸存,缺口集中于机械闸门/执行证据/三处文本漏洞/需求方验收轴。本版落齐 11 项共识行动项(2 项明确不做:不回填历史日志、不加数字轮次上限)。
+- 触发一致性:openai.yaml 负面边界与 description 兄弟分流枚举统一(standalone pages/prototypes/slide decks/landing pages 同一清单,场内禁产清单单列)。
+- Redesign 无来源态:加判别问题「保持现有观感精修 vs 允许观感变化」,「不知道/延后」为合法答复并按 refine 继续+声明假设;中途歧义同业务路径停问。
+- 问询条款:defer 主动告知义务写进歧义问询(「不知道/延后」合法,落为显式假设);业务语义问人/代码可查自查的分界显式化。
+- 打磨验收:audit 分级标尺 blocker/major/minor(design-playbooks 双副本同步);checklist 打磨闭环项加门槛——跳过须附原因与影响并在交付汇总;结构(blocker/major)先于装饰(minor)。
+- 需求方验收轴:Final Response 增业务语签收摘要(能做什么/拿什么签收)+可选 before/after 视觉证据。
+- 机械闸门:Verification 增第 6 步 token 纪律自查(无来源 git diff 零变更断言+裸 hex grep);checklist 增对应机械项——补上兄弟技能 verify_artifact.py 同构的确定性防线(不复活其 file:// 语境)。
+- 适配器细则:env 门控分支=合法单点形态(删=回退 hunk);补信封/retry/throw 契约与 queryKey 全状态要求(陈旧缓存类缺陷宿主闸门不可见)。
+- 传播影响:有源态更新 token 值时,已传播但未被 delta 圈定的页面清单为 checklist 强制报告项。
+- 跨请求记忆:需求清单交付附契约/适配器状态,落项目 docs 位置;重入 Step 0 先读记录再问,契约到达同位落痕。
+- eval 待办:新增 docs/eval-plan.md(E1-prime 含对照臂与固定交互序列/E2 两步判分/E3 三臂/E6 同场分流),作为技能有效性证伪路径——12 轮零实跑记录是议会确认的最大缺口,后续每条"完善"宣称以实验结果为准。
+- 补充(搁置项 ref#28 闭环):Redesign 无来源态的基线指针补限定语——ui-baseline 在该状态"仅作布局/构成/一致性基准",其 Token Baseline 值不授权向缺乏 token 的宿主写入值,零 token 变更规则优先。议会 6 个搁置项至此全部吸收或闭环。
+
+## 2026-08-27 · v2.25 · 基线拆分接入 ui-baseline.md + 打磨闭环:playbooks pass 序列进 Redesign,checklist 加验收项
+
+- 基线拆分同 artifact 版 v2.19(共享引用,副本同步):Part I Universal / Part II Admin,C 端宿主只用 Part I+宿主约定,后管宿主叠加。第 2 节兜底指针按 Part 选择规则改写。
+- 打磨接线(上轮审核缺口 1):Redesign 无来源态新增 pass 序列——audit 出分级问题清单 → 结构先于装饰修复 → Polish Checklist → harden 在最小/最大目标视口复查;ui-baseline 按宿主类型选 Part,充当"正确长什么样"的基准。此前 design-playbooks 只躺在 Further Reference 索引,打磨任务不会加载。
+- checklist 新增打磨闭环验收:audit 发现逐项修复或显式跳过,结构问题先于装饰处理。
+- Visual Consistency Sweep(上轮审核缺口 2)随基线 Part I 同步进入:图标纪律/数据呈现(空值"—"、单位精度、日期统一、数字右对齐 tabular-nums)/截断规则/边框纪律/投影预算。
+
 ## 2026-08-27 · v2.24 · 同步布局实现细节层:Scroll Architecture/Page Assembly 进基线,Master-Detail 进组件手册
 
 - 动因与内容同 artifact 版 v2.18(共享引用,源头在 web-page-engineer 侧撰写,本技能副本 cp 同步)。要点:滚动架构七条(含 overscroll-behavior/scrollbar-gutter/sticky 祖先坑三个现代 CSS 细节)、页面装配六组(卡片等高/表单宽型/筛选折叠/页头四件套/可读列宽/降级阶梯)、主从分栏与深度判据(查看→抽屉保上下文,编辑→页面)。

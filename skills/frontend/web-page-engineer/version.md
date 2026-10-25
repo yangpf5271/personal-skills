@@ -1,5 +1,27 @@
 # Version Log
 
+## 2026-10-09 · v2.21 · engineer 议会修复批:按评审判定书落 9 项行动项(部署同步归用户)
+
+- 动因:agent-council 评审(房间 c-20261009-114305-f21m,判定书 .scratch/council/ 下)裁定「流程已完善」不成立——C1/C5/C6 击穿。本批落共识行动项(部署副本重同步一项归用户手动统一执行,不在本批)。
+- 同步纪律机械化(C6):新增仓库级 scripts/check_shared_refs.py——三对共享引用 diff 断言,零差异才通过;CLAUDE.md 增同步段并给出唯一正确计数(3 文件 × 2 技能 = 6 份仓库副本 + 部署副本域),修正历史三处计数互不自洽;--deploy-root 可查看部署副本陈旧状态(仅警告,不拦截用户的手动同步节奏)。
+- spec 存在性接线(C5):verify_artifact.py 增 --require-design-spec——Track A 交付断言产物根目录含 design-spec.md,把 checklist 该项从「零闸门零实例」变「有机械回执」。
+- spec 轻量结构:design-spec 增 spec-version 字段+固定节标题(Tokens/Shell & Density/Status Semantics/Delta vs Current/Assumptions/Tweaks,token 块可机械 diff),A3 屏幕映射(task→layout→component)列为可选节;integrator 侧消费提示检查 spec-version(其 v2.27)。
+- checklist 双轴标注:新增 Gate axes 节——已接线(静态扫描/spec 存在性)/可判定未接线(file:// 无头冒烟、rogue hex、window.* 导出、全局 styles grep——硬规则 1 双零覆盖实证)/判断项为有意设计禁机械化(Goodhart)。
+- A1 含糊文档指引(C2):澄清问题单轮打包(编号+推荐答案),「不知道/延后」合法、未决点以可推翻假设随产物交付;弹性法则与 integrator no-improvise 的张力显式声明为有意取舍;B1 增停顿预算对齐说明(ask-heavily=单轮打包非多次停)。
+- eval 待办:新增 docs/eval-plan.md——E6 引用 integrator 侧共用定义、E7(A1 含糊输入:单轮打包+假设声明+checklist 全过三断言)、E8(机械闸门盲区:全局 styles/rogue hex/漏 window.* 三缺陷现闸门全漏的实证)。
+
+## 2026-10-09 · v2.20 · 共享 playbooks 增 audit 分级标尺(兄弟技能议会行动项)
+
+- 动因:web-page-integrator 评审判定书行动项——audit pass 只说 "by severity" 无标尺,agent 自造分级导致「结构先于装饰」不可复核。
+- `references/design-playbooks.md` Audit Pass 第 2/3 步改写:发现按 blocker(破坏任务/流/数据)/major(明显损害任务或一致性)/minor(打磨)三级评定;blocker/major 先于 minor;跳过须附原因与影响。双副本同步(integrator 侧 diff 校验一致)。
+
+## 2026-08-27 · v2.19 · 基线拆分 ui-baseline.md(通用/后管双部)+ 打磨补强:Sweep 节、Track B 接入 Part I
+
+- 动因:用户指出基线混装通用与后管规则,文件名 "admin-" 会错误劝退 C 端场景(C 端页面优化应只用通用规则)。盘点确认:"机制与纪律"几乎全通用(一致性/交互/滚动机制/动作语法/页头/列宽/卡片节奏),"密度与表格机器"是后管专属。
+- 改名重组:admin-ui-baseline.md → ui-baseline.md,Part I Universal(Visual Consistency Sweep 新增:图标纪律/数据呈现含空值"—"与 tabular-nums/截断规则/边框纪律/投影预算;Interaction & Accessibility;Scroll Mechanics;Action Placement Grammar;Page Assembly 通用部分)+ Part II Admin(姿态/壳与滚动/Token B 端值/密度/表单筛选机器/降级阶梯);头部写明适用规则(C 端只 Part I,后管叠加,宿主约定优先)。
+- B4 新增 Track B 接线:单页产物遵循 Part I 作为通用卫生规则,Part II 仅限 admin 风格屏——Track B 此前完全不引用该基线,拆分后获得一致性/状态/滚动/动作语法兜底。
+- A2/Further Reference 引用同步改指 ui-baseline.md;四份共享副本 diff 校验一致。
+
 ## 2026-08-27 · v2.18 · 布局实现细节层:基线增 Scroll Architecture + Page Assembly,components 增 Master-Detail
 
 - 动因:用户追问"页面不滚内部滚/多卡片对齐之类的实现细节规则",检索市面(antd/Carbon/NN/g/MDN/web.dev 2026-08 时点)后确认该层空白——已有覆盖止于宏观布局与动作语法。
